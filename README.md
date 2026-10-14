@@ -25,25 +25,189 @@
 
 ## Talk or type
 
-Switch between **Voice** and **Chat** with one tap. It's the same conversation either way: start a call, hang up, keep typing, and JOSIE remembers it all. Every conversation is saved in the sidebar.
+Switch between **Voice** and **Chat** with one tap. It's the same conversation either way: start a call, hang up, keep typing, and JOSIE remembers it all. Every conversation is saved in the sidebar and in the Library.
 
 <table>
   <tr>
-    <td width="50%" align="center"><img src="videos/josie-voice-call-poster.jpg" alt="JOSIE-Voice in Voice mode: the orb with a live transcript"></td>
-    <td width="50%" align="center"><img src="videos/josie-chat-poster.jpg" alt="JOSIE-Voice in Chat mode: messages with a web search result"></td>
+    <td width="50%" align="center"><a href="images/mac-call-orb-1600.webp"><img src="images/mac-call-orb-800.webp" alt="JOSIE-Voice in Voice mode on the Mac: the big orb, Listening… and five round call controls (mockup)"></a></td>
+    <td width="50%" align="center"><a href="images/mac-chat-1600.webp"><img src="images/mac-chat-800.webp" alt="JOSIE-Voice in Chat mode on the Mac: glass bubbles, the sessions sidebar and a PDF in the composer (mockup)"></a></td>
   </tr>
   <tr>
-    <td align="center"><b>Voice mode</b><br>Just talk, and JOSIE answers out loud. Live transcripts appear as you speak.</td>
-    <td align="center"><b>Chat mode</b><br>Type when you can't talk, with web search when she needs it.</td>
+    <td align="center"><b>Voice mode</b><br>Just talk, and JOSIE answers out loud. Live transcripts appear as you speak. (mockup)</td>
+    <td align="center"><b>Chat mode</b><br>Type when you can't talk, and attach documents to ask about them. (mockup)</td>
   </tr>
 </table>
 
-<p align="center">
-  <img src="mock_moonlight_voice.jpg" alt="Voice call at night with the session sidebar and call controls" width="49%">
-  <img src="mock_glass_chat_moon.jpg" alt="Chat mode with the Liquid Glass composer" width="49%">
-</p>
+### Demo videos
 
-<p align="center"><sub>The sky follows the real time of day, from sunrise to stars at night.</sub></p>
+Click a picture to play the clip.
+
+<table>
+  <tr>
+    <td width="33%" align="center" valign="top"><a href="videos/josie-mac-call.mp4"><img src="videos/josie-mac-call-poster.jpg" alt="Voice call on the Mac: the orb moves from listening to thinking, a tool call and speaking while the reply streams into the transcript (mockup)"></a><br><sub>▶ A voice call with the live transcript (mockup)</sub></td>
+    <td width="33%" align="center" valign="top"><a href="videos/josie-transcript-morph.mp4"><img src="videos/josie-transcript-morph-poster.jpg" alt="Turning the transcript on and off during a call: the orb glides up and shrinks and the bubbles rise in (mockup)"></a><br><sub>▶ Show or hide the transcript mid-call (mockup)</sub></td>
+    <td width="33%" align="center" valign="top"><a href="videos/josie-sky-day-night.mp4"><img src="videos/josie-sky-day-night-poster.jpg" alt="The sky behind the orb running through one day: afternoon, golden hour, a starry night and dawn (mockup)"></a><br><sub>▶ The sky follows the time of day (mockup)</sub></td>
+  </tr>
+  <tr>
+    <td width="33%" align="center" valign="top"><a href="videos/josie-embedding-map-3d.mp4"><img src="videos/josie-embedding-map-3d-poster.jpg" alt="The Library's 3D embedding map: hovering a node shows its title, then the map orbits (mockup)"></a><br><sub>▶ Your Library as a 3D embedding map (mockup)</sub></td>
+    <td width="33%" align="center" valign="top"><a href="videos/josie-menu-bar-api.mp4"><img src="videos/josie-menu-bar-api-poster.jpg" alt="The menu bar extra: the API Server switch turns on, shows the local address and a green dot, then turns off (mockup)"></a><br><sub>▶ Menu bar extra with the local API server (mockup)</sub></td>
+  </tr>
+</table>
+
+### Screenshots
+
+<details open>
+<summary><b>Mac · Calls & chat</b> (8)</summary>
+<br>
+
+<table>
+  <tr>
+    <td width="33%" align="center" valign="top"><a href="images/mac-call-orb-1600.webp"><img src="images/mac-call-orb-800.webp" alt="Voice mode during a call with transcripts hidden: the big centred orb, a waveform and Listening… under it, and five round call controls with labels (mockup)"></a><br><sub>Voice: just talk, and JOSIE answers out loud. (mockup)</sub></td>
+    <td width="33%" align="center" valign="top"><a href="images/mac-call-1600.webp"><img src="images/mac-call-800.webp" alt="Voice call with transcripts shown: the small orb at the top, a few turns of transcript with a tool call, and the five controls in a glass capsule (mockup)"></a><br><sub>Live transcripts appear as you speak. (mockup)</sub></td>
+    <td width="33%" align="center" valign="top"><a href="images/mac-chat-1600.webp"><img src="images/mac-chat-800.webp" alt="Chat mode with the sessions sidebar, glass bubbles with avatars and timestamps, and a PDF attachment chip in the composer (mockup)"></a><br><sub>Chat: type when you can't talk. (mockup)</sub></td>
+  </tr>
+  <tr>
+    <td width="33%" align="center" valign="top"><a href="images/mac-attachments-drop-1600.webp"><img src="images/mac-attachments-drop-800.webp" alt="The call window while a PDF is dragged onto it: a dashed drop frame and attachment chips above the controls (mockup)"></a><br><sub>Drop a PDF onto a call to talk about it. (mockup)</sub></td>
+    <td width="33%" align="center" valign="top"><a href="images/mac-camera-1600.webp"><img src="images/mac-camera-800.webp" alt="A call with the Camera control on and JOSIE answering about what the camera shows (mockup)"></a><br><sub>Turn on the camera and ask what it sees. (mockup)</sub></td>
+    <td width="33%" align="center" valign="top"><a href="images/mac-mute-chip-1600.webp"><img src="images/mac-mute-chip-800.webp" alt="A call after a timed mute: the JOSIE muted chip with a countdown at the top of the call screen (mockup)"></a><br><sub>&ldquo;Be quiet for ten minutes&rdquo;: a timed mute. (mockup)</sub></td>
+  </tr>
+  <tr>
+    <td width="33%" align="center" valign="top"><a href="images/mac-sky-golden-hour-1600.webp"><img src="images/mac-sky-golden-hour-800.webp" alt="Voice mode at golden hour: the warm evening sky behind the orb (mockup)"></a><br><sub>Golden hour behind the orb. (mockup)</sub></td>
+    <td width="33%" align="center" valign="top"><a href="images/mac-sky-night-1600.webp"><img src="images/mac-sky-night-800.webp" alt="Voice mode at night: a dark sky with stars behind the orb (mockup)"></a><br><sub>Stars at night. (mockup)</sub></td>
+  </tr>
+</table>
+
+</details>
+
+<details>
+<summary><b>Mac · Library & embeddings</b> (3)</summary>
+<br>
+
+<table>
+  <tr>
+    <td width="33%" align="center" valign="top"><a href="images/mac-library-1600.webp"><img src="images/mac-library-800.webp" alt="The Library window: semantic search, kind, type and date filters, a list of documents and conversations, and one document's details and chunk preview (mockup)"></a><br><sub>Every document and conversation, searchable in the Library. (mockup)</sub></td>
+    <td width="33%" align="center" valign="top"><a href="images/mac-embedding-map-1600.webp"><img src="images/mac-embedding-map-800.webp" alt="The Library's Map tab in 2D with PCA: coloured nodes linked to their nearest neighbours and a hover tooltip on one node (mockup)"></a><br><sub>The embedding map in 2D. (mockup)</sub></td>
+    <td width="33%" align="center" valign="top"><a href="images/mac-embedding-map-3d-1600.webp"><img src="images/mac-embedding-map-3d-800.webp" alt="The embedding map in 3D with UMAP, orbited so the depth of the clusters shows (mockup)"></a><br><sub>The same map in 3D. (mockup)</sub></td>
+  </tr>
+</table>
+
+</details>
+
+<details>
+<summary><b>Mac · Voice studio & Voice ID</b> (2)</summary>
+<br>
+
+<table>
+  <tr>
+    <td width="33%" align="center" valign="top"><a href="images/mac-voice-studio-1600.webp"><img src="images/mac-voice-studio-800.webp" alt="Personalization, Voice: the voice JOSIE speaks as, a style field, a saved voice, and the Clone a voice and Design a voice sections (mockup)"></a><br><sub>Pick a preset, clone a voice or design a new one. (mockup)</sub></td>
+    <td width="33%" align="center" valign="top"><a href="images/mac-voice-id-1600.webp"><img src="images/mac-voice-id-800.webp" alt="Profile, Voice ID: the enrolment form with three phrases and one known speaker marked owner (mockup)"></a><br><sub>Teach JOSIE your voice with three phrases. (mockup)</sub></td>
+  </tr>
+</table>
+
+</details>
+
+<details>
+<summary><b>Mac · Dashboard</b> (8)</summary>
+<br>
+
+<table>
+  <tr>
+    <td width="33%" align="center" valign="top"><a href="images/mac-dashboard-overview-1600.webp"><img src="images/mac-dashboard-overview-800.webp" alt="Dashboard overview: stat tiles, a yearly activity heatmap and recent calls (mockup)"></a><br><sub>Overview: calls, talk time and activity. (mockup)</sub></td>
+    <td width="33%" align="center" valign="top"><a href="images/mac-dashboard-highlights-1600.webp"><img src="images/mac-dashboard-highlights-800.webp" alt="Dashboard highlights for 30 days: six Wrapped tiles, personal records and most said words (mockup)"></a><br><sub>Highlights: your month, wrapped. (mockup)</sub></td>
+    <td width="33%" align="center" valign="top"><a href="images/mac-dashboard-calls-1600.webp"><img src="images/mac-dashboard-calls-800.webp" alt="Dashboard calls: stat tiles, a call-length histogram, minutes per day and the Who talks chart (mockup)"></a><br><sub>Calls: lengths, minutes per day and who talks. (mockup)</sub></td>
+  </tr>
+  <tr>
+    <td width="33%" align="center" valign="top"><a href="images/mac-dashboard-chat-1600.webp"><img src="images/mac-dashboard-chat-800.webp" alt="Dashboard chat: stat tiles, messages per day for you and JOSIE, and the models list (mockup)"></a><br><sub>Chat: messages per day and models. (mockup)</sub></td>
+    <td width="33%" align="center" valign="top"><a href="images/mac-dashboard-speakers-1600.webp"><img src="images/mac-dashboard-speakers-800.webp" alt="Dashboard speakers: tiles, the owner's card with similarity bins and match confidence (mockup)"></a><br><sub>Speakers: how well JOSIE knows each voice. (mockup)</sub></td>
+    <td width="33%" align="center" valign="top"><a href="images/mac-dashboard-latency-1600.webp"><img src="images/mac-dashboard-latency-800.webp" alt="Dashboard latency: per-stage median bars with p90 ticks and recent turns (mockup)"></a><br><sub>Latency for every stage of a voice turn. (mockup)</sub></td>
+  </tr>
+  <tr>
+    <td width="33%" align="center" valign="top"><a href="images/mac-dashboard-embeddings-1600.webp"><img src="images/mac-dashboard-embeddings-800.webp" alt="Dashboard embeddings: chunk, vector, document and session counts, documents by type and the embedding map panel (mockup)"></a><br><sub>What's indexed for search. (mockup)</sub></td>
+    <td width="33%" align="center" valign="top"><a href="images/mac-dashboard-export-1600.webp"><img src="images/mac-dashboard-export-800.webp" alt="Dashboard export for training: the Record my calls switch, a format picker and the Export button (mockup)"></a><br><sub>Export your calls for training. (mockup)</sub></td>
+  </tr>
+</table>
+
+</details>
+
+<details>
+<summary><b>Mac · Menu bar & API server</b> (4)</summary>
+<br>
+
+<table>
+  <tr>
+    <td width="33%" align="center" valign="top"><a href="images/mac-menu-bar-1600.webp"><img src="images/mac-menu-bar-800.webp" alt="The menu bar extra open during a call: status, elapsed time, the last transcript line and menu items for ending the call and muting (mockup)"></a><br><sub>Calls and mute right from the menu bar. (mockup)</sub></td>
+    <td width="33%" align="center" valign="top"><a href="images/mac-hub-menu-1600.webp"><img src="images/mac-hub-menu-800.webp" alt="The avatar menu open: local profile, Settings, Personalization, Profile, Dashboard, Library and Run setup again (mockup)"></a><br><sub>Everything else lives under your avatar. (mockup)</sub></td>
+    <td width="33%" align="center" valign="top"><a href="images/mac-settings-api-1600.webp"><img src="images/mac-settings-api-800.webp" alt="Settings, API server: the server switch, local URL, port, LAN switch off, a hidden API key and session limits (mockup)"></a><br><sub>An optional local OpenAI-compatible API. (mockup)</sub></td>
+  </tr>
+  <tr>
+    <td width="33%" align="center" valign="top"><a href="images/mac-dashboard-api-1600.webp"><img src="images/mac-dashboard-api-800.webp" alt="Dashboard API server: status, URL, uptime, sessions, requests per endpoint and recent requests (mockup)"></a><br><sub>Watch the API server at work. (mockup)</sub></td>
+  </tr>
+</table>
+
+</details>
+
+<details>
+<summary><b>Mac · Settings</b> (10)</summary>
+<br>
+
+<table>
+  <tr>
+    <td width="33%" align="center" valign="top"><a href="images/mac-settings-models-1600.webp"><img src="images/mac-settings-models-800.webp" alt="Settings, Models and endpoints: the language model section with Ollama selected and the start of Speech engines (mockup)"></a><br><sub>Models &amp; endpoints: Ollama by default. (mockup)</sub></td>
+    <td width="33%" align="center" valign="top"><a href="images/mac-settings-speech-engines-1600.webp"><img src="images/mac-settings-speech-engines-800.webp" alt="Settings, Speech engines with Kokoro 82M selected as the voice, its download row and voice picker (mockup)"></a><br><sub>Choose the speech engines, like Kokoro 82M. (mockup)</sub></td>
+    <td width="33%" align="center" valign="top"><a href="images/mac-settings-embeddings-1600.webp"><img src="images/mac-settings-embeddings-800.webp" alt="Settings, Embeddings: the weights picker on 8-bit, the Downloaded badge and the semantic search status line (mockup)"></a><br><sub>EmbeddingGemma for semantic search. (mockup)</sub></td>
+  </tr>
+  <tr>
+    <td width="33%" align="center" valign="top"><a href="images/mac-settings-conversation-1600.webp"><img src="images/mac-settings-conversation-800.webp" alt="Settings, Conversation: turn taking speed, Smart Turn and speculative switches, language, the barge-in slider and speakers (mockup)"></a><br><sub>Turn taking, barge-in and speakers. (mockup)</sub></td>
+    <td width="33%" align="center" valign="top"><a href="images/mac-settings-tools-1600.webp"><img src="images/mac-settings-tools-800.webp" alt="Settings, Tools and MCP: built-in tool switches and Apple apps with permission status and a Grant button (mockup)"></a><br><sub>Built-in and Apple tools, each with its own switch. (mockup)</sub></td>
+    <td width="33%" align="center" valign="top"><a href="images/mac-settings-documents-1600.webp"><img src="images/mac-settings-documents-800.webp" alt="Settings, Documents and search: conversation indexing, auto context and the documents list (mockup)"></a><br><sub>Documents &amp; search. (mockup)</sub></td>
+  </tr>
+  <tr>
+    <td width="33%" align="center" valign="top"><a href="images/mac-settings-retrieval-1600.webp"><img src="images/mac-settings-retrieval-800.webp" alt="Settings, Retrieval: chunk size, overlap, passages and search limit sliders with Reset to defaults (mockup)"></a><br><sub>Fine-tune retrieval. (mockup)</sub></td>
+    <td width="33%" align="center" valign="top"><a href="images/mac-settings-assistant-1600.webp"><img src="images/mac-settings-assistant-800.webp" alt="Personalization, Assistant: the self-control tools switch with per-tool switches and the While muted section (mockup)"></a><br><sub>Self-control tools and mutes. (mockup)</sub></td>
+    <td width="33%" align="center" valign="top"><a href="images/mac-settings-appearance-1600.webp"><img src="images/mac-settings-appearance-800.webp" alt="Personalization, Appearance: dynamic sky, stars at night, show in menu bar and show transcripts switches (mockup)"></a><br><sub>Dynamic sky, stars and the menu bar. (mockup)</sub></td>
+  </tr>
+  <tr>
+    <td width="33%" align="center" valign="top"><a href="images/mac-settings-diagnostics-1600.webp"><img src="images/mac-settings-diagnostics-800.webp" alt="Settings, Diagnostics: recent tool calls with status dots and durations, log buttons and device info (mockup)"></a><br><sub>Diagnostics: recent tool calls and logs. (mockup)</sub></td>
+  </tr>
+</table>
+
+</details>
+
+<details>
+<summary><b>Mac · Onboarding</b> (1)</summary>
+<br>
+
+<table>
+  <tr>
+    <td width="33%" align="center" valign="top"><a href="images/onboarding-models-1600.webp"><img src="images/onboarding-models-800.webp" alt="Onboarding, On-device models: model sizes selected, optional add-ons unchecked and the free space needed (mockup)"></a><br><sub>First launch: choose model sizes and download. (mockup)</sub></td>
+  </tr>
+</table>
+
+</details>
+
+<details open>
+<summary><b>iPhone · GPT-Live calls, Live Activity, onboarding and settings</b> (7)</summary>
+<br>
+
+On iPhone, calls use OpenAI GPT-Live or your own compatible server; no models run on the phone. Not available as a download yet.
+
+<table>
+  <tr>
+    <td width="25%" align="center" valign="top"><a href="images/ios-call.webp"><img src="images/ios-call.webp" alt="The iPhone app during a GPT-Live call: the orb, a short transcript and only the call and keyboard buttons (mockup)" width="200"></a><br><sub>A GPT-Live call on the iPhone. (mockup)</sub></td>
+    <td width="25%" align="center" valign="top"><a href="images/ios-live-activity.webp"><img src="images/ios-live-activity.webp" alt="The iPhone Lock Screen with JOSIE's Live Activity: state, call timer, last line and an End button (mockup)" width="200"></a><br><sub>The call on the Lock Screen. (mockup)</sub></td>
+    <td width="25%" align="center" valign="top"><a href="images/ios-dynamic-island.webp"><img src="images/ios-dynamic-island.webp" alt="The expanded Dynamic Island during a call: state, timer, last line and an End button (mockup)" width="200"></a><br><sub>End the call from the Dynamic Island. (mockup)</sub></td>
+    <td width="25%" align="center" valign="top"><a href="images/ios-onboarding-gpt-live.webp"><img src="images/ios-onboarding-gpt-live.webp" alt="iPhone onboarding, Connect GPT-Live: the OpenAI provider with an empty API key field, a voice picker and the custom provider option (mockup)" width="200"></a><br><sub>Connect GPT-Live in onboarding. (mockup)</sub></td>
+  </tr>
+  <tr>
+    <td width="25%" align="center" valign="top"><a href="images/ios-onboarding-tour.webp"><img src="images/ios-onboarding-tour.webp" alt="iPhone onboarding tour, Talk like a phone call: four rows about interrupting, locking, the Live Activity and voices (mockup)" width="200"></a><br><sub>A short tour: talk like a phone call. (mockup)</sub></td>
+    <td width="25%" align="center" valign="top"><a href="images/ios-settings-providers.webp"><img src="images/ios-settings-providers.webp" alt="iPhone Settings, Providers: the built-in OpenAI entry, a custom provider, the Use for calls picker and the voice (mockup)" width="200"></a><br><sub>Providers: OpenAI or your own GPT-Live server. (mockup)</sub></td>
+    <td width="25%" align="center" valign="top"><a href="images/ios-dashboard-calls.webp"><img src="images/ios-dashboard-calls.webp" alt="iPhone Dashboard, Calls after a couple of GPT-Live calls (mockup)" width="200"></a><br><sub>Your calls on the iPhone dashboard. (mockup)</sub></td>
+  </tr>
+</table>
+
+</details>
+
+<sub>Every screenshot and clip here is a mockup rendered from the app's source with demo content, not a capture of a running build. Real captures will replace them.</sub>
 
 ## What she can do
 
@@ -100,7 +264,7 @@ That's it. Click the orb and say hi.
 
 **Does it work on Intel Macs?** No, Apple Silicon (M1 or later) only.
 
-**Is there an iPhone or iPad version?** Not as a download yet.
+**Is there an iPhone or iPad version?** Not as a download yet. On iPhone and iPad, calls use OpenAI GPT-Live; see the iPhone screenshots above (mockups).
 
 **It says "Ollama isn't running".** Open Ollama from Applications, then click Recheck in JOSIE's setup.
 
@@ -112,7 +276,7 @@ That's it. Click the orb and say hi.
 
 ## The JOSIE family
 
-<img src="josie-orb.png" alt="JOSIE orb" width="56" align="left">
+<img src="logo.png" alt="JOSIE orb" width="56" align="left">
 
 JOSIE-Voice comes from the JOSIE family of personality-driven language models by Gökdeniz Gülmez, trained entirely on Apple Silicon with [MLX-LM-LoRA](https://github.com/Goekdeniz-Guelmez/mlx-lm-lora). Meet the models on [Hugging Face](https://huggingface.co/Goekdeniz-Guelmez).
 
