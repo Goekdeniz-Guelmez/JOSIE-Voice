@@ -233,8 +233,15 @@
       @media (pointer: coarse), (max-width: 760px) { .x-clock button { min-height: var(--tap); } }
       @media (max-width: 760px) { .x-clock { left: 16px; right: 16px; } .page { padding-bottom: 96px; } }
       /* reveal */
-      .js .x-reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.9s var(--ease-out), transform 0.9s var(--ease-out); }
+      .js .x-reveal { opacity: 0; transform: translateY(36px) scale(0.98); transition: opacity 0.9s var(--ease-out), transform 1.1s var(--ease-out); transition-delay: calc(var(--i, 0) * 70ms); }
+      .js .x-reveal.is-past { transform: translateY(-36px) scale(0.98); }
       .js .x-reveal.is-in { opacity: 1; transform: none; }
+      /* smooth scroll (Lenis, via Locomotive Scroll) */
+      html.lenis, html.lenis body { height: auto; }
+      .lenis:not(.lenis-autoToggle).lenis-stopped { overflow: clip; }
+      .lenis [data-lenis-prevent] { overscroll-behavior: contain; }
+      .lenis.lenis-smooth iframe { pointer-events: none; }
+      .lenis.lenis-smooth { scroll-behavior: auto !important; }
       @media (prefers-reduced-motion: reduce) {
         .js .x-reveal { opacity: 1; transform: none; transition: none; }
         .x-orb::before, .x-orb img { animation: none; }
@@ -264,7 +271,7 @@
         <section class="x-hero">
           <div class="x-orb-slot"><div class="x-orb x-orb--hero" role="img" aria-label="The JOSIE orb"><canvas class="x-orb__gl" aria-hidden="true"></canvas><img src="logo.png" alt="" /></div></div>
           <p class="x-eye">By Gökdeniz Gülmez · Free for Mac</p>
-          <h1 class="x-h"><b>Talk to</b><i>your Mac.</i></h1>
+          <h1 class="x-h" data-scroll data-scroll-speed="0.12"><b>Talk to</b><i>your Mac.</i></h1>
           <p class="x-lede">JOSIE-Voice is a voice and chat assistant that listens, knows who's speaking, talks back with a natural voice, and takes real action in your Reminders, Calendar, Maps and Messages. Hearing, voice recognition and speech all run on your Mac, so your voice never leaves it.</p>
           <div class="x-btns">
             <a class="x-btn x-btn--primary" href="https://github.com/Goekdeniz-Guelmez/JOSIE-Voice/releases" target="_blank" rel="noopener">Download for Mac</a>
@@ -276,7 +283,7 @@
 
         <section class="x-sec" id="see">
           <p class="x-eye x-reveal">01 · Two ways to use it</p>
-          <h2 class="x-h x-reveal"><b>Talk or</b><i>type.</i></h2>
+          <h2 class="x-h x-reveal"><b>Talk or</b><i data-scroll data-scroll-speed="0.06">type.</i></h2>
           <p class="x-lede x-reveal">Switch between Voice and Chat with one tap. It's the same conversation either way: start a call, hang up, keep typing, and JOSIE remembers it all.</p>
           <div class="x-grid x-grid--videos x-grid--showcase">
             <figure class="x-shot x-reveal"><video autoplay muted loop playsinline preload="metadata" poster="videos/josie-mac-call-poster.jpg" aria-label="Voice call on the Mac: the orb moves from listening to thinking, a tool call and speaking while the new turn and JOSIE's reply stream into the transcript"><source src="videos/josie-mac-call.webm" type="video/webm" /><source src="videos/josie-mac-call.mp4" type="video/mp4" /></video><figcaption>A voice call with the live transcript. (mockup)</figcaption></figure>
@@ -288,7 +295,7 @@
 
         <section class="x-sec" id="actions">
           <p class="x-eye x-reveal">02 · Gets things done</p>
-          <h2 class="x-h x-reveal"><b>Not just</b><i>talk.</i></h2>
+          <h2 class="x-h x-reveal"><b>Not just</b><i data-scroll data-scroll-speed="0.06">talk.</i></h2>
           <p class="x-lede x-reveal">JOSIE works with the Apple apps you already use. Ask out loud and it really happens: the reminder is in Reminders, the event is in your calendar, the message is waiting in Messages.</p>
           <div class="x-act">
             <ul class="x-act-list">
@@ -304,7 +311,7 @@
 
         <section class="x-sec" id="features">
           <p class="x-eye x-reveal">03 · Features</p>
-          <h2 class="x-h x-reveal"><b>What it</b><i>can do.</i></h2>
+          <h2 class="x-h x-reveal"><b>What it</b><i data-scroll data-scroll-speed="0.06">can do.</i></h2>
           <div class="x-grid">
             <article class="x-card x-glass x-reveal"><span class="x-num">01</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v10H9l-5 4z"/><path d="M8 10h.01M12 10h.01M16 10h.01"/></svg><h3>Real conversation</h3><p>Knows when you've finished talking. Interrupt her just by speaking.</p></article>
             <article class="x-card x-glass x-reveal"><span class="x-num">02</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12h2M7 8v8M11 5v14M15 9v6M19 7v10"/></svg><h3>Knows your voice</h3><p>Learns you from three short phrases and tells people apart.</p></article>
@@ -323,12 +330,12 @@
 
         <section class="x-sec" id="gallery">
           <p class="x-eye x-reveal">04 · Screenshots</p>
-          <h2 class="x-h x-reveal"><b>Every</b><i>screen.</i></h2>
+          <h2 class="x-h x-reveal"><b>Every</b><i data-scroll data-scroll-speed="0.06">screen.</i></h2>
           <p class="x-lede x-reveal">The Mac app, plus a preview of the iPhone app. Click any picture to see it larger.</p>
           <nav class="x-gnav x-reveal" aria-label="Screenshot groups"><a class="x-chip x-glass" href="#g-mac">Mac</a><a class="x-chip x-glass" href="#g-mac-calls">Calls &amp; chat</a><a class="x-chip x-glass" href="#g-mac-library">Library &amp; embeddings</a><a class="x-chip x-glass" href="#g-mac-voice">Voice studio &amp; Voice ID</a><a class="x-chip x-glass" href="#g-mac-dashboard">Dashboard</a><a class="x-chip x-glass" href="#g-mac-menus">Menu bar &amp; API server</a><a class="x-chip x-glass" href="#g-mac-settings">Settings</a><a class="x-chip x-glass" href="#g-mac-onboarding">Onboarding</a><a class="x-chip x-glass" href="#g-iphone">iPhone</a></nav>
           <h3 class="x-gh x-reveal" id="g-mac">Mac</h3>
           <h4 class="x-gsub x-reveal" id="g-mac-calls">Calls &amp; chat</h4>
-          <div class="x-grid x-grid--shots x-reveal" tabindex="0" aria-label="Screenshots, scroll sideways for more">
+          <div class="x-grid x-grid--shots x-reveal" data-lenis-prevent-wheel tabindex="0" aria-label="Screenshots, scroll sideways for more">
             <figure class="x-shot"><a class="x-zoom" href="images/mac-call-orb-1600.webp"><img src="images/mac-call-orb-800.webp" srcset="images/mac-call-orb-800.webp 800w, images/mac-call-orb-1600.webp 1600w" sizes="(max-width: 700px) 84vw, 500px" width="800" height="500" loading="lazy" decoding="async" alt="Voice mode during a call with transcripts hidden: the big centred orb, a waveform and Listening… under it, and five round call controls with labels (mockup)" /></a><figcaption>Voice: just talk, and JOSIE answers out loud. (mockup)</figcaption></figure>
             <figure class="x-shot"><a class="x-zoom" href="images/mac-call-1600.webp"><img src="images/mac-call-800.webp" srcset="images/mac-call-800.webp 800w, images/mac-call-1600.webp 1600w" sizes="(max-width: 700px) 84vw, 500px" width="800" height="500" loading="lazy" decoding="async" alt="Voice call with transcripts shown: the small orb at the top, a few turns of transcript with a tool call, and the five controls in a glass capsule (mockup)" /></a><figcaption>Live transcripts appear as you speak. (mockup)</figcaption></figure>
             <figure class="x-shot"><a class="x-zoom" href="images/mac-chat-1600.webp"><img src="images/mac-chat-800.webp" srcset="images/mac-chat-800.webp 800w, images/mac-chat-1600.webp 1600w" sizes="(max-width: 700px) 84vw, 500px" width="800" height="500" loading="lazy" decoding="async" alt="Chat mode with the sessions sidebar, glass bubbles with avatars and timestamps, and a PDF attachment chip in the composer (mockup)" /></a><figcaption>Chat: type when you can't talk. (mockup)</figcaption></figure>
@@ -339,18 +346,18 @@
             <figure class="x-shot"><a class="x-zoom" href="images/mac-sky-night-1600.webp"><img src="images/mac-sky-night-800.webp" srcset="images/mac-sky-night-800.webp 800w, images/mac-sky-night-1600.webp 1600w" sizes="(max-width: 700px) 84vw, 500px" width="800" height="500" loading="lazy" decoding="async" alt="Voice mode at night: a dark sky with stars behind the orb (mockup)" /></a><figcaption>Stars at night. (mockup)</figcaption></figure>
           </div>
           <h4 class="x-gsub x-reveal" id="g-mac-library">Library &amp; embeddings</h4>
-          <div class="x-grid x-grid--shots x-reveal" tabindex="0" aria-label="Screenshots, scroll sideways for more">
+          <div class="x-grid x-grid--shots x-reveal" data-lenis-prevent-wheel tabindex="0" aria-label="Screenshots, scroll sideways for more">
             <figure class="x-shot"><a class="x-zoom" href="images/mac-library-1600.webp"><img src="images/mac-library-800.webp" srcset="images/mac-library-800.webp 800w, images/mac-library-1600.webp 1600w" sizes="(max-width: 700px) 84vw, 500px" width="800" height="500" loading="lazy" decoding="async" alt="The Library window: semantic search, kind, type and date filters, a list of documents and conversations, and one document's details and chunk preview (mockup)" /></a><figcaption>Every document and conversation, searchable in the Library. (mockup)</figcaption></figure>
             <figure class="x-shot"><a class="x-zoom" href="images/mac-embedding-map-1600.webp"><img src="images/mac-embedding-map-800.webp" srcset="images/mac-embedding-map-800.webp 800w, images/mac-embedding-map-1600.webp 1600w" sizes="(max-width: 700px) 84vw, 500px" width="800" height="500" loading="lazy" decoding="async" alt="The Library's Map tab in 2D with PCA: coloured nodes linked to their nearest neighbours and a hover tooltip on one node (mockup)" /></a><figcaption>The embedding map in 2D. (mockup)</figcaption></figure>
             <figure class="x-shot"><a class="x-zoom" href="images/mac-embedding-map-3d-1600.webp"><img src="images/mac-embedding-map-3d-800.webp" srcset="images/mac-embedding-map-3d-800.webp 800w, images/mac-embedding-map-3d-1600.webp 1600w" sizes="(max-width: 700px) 84vw, 500px" width="800" height="500" loading="lazy" decoding="async" alt="The embedding map in 3D with UMAP, orbited so the depth of the clusters shows (mockup)" /></a><figcaption>The same map in 3D. (mockup)</figcaption></figure>
           </div>
           <h4 class="x-gsub x-reveal" id="g-mac-voice">Voice studio &amp; Voice ID</h4>
-          <div class="x-grid x-grid--shots x-reveal" tabindex="0" aria-label="Screenshots, scroll sideways for more">
+          <div class="x-grid x-grid--shots x-reveal" data-lenis-prevent-wheel tabindex="0" aria-label="Screenshots, scroll sideways for more">
             <figure class="x-shot"><a class="x-zoom" href="images/mac-voice-studio-1600.webp"><img src="images/mac-voice-studio-800.webp" srcset="images/mac-voice-studio-800.webp 800w, images/mac-voice-studio-1600.webp 1600w" sizes="(max-width: 700px) 84vw, 500px" width="800" height="500" loading="lazy" decoding="async" alt="Personalization, Voice: the voice JOSIE speaks as, a style field, a saved voice, and the Clone a voice and Design a voice sections (mockup)" /></a><figcaption>Pick a preset, clone a voice or design a new one. (mockup)</figcaption></figure>
             <figure class="x-shot"><a class="x-zoom" href="images/mac-voice-id-1600.webp"><img src="images/mac-voice-id-800.webp" srcset="images/mac-voice-id-800.webp 800w, images/mac-voice-id-1600.webp 1600w" sizes="(max-width: 700px) 84vw, 500px" width="800" height="500" loading="lazy" decoding="async" alt="Profile, Voice ID: the enrolment form with three phrases and one known speaker marked owner (mockup)" /></a><figcaption>Teach JOSIE your voice with three phrases. (mockup)</figcaption></figure>
           </div>
           <h4 class="x-gsub x-reveal" id="g-mac-dashboard">Dashboard</h4>
-          <div class="x-grid x-grid--shots x-reveal" tabindex="0" aria-label="Screenshots, scroll sideways for more">
+          <div class="x-grid x-grid--shots x-reveal" data-lenis-prevent-wheel tabindex="0" aria-label="Screenshots, scroll sideways for more">
             <figure class="x-shot"><a class="x-zoom" href="images/mac-dashboard-overview-1600.webp"><img src="images/mac-dashboard-overview-800.webp" srcset="images/mac-dashboard-overview-800.webp 800w, images/mac-dashboard-overview-1600.webp 1600w" sizes="(max-width: 700px) 84vw, 500px" width="800" height="500" loading="lazy" decoding="async" alt="Dashboard overview: stat tiles, a yearly activity heatmap and recent calls (mockup)" /></a><figcaption>Overview: calls, talk time and activity. (mockup)</figcaption></figure>
             <figure class="x-shot"><a class="x-zoom" href="images/mac-dashboard-highlights-1600.webp"><img src="images/mac-dashboard-highlights-800.webp" srcset="images/mac-dashboard-highlights-800.webp 800w, images/mac-dashboard-highlights-1600.webp 1600w" sizes="(max-width: 700px) 84vw, 500px" width="800" height="500" loading="lazy" decoding="async" alt="Dashboard highlights for 30 days: six Wrapped tiles, personal records and most said words (mockup)" /></a><figcaption>Highlights: your month, wrapped. (mockup)</figcaption></figure>
             <figure class="x-shot"><a class="x-zoom" href="images/mac-dashboard-calls-1600.webp"><img src="images/mac-dashboard-calls-800.webp" srcset="images/mac-dashboard-calls-800.webp 800w, images/mac-dashboard-calls-1600.webp 1600w" sizes="(max-width: 700px) 84vw, 500px" width="800" height="500" loading="lazy" decoding="async" alt="Dashboard calls: stat tiles, a call-length histogram, minutes per day and the Who talks chart (mockup)" /></a><figcaption>Calls: lengths, minutes per day and who talks. (mockup)</figcaption></figure>
@@ -361,14 +368,14 @@
             <figure class="x-shot"><a class="x-zoom" href="images/mac-dashboard-export-1600.webp"><img src="images/mac-dashboard-export-800.webp" srcset="images/mac-dashboard-export-800.webp 800w, images/mac-dashboard-export-1600.webp 1600w" sizes="(max-width: 700px) 84vw, 500px" width="800" height="500" loading="lazy" decoding="async" alt="Dashboard export for training: the Record my calls switch, a format picker and the Export button (mockup)" /></a><figcaption>Export your calls for training. (mockup)</figcaption></figure>
           </div>
           <h4 class="x-gsub x-reveal" id="g-mac-menus">Menu bar &amp; API server</h4>
-          <div class="x-grid x-grid--shots x-reveal" tabindex="0" aria-label="Screenshots, scroll sideways for more">
+          <div class="x-grid x-grid--shots x-reveal" data-lenis-prevent-wheel tabindex="0" aria-label="Screenshots, scroll sideways for more">
             <figure class="x-shot"><a class="x-zoom" href="images/mac-menu-bar-1600.webp"><img src="images/mac-menu-bar-800.webp" srcset="images/mac-menu-bar-800.webp 800w, images/mac-menu-bar-1600.webp 1600w" sizes="(max-width: 700px) 84vw, 500px" width="800" height="500" loading="lazy" decoding="async" alt="The menu bar extra open during a call: status, elapsed time, the last transcript line and menu items for ending the call and muting (mockup)" /></a><figcaption>Calls and mute right from the menu bar. (mockup)</figcaption></figure>
             <figure class="x-shot"><a class="x-zoom" href="images/mac-hub-menu-1600.webp"><img src="images/mac-hub-menu-800.webp" srcset="images/mac-hub-menu-800.webp 800w, images/mac-hub-menu-1600.webp 1600w" sizes="(max-width: 700px) 84vw, 500px" width="800" height="500" loading="lazy" decoding="async" alt="The avatar menu open: local profile, Settings, Personalization, Profile, Dashboard, Library and Run setup again (mockup)" /></a><figcaption>Everything else lives under your avatar. (mockup)</figcaption></figure>
             <figure class="x-shot"><a class="x-zoom" href="images/mac-settings-api-1600.webp"><img src="images/mac-settings-api-800.webp" srcset="images/mac-settings-api-800.webp 800w, images/mac-settings-api-1600.webp 1600w" sizes="(max-width: 700px) 84vw, 500px" width="800" height="500" loading="lazy" decoding="async" alt="Settings, API server: the server switch, local URL, port, LAN switch off, a hidden API key and session limits (mockup)" /></a><figcaption>An optional local OpenAI-compatible API. (mockup)</figcaption></figure>
             <figure class="x-shot"><a class="x-zoom" href="images/mac-dashboard-api-1600.webp"><img src="images/mac-dashboard-api-800.webp" srcset="images/mac-dashboard-api-800.webp 800w, images/mac-dashboard-api-1600.webp 1600w" sizes="(max-width: 700px) 84vw, 500px" width="800" height="500" loading="lazy" decoding="async" alt="Dashboard API server: status, URL, uptime, sessions, requests per endpoint and recent requests (mockup)" /></a><figcaption>Watch the API server at work. (mockup)</figcaption></figure>
           </div>
           <h4 class="x-gsub x-reveal" id="g-mac-settings">Settings</h4>
-          <div class="x-grid x-grid--shots x-reveal" tabindex="0" aria-label="Screenshots, scroll sideways for more">
+          <div class="x-grid x-grid--shots x-reveal" data-lenis-prevent-wheel tabindex="0" aria-label="Screenshots, scroll sideways for more">
             <figure class="x-shot"><a class="x-zoom" href="images/mac-settings-models-1600.webp"><img src="images/mac-settings-models-800.webp" srcset="images/mac-settings-models-800.webp 800w, images/mac-settings-models-1600.webp 1600w" sizes="(max-width: 700px) 84vw, 500px" width="800" height="500" loading="lazy" decoding="async" alt="Settings, Models and endpoints: the language model section with Ollama selected and the start of Speech engines (mockup)" /></a><figcaption>Models &amp; endpoints: Ollama by default. (mockup)</figcaption></figure>
             <figure class="x-shot"><a class="x-zoom" href="images/mac-settings-speech-engines-1600.webp"><img src="images/mac-settings-speech-engines-800.webp" srcset="images/mac-settings-speech-engines-800.webp 800w, images/mac-settings-speech-engines-1600.webp 1600w" sizes="(max-width: 700px) 84vw, 500px" width="800" height="500" loading="lazy" decoding="async" alt="Settings, Speech engines with Kokoro 82M selected as the voice, its download row and voice picker (mockup)" /></a><figcaption>Choose the speech engines, like Kokoro 82M. (mockup)</figcaption></figure>
             <figure class="x-shot"><a class="x-zoom" href="images/mac-settings-embeddings-1600.webp"><img src="images/mac-settings-embeddings-800.webp" srcset="images/mac-settings-embeddings-800.webp 800w, images/mac-settings-embeddings-1600.webp 1600w" sizes="(max-width: 700px) 84vw, 500px" width="800" height="500" loading="lazy" decoding="async" alt="Settings, Embeddings: the weights picker on 8-bit, the Downloaded badge and the semantic search status line (mockup)" /></a><figcaption>EmbeddingGemma for semantic search. (mockup)</figcaption></figure>
@@ -381,7 +388,7 @@
             <figure class="x-shot"><a class="x-zoom" href="images/mac-settings-diagnostics-1600.webp"><img src="images/mac-settings-diagnostics-800.webp" srcset="images/mac-settings-diagnostics-800.webp 800w, images/mac-settings-diagnostics-1600.webp 1600w" sizes="(max-width: 700px) 84vw, 500px" width="800" height="500" loading="lazy" decoding="async" alt="Settings, Diagnostics: recent tool calls with status dots and durations, log buttons and device info (mockup)" /></a><figcaption>Diagnostics: recent tool calls and logs. (mockup)</figcaption></figure>
           </div>
           <h4 class="x-gsub x-reveal" id="g-mac-onboarding">Onboarding</h4>
-          <div class="x-grid x-grid--shots x-reveal" tabindex="0" aria-label="Screenshots, scroll sideways for more">
+          <div class="x-grid x-grid--shots x-reveal" data-lenis-prevent-wheel tabindex="0" aria-label="Screenshots, scroll sideways for more">
             <figure class="x-shot"><a class="x-zoom" href="images/onboarding-models-1600.webp"><img src="images/onboarding-models-800.webp" srcset="images/onboarding-models-800.webp 800w, images/onboarding-models-1600.webp 1600w" sizes="(max-width: 700px) 84vw, 500px" width="800" height="500" loading="lazy" decoding="async" alt="Onboarding, On-device models: model sizes selected, optional add-ons unchecked and the free space needed (mockup)" /></a><figcaption>First launch: choose model sizes and download. (mockup)</figcaption></figure>
           </div>
           <h3 class="x-gh x-reveal" id="g-iphone">iPhone</h3>
@@ -407,7 +414,7 @@
 
         <section class="x-sec" id="install">
           <p class="x-eye x-reveal">05 · No tech skills needed</p>
-          <h2 class="x-h x-reveal"><b>Five steps.</b><i>No terminal.</i></h2>
+          <h2 class="x-h x-reveal"><b>Five steps.</b><i data-scroll data-scroll-speed="0.06">No terminal.</i></h2>
           <p class="x-lede x-reveal">You won't type a single command. Setup takes about 15 minutes, mostly waiting for downloads.</p>
           <div class="x-panel x-glass x-reveal">
             <h3>Before you start</h3>
@@ -442,7 +449,7 @@
 
         <section class="x-sec" id="good">
           <p class="x-eye x-reveal">06 · Good to know</p>
-          <h2 class="x-h x-reveal"><b>Small</b><i>details.</i></h2>
+          <h2 class="x-h x-reveal"><b>Small</b><i data-scroll data-scroll-speed="0.06">details.</i></h2>
           <div class="x-grid">
             <div class="x-card x-glass x-reveal"><span class="x-num">01</span><h3>Works offline</h3><p>After setup, everything works offline except the language model, which runs in Ollama on your Mac.</p></div>
             <div class="x-card x-glass x-reveal"><span class="x-num">02</span><h3>Other models</h3><p>In Settings, switch to any OpenAI-compatible service with your own key, or to Apple Intelligence on macOS 26.</p></div>
@@ -454,7 +461,7 @@
 
         <section class="x-sec" id="faq">
           <p class="x-eye x-reveal">07 · FAQ</p>
-          <h2 class="x-h x-reveal"><b>Questions,</b><i>answered.</i></h2>
+          <h2 class="x-h x-reveal"><b>Questions,</b><i data-scroll data-scroll-speed="0.06">answered.</i></h2>
           <div class="x-faq">
             <details class="x-glass x-reveal"><summary>Is it free?</summary><p>Yes.</p></details>
             <details class="x-glass x-reveal"><summary>Does my voice go to the cloud?</summary><p>No. Hearing, voice recognition and speech run on your Mac, and by default the language model (Ollama) does too. If you switch to an online model, your text goes to that service.</p></details>
@@ -484,7 +491,7 @@
         </section>
 
         <section class="x-sec x-cta">
-          <h2 class="x-h x-reveal"><b>Ready to</b><i>say hi?</i></h2>
+          <h2 class="x-h x-reveal"><b>Ready to</b><i data-scroll data-scroll-speed="0.06">say hi?</i></h2>
           <a class="x-btn x-btn--primary x-reveal" href="https://github.com/Goekdeniz-Guelmez/JOSIE-Voice/releases" target="_blank" rel="noopener">Download for Mac</a>
         </section>
       </main>
@@ -622,12 +629,6 @@
             sky.preview(b.dataset.h);
           });
         });
-        var els = document.querySelectorAll(".x-reveal");
-        if (!("IntersectionObserver" in window)) return els.forEach(function (e) { e.classList.add("is-in"); });
-        var io = new IntersectionObserver(function (en) {
-          en.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add("is-in"); io.unobserve(e.target); } });
-        }, { rootMargin: "0px 0px -8% 0px" });
-        els.forEach(function (e) { io.observe(e); });
       })();
     </script>
     <script type="x-shader/x-vertex" id="orb-vert">#version 300 es
@@ -800,7 +801,7 @@ void main() {
           orb.style.width = w + "px"; orb.style.height = w + "px";
           place(c.x, c.y, c.s);
         });
-        function toTop() { if (docked) window.scrollTo({ top: 0, behavior: reduce ? "auto" : "smooth" }); }
+        function toTop() { if (!docked) return; if (window.__loco && !reduce) window.__loco.scrollTo(0, { duration: 1.4 }); else window.scrollTo({ top: 0, behavior: reduce ? "auto" : "smooth" }); }
         orb.addEventListener("click", toTop);
         orb.addEventListener("keydown", function (e) { if (docked && (e.key === "Enter" || e.key === " ")) { e.preventDefault(); toTop(); } });
         onScroll();
@@ -968,5 +969,47 @@ void main() {
       })();
     </script>
     <script src="main.js"></script>
+    <script src="vendor/lenis.min.js"></script>
+    <script>window.lenis = window.Lenis; /* the Locomotive UMD build reads a global named "lenis" */</script>
+    <script src="vendor/locomotive-scroll.umd.js"></script>
+    <script>
+      /* Locomotive Scroll: smooth scrolling, light parallax, and every .x-reveal fades in on the way in
+         and back out on the way out (both directions). Falls back to plain visible content. */
+      (function () {
+        var els = document.querySelectorAll(".x-reveal");
+        // stagger siblings inside grids and lists
+        document.querySelectorAll(".x-grid, .x-act-list, .x-phones-grid, .x-steps, .x-faq").forEach(function (g) {
+          var i = 0;
+          Array.prototype.forEach.call(g.children, function (c) { if (c.classList.contains("x-reveal")) c.style.setProperty("--i", Math.min(i++, 6)); });
+        });
+        var reduce = false;
+        try { reduce = !!(window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches); } catch (e) {}
+        function showAll() { els.forEach(function (e) { e.classList.add("is-in"); }); }
+        if (reduce || typeof window.Lenis !== "function" || typeof window.locomotiveScroll !== "function") {
+          document.querySelectorAll("[data-scroll-speed]").forEach(function (e) { e.removeAttribute("data-scroll-speed"); });
+          return showAll();
+        }
+        els.forEach(function (e) {
+          e.setAttribute("data-scroll", "");
+          e.setAttribute("data-scroll-repeat", "");
+          e.setAttribute("data-scroll-call", "xreveal");
+        });
+        window.addEventListener("xreveal", function (ev) {
+          var d = ev.detail || {}, t = d.target;
+          if (!t) return;
+          if (d.way === "enter") { t.classList.add("is-in"); t.classList.remove("is-past"); }
+          else { t.classList.remove("is-in"); t.classList.toggle("is-past", t.getBoundingClientRect().top < window.innerHeight / 2); }
+        });
+        try {
+          window.__loco = new window.locomotiveScroll({
+            lenisOptions: { lerp: 0.09, smoothWheel: true, anchors: { offset: -84 } },
+            triggerRootMargin: "-6% 0px -6% 0px"
+          });
+        } catch (err) {
+          if (window.console) console.warn("Locomotive Scroll failed, using native scroll", err);
+          showAll();
+        }
+      })();
+    </script>
   </body>
 </html>
