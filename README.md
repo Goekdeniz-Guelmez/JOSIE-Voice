@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="josie-2-9b-tree-transparent.png" alt="JOSIE tree logo" width="160">
+  <img src="logo.png" alt="JOSIE-Voice logo" width="160">
 </p>
 
 <h1 align="center">JOSIE-Voice</h1>
@@ -112,7 +112,7 @@ That's it. Click the orb and say hi.
 
 ## The JOSIE family
 
-<img src="josie-orb.png" alt="JOSIE orb" width="56" align="left">
+<img src="josie-2-9b-tree-transparent.png" alt="JOSIE model family tree" width="56" align="left">
 
 JOSIE-Voice comes from the JOSIE family of personality-driven language models by Gökdeniz Gülmez, trained entirely on Apple Silicon with [MLX-LM-LoRA](https://github.com/Goekdeniz-Guelmez/mlx-lm-lora). Meet the models on [Hugging Face](https://huggingface.co/Goekdeniz-Guelmez).
 
