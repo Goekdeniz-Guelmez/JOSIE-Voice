@@ -36,6 +36,41 @@
     });
   }
 
+  // Screenshot rails: wrap each sideways row and add previous/next buttons
+  document.querySelectorAll(".x-grid--shots").forEach(function (track) {
+    var rail = document.createElement("div");
+    rail.className = "x-rail";
+    track.parentNode.insertBefore(rail, track);
+    rail.appendChild(track);
+    var btns = document.createElement("div");
+    btns.className = "x-rail-btns";
+    btns.innerHTML = '<button type="button" class="x-rail-btn x-glass" aria-label="Previous screenshots">‹</button>' +
+      '<button type="button" class="x-rail-btn x-glass" aria-label="Next screenshots">›</button>';
+    rail.appendChild(btns);
+    var prev = btns.children[0], next = btns.children[1];
+    function page(dir) {
+      var item = track.querySelector(".x-shot");
+      var stepW = item ? item.getBoundingClientRect().width + 28 : track.clientWidth * 0.8;
+      var per = Math.max(1, Math.floor(track.clientWidth / stepW));
+      track.scrollBy({ left: dir * per * stepW, behavior: "smooth" });
+    }
+    function update() {
+      var max = track.scrollWidth - track.clientWidth - 2;
+      rail.classList.toggle("x-rail--static", max <= 0);
+      prev.disabled = track.scrollLeft <= 2;
+      next.disabled = track.scrollLeft >= max;
+    }
+    prev.addEventListener("click", function () { page(-1); });
+    next.addEventListener("click", function () { page(1); });
+    track.addEventListener("keydown", function (e) {
+      if (e.key === "ArrowRight") { e.preventDefault(); page(1); }
+      else if (e.key === "ArrowLeft") { e.preventDefault(); page(-1); }
+    });
+    track.addEventListener("scroll", update, { passive: true });
+    window.addEventListener("resize", update);
+    update();
+  });
+
   // Mark the nav link for the section in view
   var links = document.querySelectorAll(".x-nav nav a");
   if (!links.length || !("IntersectionObserver" in window)) return;
