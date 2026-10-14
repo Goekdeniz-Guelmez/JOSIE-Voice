@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="josie-2-9b-tree-transparent.png" alt="JOSIE tree logo" width="160">
+  <img src="josie-orb.png" alt="JOSIE orb" width="160">
 </p>
 
 <h1 align="center">JOSIE-Voice</h1>
