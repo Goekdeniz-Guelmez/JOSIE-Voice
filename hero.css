@@ -1,4 +1,4 @@
-/* Hark hero: spacing and headline refinements for the opening section */
+/* Hero: spacing and headline refinements for the opening section */
 .x-hero { min-height: min(88vh, 860px); align-content: center; }
 .x-hero .x-h { font-size: clamp(44px, 9vw, 96px); }
 .x-hero .x-eye { margin-bottom: 0; }
