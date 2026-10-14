@@ -104,6 +104,9 @@
       /* gallery */
       .x-shot { margin: 0; padding: 10px; border-radius: var(--r-xl); }
       .x-shot img { width: 100%; aspect-ratio: 16 / 10; object-fit: cover; border-radius: calc(var(--r-xl) - 10px); }
+      .x-shot video { display: block; width: 100%; aspect-ratio: 16 / 10; object-fit: cover; border-radius: calc(var(--r-xl) - 10px); background: rgb(255 255 255 / 0.06); }
+      .x-grid--videos { margin-top: 16px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); }
+      .x-note { margin-top: 12px; font: var(--type-label); color: rgb(255 255 255 / 0.7); }
       .x-shot figcaption { padding: 12px 10px 4px; font: var(--type-label); }
       /* install */
       .x-panel { padding: clamp(20px, 3vw, 32px); }
@@ -191,6 +194,12 @@
             <figure class="x-shot x-glass x-reveal"><img src="mock_night_chat.jpg" alt="Chat mode at night" /><figcaption>Chat: type when you can't talk.</figcaption></figure>
             <figure class="x-shot x-glass x-reveal"><img src="mock_glass_chat_moon.jpg" alt="Chat with the sessions sidebar open" /><figcaption>Every conversation saved in the sidebar.</figcaption></figure>
           </div>
+          <div class="x-grid x-grid--videos">
+            <figure class="x-shot x-glass x-reveal"><video autoplay muted loop playsinline preload="metadata" poster="videos/josie-voice-call-poster.jpg" aria-label="Voice call at night: the orb changes colour while JOSIE listens, thinks and answers, with a live transcript"><source src="videos/josie-voice-call.webm" type="video/webm" /><source src="videos/josie-voice-call.mp4" type="video/mp4" /></video><figcaption>A voice call with the live transcript.</figcaption></figure>
+            <figure class="x-shot x-glass x-reveal"><video autoplay muted loop playsinline preload="metadata" poster="videos/josie-chat-poster.jpg" aria-label="Chat mode at sunset: a typed question, a web search, and a streamed answer"><source src="videos/josie-chat.webm" type="video/webm" /><source src="videos/josie-chat.mp4" type="video/mp4" /></video><figcaption>Chat, with web search when she needs it.</figcaption></figure>
+            <figure class="x-shot x-glass x-reveal"><video autoplay muted loop playsinline preload="metadata" poster="videos/josie-sky-timelapse-poster.jpg" aria-label="Time-lapse of the sky going from late afternoon through sunset to a starry night"><source src="videos/josie-sky-timelapse.webm" type="video/webm" /><source src="videos/josie-sky-timelapse.mp4" type="video/mp4" /></video><figcaption>The sky follows the time of day, stars at night.</figcaption></figure>
+          </div>
+          <p class="x-note x-reveal">Clips recorded from JOSIE's web interface, which shares the Mac app's look.</p>
         </section>
 
         <section class="x-sec" id="features">
@@ -684,6 +693,19 @@ void main() {
         try { render(); } catch (e) { fail(); return; }
         if (gl.getError() !== gl.NO_ERROR) { fail(); return; }
         schedule();
+      })();
+    </script>
+    <script>
+      (function () {
+        var reduce = false;
+        try { reduce = !!(window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches); } catch (e) {}
+        document.querySelectorAll(".x-shot video").forEach(function (v) {
+          if (reduce) { v.removeAttribute("autoplay"); v.pause(); v.preload = "none"; return; }
+          // Only play clips that are on screen.
+          if ("IntersectionObserver" in window) {
+            new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting) { var p = v.play(); if (p && p.catch) p.catch(function () {}); } else v.pause(); }); }, { threshold: 0.2 }).observe(v);
+          }
+        });
       })();
     </script>
     <script src="hark.js"></script>
