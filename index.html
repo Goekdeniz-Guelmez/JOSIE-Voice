@@ -108,6 +108,12 @@
       .x-orb.is-gl img, .x-orb.is-gl::before { display: none; }
       @keyframes x-breathe { 50% { transform: scale(1.14); opacity: 0.7; } }
       @keyframes x-float { 50% { transform: scale(1.03); } }
+      /* hero orb docks into the top-left corner while scrolling */
+      .x-orb-slot { width: clamp(180px, 26vw, 280px); aspect-ratio: 1; }
+      .x-orb--hero { width: 100%; height: 100%; }
+      .x-orb--hero.is-docked { position: fixed; top: 0; left: 0; z-index: 30; transform-origin: 0 0; cursor: pointer; will-change: transform; }
+      .x-orb--hero.is-moving { transition: transform 0.7s cubic-bezier(0.32, 0.72, 0, 1); }
+      .x-orb--hero.is-docked:focus-visible { outline: 3px solid #fff; outline-offset: 6px; border-radius: 50%; }
       .x-hero .x-lede { margin-inline: auto; }
       .x-hero .x-btns { justify-content: center; }
       .x-meta { font: var(--type-small); color: var(--text-secondary); padding: 8px 16px; border-radius: var(--r-pill); }
@@ -256,10 +262,10 @@
 
       <main class="main">
         <section class="x-hero">
-          <div class="x-orb" role="img" aria-label="The JOSIE orb"><canvas class="x-orb__gl" aria-hidden="true"></canvas><img src="logo.png" alt="" /></div>
+          <div class="x-orb-slot"><div class="x-orb x-orb--hero" role="img" aria-label="The JOSIE orb"><canvas class="x-orb__gl" aria-hidden="true"></canvas><img src="logo.png" alt="" /></div></div>
           <p class="x-eye">By Gökdeniz Gülmez · Free for Mac</p>
           <h1 class="x-h"><b>Talk to</b><i>your Mac.</i></h1>
-          <p class="x-lede">JOSIE-Voice is a voice and chat assistant that listens, knows who's speaking, and talks back with a natural voice, and takes real action in your Reminders, Calendar, Maps and Messages. Hearing, voice recognition and speech all run on your Mac, so your voice never leaves it.</p>
+          <p class="x-lede">JOSIE-Voice is a voice and chat assistant that listens, knows who's speaking, talks back with a natural voice, and takes real action in your Reminders, Calendar, Maps and Messages. Hearing, voice recognition and speech all run on your Mac, so your voice never leaves it.</p>
           <div class="x-btns">
             <a class="x-btn x-btn--primary" href="https://github.com/Goekdeniz-Guelmez/JOSIE-Voice/releases" target="_blank" rel="noopener">Download for Mac</a>
             <a class="x-btn x-glass" href="#install">How to install</a>
@@ -728,6 +734,78 @@ void main() {
   outColor = vec4(col, 1.0) * a + halo * (1.0 - a);
 }
 </script>
+    <script>
+      /* Hero orb: flies to the top-left corner (scaled down, still animating) once you scroll,
+         returns to the centre at the top. Clicking the corner orb scrolls back up. */
+      (function () {
+        var orb = document.querySelector(".x-orb--hero"), slot = orb && orb.parentNode;
+        if (!orb) return;
+        var reduce = false;
+        try { reduce = !!(window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches); } catch (e) {}
+        var docked = false, settleTimer = 0;
+        function corner(w) {
+          var small = window.innerWidth <= 720, size = small ? 40 : 52;
+          var cx = (small ? 12 : 20) + size / 2, cy = 12 + 24;
+          var s = size / w;
+          return { x: cx - (w * s) / 2, y: cy - (w * s) / 2, s: s };
+        }
+        function place(x, y, s) { orb.style.transform = "translate(" + x + "px," + y + "px) scale(" + s + ")"; }
+        function animate(fn) {
+          clearTimeout(settleTimer);
+          if (reduce) { orb.classList.remove("is-moving"); fn(); return; }
+          void orb.offsetWidth;
+          orb.classList.add("is-moving");
+          fn();
+          settleTimer = setTimeout(function () { orb.classList.remove("is-moving"); }, 720);
+        }
+        function dock() {
+          if (docked) return;
+          docked = true;
+          var r = slot.getBoundingClientRect(), w = r.width;
+          orb.classList.remove("is-moving");
+          orb.style.width = w + "px"; orb.style.height = w + "px";
+          orb.classList.add("is-docked");
+          place(r.left, r.top, 1);
+          orb.setAttribute("role", "button");
+          orb.setAttribute("tabindex", "0");
+          orb.setAttribute("aria-label", "Back to top");
+          var c = corner(w);
+          animate(function () { place(c.x, c.y, c.s); });
+        }
+        function undock() {
+          if (!docked) return;
+          docked = false;
+          var r = slot.getBoundingClientRect();
+          orb.setAttribute("role", "img");
+          orb.removeAttribute("tabindex");
+          orb.setAttribute("aria-label", "The JOSIE orb");
+          function done() {
+            if (docked) return;
+            orb.classList.remove("is-docked", "is-moving");
+            orb.style.transform = ""; orb.style.width = ""; orb.style.height = "";
+          }
+          if (reduce) { done(); return; }
+          animate(function () { place(r.left, r.top, 1); });
+          settleTimer = setTimeout(done, 720);
+        }
+        function onScroll() {
+          var y = window.scrollY || window.pageYOffset;
+          if (!docked && y > 60) dock();
+          else if (docked && y < 12) undock();
+        }
+        window.addEventListener("scroll", onScroll, { passive: true });
+        window.addEventListener("resize", function () {
+          if (!docked) return;
+          var w = slot.getBoundingClientRect().width, c = corner(w);
+          orb.style.width = w + "px"; orb.style.height = w + "px";
+          place(c.x, c.y, c.s);
+        });
+        function toTop() { if (docked) window.scrollTo({ top: 0, behavior: reduce ? "auto" : "smooth" }); }
+        orb.addEventListener("click", toTop);
+        orb.addEventListener("keydown", function (e) { if (docked && (e.key === "Enter" || e.key === " ")) { e.preventDefault(); toTop(); } });
+        onScroll();
+      })();
+    </script>
     <script>
       /* JOSIE's liquid orb (WebGL2), ported from the app; falls back to logo.png. Runs for every .x-orb. */
       document.querySelectorAll(".x-orb").forEach(function (wrap) {
