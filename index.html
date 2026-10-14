@@ -108,6 +108,11 @@
       .x-grid--videos { margin-top: 16px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); }
       .x-note { margin-top: 12px; font: var(--type-label); color: rgb(255 255 255 / 0.7); }
       .x-shot figcaption { padding: 12px 10px 4px; font: var(--type-label); }
+      .x-grid--pair { grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr)); }
+      .x-phones { display: flex; flex-wrap: wrap; gap: 16px; padding: 0 22px 18px; }
+      .x-phones figure { margin: 0; width: min(200px, 100%); }
+      .x-phones img { width: 100%; border-radius: 14% / 6.8%; }
+      .x-phones figcaption { margin-top: 8px; font: var(--type-label); color: var(--text-secondary); }
       /* install */
       .x-panel { padding: clamp(20px, 3vw, 32px); }
       .x-panel > h3 { font: var(--type-heading); margin-bottom: 4px; }
@@ -189,17 +194,18 @@
           <h2 class="x-h x-reveal"><b>Talk or</b><i>type.</i></h2>
           <p class="x-lede x-reveal">Switch between Voice and Chat with one tap. It's the same conversation either way: start a call, hang up, keep typing, and JOSIE remembers it all.</p>
           <div class="x-grid x-grid--2">
-            <figure class="x-shot x-glass x-reveal"><img src="mock_dreamy.jpg" alt="Daytime voice call with a glowing orange orb" /><figcaption>Voice: just talk, and JOSIE answers out loud.</figcaption></figure>
-            <figure class="x-shot x-glass x-reveal"><img src="mock_moonlight_voice.jpg" alt="Night voice call with a live transcript" /><figcaption>Live transcripts appear as you speak.</figcaption></figure>
-            <figure class="x-shot x-glass x-reveal"><img src="mock_night_chat.jpg" alt="Chat mode at night" /><figcaption>Chat: type when you can't talk.</figcaption></figure>
-            <figure class="x-shot x-glass x-reveal"><img src="mock_glass_chat_moon.jpg" alt="Chat with the sessions sidebar open" /><figcaption>Every conversation saved in the sidebar.</figcaption></figure>
+            <figure class="x-shot x-glass x-reveal"><img src="mock_mac_call_orb.jpg" alt="Daytime voice call on the Mac: the big orange orb, a waveform, Listening… and five round call controls" /><figcaption>Voice: just talk, and JOSIE answers out loud. (mockup)</figcaption></figure>
+            <figure class="x-shot x-glass x-reveal"><img src="mock_mac_call.jpg" alt="Voice call with the transcript shown: the orb at the top, chat bubbles with a tool call, and the controls in a glass capsule" /><figcaption>Live transcripts appear as you speak. (mockup)</figcaption></figure>
+            <figure class="x-shot x-glass x-reveal"><img src="mock_mac_chat.jpg" alt="Chat mode on the Mac with the sessions sidebar and an attached PDF in the composer" /><figcaption>Chat: type when you can't talk. (mockup)</figcaption></figure>
+            <figure class="x-shot x-glass x-reveal"><img src="mock_mac_library.jpg" alt="The Library window: documents and past calls and chats with filters, semantic search and a document's details" /><figcaption>Every conversation and document, saved and searchable in the Library. (mockup)</figcaption></figure>
           </div>
-          <div class="x-grid x-grid--videos">
-            <figure class="x-shot x-glass x-reveal"><video autoplay muted loop playsinline preload="metadata" poster="videos/josie-voice-call-poster.jpg" aria-label="Voice call at night: the orb changes colour while JOSIE listens, thinks and answers, with a live transcript"><source src="videos/josie-voice-call.webm" type="video/webm" /><source src="videos/josie-voice-call.mp4" type="video/mp4" /></video><figcaption>A voice call with the live transcript.</figcaption></figure>
+          <div class="x-grid x-grid--videos x-grid--pair">
+            <figure class="x-shot x-glass x-reveal"><video autoplay muted loop playsinline preload="metadata" poster="videos/josie-mac-call-poster.jpg" aria-label="Voice call on the Mac: the orb moves from listening to thinking, a tool call and speaking while the new turn and JOSIE's reply stream into the transcript"><source src="videos/josie-mac-call.webm" type="video/webm" /><source src="videos/josie-mac-call.mp4" type="video/mp4" /></video><figcaption>A voice call with the live transcript. (mockup)</figcaption></figure>
+            <figure class="x-shot x-glass x-reveal"><video autoplay muted loop playsinline preload="metadata" poster="videos/josie-transcript-morph-poster.jpg" aria-label="Turning the transcript on and off during a call: the orb glides up and shrinks, the controls grow into a glass capsule and the bubbles rise in, then it folds back"><source src="videos/josie-transcript-morph.webm" type="video/webm" /><source src="videos/josie-transcript-morph.mp4" type="video/mp4" /></video><figcaption>Show or hide the transcript mid-call. (mockup)</figcaption></figure>
             <figure class="x-shot x-glass x-reveal"><video autoplay muted loop playsinline preload="metadata" poster="videos/josie-chat-poster.jpg" aria-label="Chat mode at sunset: a typed question, a web search, and a streamed answer"><source src="videos/josie-chat.webm" type="video/webm" /><source src="videos/josie-chat.mp4" type="video/mp4" /></video><figcaption>Chat, with web search when she needs it.</figcaption></figure>
-            <figure class="x-shot x-glass x-reveal"><video autoplay muted loop playsinline preload="metadata" poster="videos/josie-sky-timelapse-poster.jpg" aria-label="Time-lapse of the sky going from late afternoon through sunset to a starry night"><source src="videos/josie-sky-timelapse.webm" type="video/webm" /><source src="videos/josie-sky-timelapse.mp4" type="video/mp4" /></video><figcaption>The sky follows the time of day, stars at night.</figcaption></figure>
+            <figure class="x-shot x-glass x-reveal"><video autoplay muted loop playsinline preload="metadata" poster="videos/josie-sky-day-night-poster.jpg" aria-label="The sky behind the orb running through one day: afternoon, golden hour, a starry night and dawn"><source src="videos/josie-sky-day-night.webm" type="video/webm" /><source src="videos/josie-sky-day-night.mp4" type="video/mp4" /></video><figcaption>The sky follows the time of day, stars at night. (mockup)</figcaption></figure>
           </div>
-          <p class="x-note x-reveal">Clips recorded from JOSIE's web interface, which shares the Mac app's look.</p>
+          <p class="x-note x-reveal">Images and clips marked "mockup" are rendered from the Mac app's source with demo content, not screen recordings. The chat clip is recorded from JOSIE's web interface, which shares the Mac app's look.</p>
         </section>
 
         <section class="x-sec" id="features">
@@ -214,6 +220,12 @@
             <article class="x-card x-glass x-reveal"><span class="x-num">06</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg><h3>Sees what you show it</h3><p>Turn on the camera and ask about what it sees. Needs an image-capable model.</p></article>
             <article class="x-card x-glass x-reveal"><span class="x-num">07</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9z"/><path d="M16 9a4 4 0 0 1 0 6M19 6a8 8 0 0 1 0 12"/></svg><h3>Adapts to the room</h3><p>Volume follows background noise, with echo cancellation.</p></article>
             <article class="x-card x-glass x-reveal"><span class="x-num">08</span><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M5 5l1.5 1.5M17.5 17.5 19 19M5 19l1.5-1.5M17.5 6.5 19 5"/></svg><h3>Living sky</h3><p>The background follows the real time of day, under Apple's Liquid Glass design.</p></article>
+          </div>
+          <div class="x-grid x-grid--2">
+            <figure class="x-shot x-glass x-reveal"><video autoplay muted loop playsinline preload="metadata" poster="videos/josie-embedding-map-3d-poster.jpg" aria-label="The Library's 3D embedding map: hovering a node shows its title, then the map is dragged to orbit around the clusters"><source src="videos/josie-embedding-map-3d.webm" type="video/webm" /><source src="videos/josie-embedding-map-3d.mp4" type="video/mp4" /></video><figcaption>Your documents and past conversations as a 3D map in the Library. (mockup)</figcaption></figure>
+            <figure class="x-shot x-glass x-reveal"><video autoplay muted loop playsinline preload="metadata" poster="videos/josie-menu-bar-api-poster.jpg" aria-label="The JOSIE menu bar extra: the menu opens, the API Server switch turns on and shows the local address with a green dot on the orb, then turns off"><source src="videos/josie-menu-bar-api.webm" type="video/webm" /><source src="videos/josie-menu-bar-api.mp4" type="video/mp4" /></video><figcaption>Calls, mute and an optional local API, right from the menu bar. (mockup)</figcaption></figure>
+            <figure class="x-shot x-glass x-reveal"><img src="mock_mac_voice_studio.jpg" alt="Personalization, Voice: the voice JOSIE speaks as, a saved voice, and the Clone a voice and Design a voice sections" /><figcaption>Pick a preset, clone a voice or design a new one. (mockup)</figcaption></figure>
+            <figure class="x-shot x-glass x-reveal"><img src="mock_mac_dashboard.jpg" alt="The Dashboard overview: call and chat stat tiles, a yearly activity heatmap and recent calls" /><figcaption>A dashboard of your calls, talk time and activity. (mockup)</figcaption></figure>
           </div>
         </section>
 
@@ -272,7 +284,11 @@
             <details class="x-glass x-reveal"><summary>Does my voice go to the cloud?</summary><p>No. Hearing, voice recognition and speech run on your Mac, and by default the language model (Ollama) does too. If you switch to an online model, your text goes to that service.</p></details>
             <details class="x-glass x-reveal"><summary>Do I need an account?</summary><p>No.</p></details>
             <details class="x-glass x-reveal"><summary>Does it work on Intel Macs?</summary><p>No, Apple Silicon (M1 or later) only.</p></details>
-            <details class="x-glass x-reveal"><summary>Is there an iPhone or iPad version?</summary><p>Not as a download yet.</p></details>
+            <details class="x-glass x-reveal"><summary>Is there an iPhone or iPad version?</summary><p>Not as a download yet. Here's a preview of the iPhone app (mockups):</p>
+              <div class="x-phones">
+                <figure><img src="mock_ios_call.jpg" alt="The iPhone app during a call: the orb, a short transcript and the call and keyboard buttons" loading="lazy" /><figcaption>A call on the iPhone. (mockup)</figcaption></figure>
+                <figure><img src="mock_ios_live_activity.jpg" alt="The iPhone Lock Screen with JOSIE's Live Activity: listening, the call timer, the last line and an End button" loading="lazy" /><figcaption>The call on the Lock Screen. (mockup)</figcaption></figure>
+              </div></details>
             <details class="x-glass x-reveal"><summary>It says "Ollama isn't running"</summary><p>Open Ollama from Applications, then click Recheck in JOSIE's setup.</p></details>
             <details class="x-glass x-reveal"><summary>JOSIE can't hear me</summary><p>Open System Settings → Privacy &amp; Security → Microphone and turn on JOSIE-Voice.</p></details>
             <details class="x-glass x-reveal"><summary>How much space does it need?</summary><p>About 5 GB of voice models plus about 1 GB for the language model, at the default small sizes.</p></details>
