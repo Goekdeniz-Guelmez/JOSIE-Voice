@@ -222,11 +222,11 @@ JOSIE works with the Apple apps you already use. Ask out loud and it really happ
 
 Each app is off until you turn it on in Settings → Apple tools, macOS asks your permission first, and nothing is sent without your tap.
 
-## What she can do
+## What Josie can do
 
 | | |
 |---|---|
-| **Real conversation** | Knows when you've finished talking. Interrupt her just by speaking. |
+| **Real conversation** | Knows when you've finished talking. Interrupt Josie just by speaking. |
 | **Knows your voice** | Learns you from three short phrases and tells people apart. |
 | **Voices you choose** | Pick a preset, clone a voice from a short recording, or describe a new one in words. |
 | **Private by design** | Hearing, voice recognition and speech run on your Mac. Your data stays on your Mac. No account. |
@@ -257,7 +257,7 @@ No terminal needed. Setup takes about 15 minutes, mostly waiting for downloads.
 2. **Move it to Applications.** Open the `.dmg`, drag JOSIE-Voice onto the Applications folder, then eject the disk.
 3. **Install Ollama, JOSIE's brain.** Download it free from [ollama.com/download](https://ollama.com/download), move it to Applications and open it once. A llama icon in the menu bar means it's running.
 4. **Open JOSIE-Voice.** Current builds are test builds and are ad-hoc signed. If macOS says it "can't be opened", go to **System Settings → Privacy & Security**, scroll down and click **Open Anyway**. You only need to do this once.
-5. **Follow the setup.** Choose model sizes (0.6B for 8 GB Macs or for speed, 1.7B for better quality on 16 GB or more) and click **Download all**. Leave the language model on Ollama; JOSIE downloads `qwen3.5:0.8b` by herself. Allow the microphone, optionally say three phrases so she learns your voice, and click **Start talking**.
+5. **Follow the setup.** Choose model sizes (0.6B for 8 GB Macs or for speed, 1.7B for better quality on 16 GB or more) and click **Download all**. Leave the language model on Ollama; JOSIE downloads `qwen3.5:0.8b` by itself. Allow the microphone, optionally say three phrases so it learns your voice, and click **Start talking**.
 
 That's it. Click the orb and say hi.
 
