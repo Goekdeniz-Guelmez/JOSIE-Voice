@@ -12,6 +12,30 @@
     });
   });
 
+  // Screenshot lightbox: links still open the full image when <dialog> isn't supported
+  var zooms = document.querySelectorAll("a.x-zoom");
+  if (zooms.length && typeof HTMLDialogElement === "function") {
+    var lb = document.createElement("dialog");
+    lb.className = "x-lb";
+    lb.innerHTML = '<button type="button" aria-label="Close">×</button><img alt="" /><p></p>';
+    document.body.appendChild(lb);
+    var lbImg = lb.querySelector("img"), lbCap = lb.querySelector("p");
+    lb.querySelector("button").addEventListener("click", function () { lb.close(); });
+    lb.addEventListener("click", function (e) { if (e.target === lb || e.target === lbImg) lb.close(); });
+    lb.addEventListener("close", function () { lbImg.removeAttribute("src"); });
+    zooms.forEach(function (a) {
+      a.addEventListener("click", function (e) {
+        if (e.metaKey || e.ctrlKey || e.shiftKey) return;
+        e.preventDefault();
+        var img = a.querySelector("img"), fig = a.closest("figure"), cap = fig && fig.querySelector("figcaption");
+        lbImg.src = a.getAttribute("href");
+        lbImg.alt = img ? img.alt : "";
+        lbCap.textContent = cap ? cap.textContent : "";
+        lb.showModal();
+      });
+    });
+  }
+
   // Mark the nav link for the section in view
   var links = document.querySelectorAll(".x-nav nav a");
   if (!links.length || !("IntersectionObserver" in window)) return;
