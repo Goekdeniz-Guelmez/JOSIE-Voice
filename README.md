@@ -6,7 +6,7 @@
 
 <p align="center">
   <b>Talk to your Mac.</b><br>
-  A voice and chat assistant that listens, knows who's speaking, and talks back with a natural voice.<br>
+  A voice and chat assistant that listens, knows who's speaking, talks back with a natural voice, and takes real action in your Reminders, Calendar, Maps and Messages.<br>
   Hearing, voice recognition and speech all run on your Mac, so your voice never leaves it.
 </p>
 
@@ -209,6 +209,19 @@ On iPhone, calls use OpenAI GPT-Live or your own compatible server; no models ru
 
 <sub>Every screenshot and clip here is a mockup rendered from the app's source with demo content, not a capture of a running build. Real captures will replace them.</sub>
 
+## Gets things done
+
+JOSIE works with the Apple apps you already use. Ask out loud and it really happens:
+
+| App | Say | What happens |
+|---|---|---|
+| **Reminders** | "Remind me to bring a jacket at 7:30." | Added to Reminders, with the time set. |
+| **Calendar** | "What's on tomorrow? Put lunch with Sam on Friday at noon." | Reads your day and adds the event. |
+| **Maps** | "Find a pharmacy near me that's still open." | Looks up places and directions in Maps. |
+| **Messages** | "Text Alex that I'm running ten minutes late." | Writes the draft in Messages. You tap Send. |
+
+Each app is off until you turn it on in Settings → Apple tools, macOS asks your permission first, and nothing is sent without your tap.
+
 ## What she can do
 
 | | |
@@ -217,7 +230,7 @@ On iPhone, calls use OpenAI GPT-Live or your own compatible server; no models ru
 | **Knows your voice** | Learns you from three short phrases and tells people apart. |
 | **Voices you choose** | Pick a preset, clone a voice from a short recording, or describe a new one in words. |
 | **Private by design** | Hearing, voice recognition and speech run on your Mac. Your data stays on your Mac. No account. |
-| **Helps with your day** | Optional Apple tools such as Reminders, Calendar, Maps and Messages drafts (you tap Send). Each one is off until you turn it on. |
+| **Takes real action** | Adds reminders and events, finds places in Maps and drafts Messages (you tap Send). Each one is off until you turn it on. |
 | **Sees what you show it** | Turn on the camera and ask about what it sees. Needs an image-capable model. |
 | **Adapts to the room** | Volume follows background noise, with echo cancellation. |
 | **Living sky** | The background follows the real time of day, under Apple's Liquid Glass design. |

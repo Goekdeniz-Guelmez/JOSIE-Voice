@@ -153,6 +153,20 @@
       .x-phone-frame { border-radius: 16% / 8%; }
       .x-phone-frame img { width: 100%; aspect-ratio: 1383 / 2760; object-fit: contain; filter: drop-shadow(0 14px 30px rgb(0 0 20 / 0.35)); }
       .x-phone-shot figcaption { margin-top: 10px; padding-inline: 4px; font: var(--type-small); color: rgb(255 255 255 / 0.9); }
+      /* actions */
+      .x-act { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr); gap: 40px; align-items: center; margin-top: 32px; }
+      .x-act-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; }
+      .x-act-row { display: flex; gap: 16px; align-items: flex-start; padding: 18px 20px; }
+      .x-act-ic { flex: none; width: 40px; height: 40px; display: grid; place-items: center; border-radius: 12px; background: rgb(255 255 255 / 0.14); box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.25); }
+      .x-act-ic svg { width: 22px; height: 22px; fill: none; stroke: #fff; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+      .x-act-row h3 { font: var(--type-tag); text-transform: uppercase; letter-spacing: 0.12em; color: var(--text-secondary); }
+      .x-act-row q { display: block; margin: 4px 0 4px; font-family: var(--x-serif); font-style: italic; font-size: clamp(17px, 1.6vw, 20px); line-height: 1.3; color: #fff; }
+      .x-act-row q::before { content: "\201C"; } .x-act-row q::after { content: "\201D"; }
+      .x-act-row p { font-size: var(--size-small); line-height: 1.4; color: rgb(255 255 255 / 0.82); }
+      .x-act-trust { list-style: none; margin: 28px 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 10px 24px; font: var(--type-small); color: rgb(255 255 255 / 0.85); }
+      .x-act-trust li { display: flex; align-items: center; gap: 8px; }
+      .x-act-trust li::before { content: ""; width: 16px; height: 16px; flex: none; border-radius: 50%; background: rgb(74 222 128 / 0.9) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M4.5 8.2l2.2 2.2 4.8-4.8' fill='none' stroke='%23fff' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / 100% no-repeat; }
+      @media (max-width: 900px) { .x-act { grid-template-columns: 1fr; gap: 28px; } }
       /* lightbox */
       .x-lb { border: 0; padding: 0; background: transparent; max-width: 96vw; max-height: 94vh; overflow: visible; }
       .x-lb::backdrop { background: rgb(2 6 20 / 0.82); -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); }
@@ -216,7 +230,7 @@
       <header class="x-nav x-glass">
         <a class="x-brand" href="#top"><img src="logo.png" alt="" />JOSIE-Voice</a>
         <nav aria-label="Sections">
-          <a href="#features">Features</a><a href="#see">See it</a><a href="#gallery">Screenshots</a><a href="#install">Install</a><a href="#faq">FAQ</a>
+          <a href="#features">Features</a><a href="#see">See it</a><a href="#actions">Actions</a><a href="#gallery">Screenshots</a><a href="#install">Install</a><a href="#faq">FAQ</a>
         </nav>
         <a class="x-btn x-btn--primary x-btn--sm" href="https://github.com/Goekdeniz-Guelmez/JOSIE-Voice/releases" target="_blank" rel="noopener">Download</a>
       </header>
@@ -226,7 +240,7 @@
           <div class="x-orb" role="img" aria-label="The JOSIE orb"><canvas class="x-orb__gl" aria-hidden="true"></canvas><img src="logo.png" alt="" /></div>
           <p class="x-eye">By Gökdeniz Gülmez · Free for Mac</p>
           <h1 class="x-h"><b>Talk to</b><i>your Mac.</i></h1>
-          <p class="x-lede">JOSIE-Voice is a voice and chat assistant that listens, knows who's speaking, and talks back with a natural voice. Hearing, voice recognition and speech all run on your Mac, so your voice never leaves it.</p>
+          <p class="x-lede">JOSIE-Voice is a voice and chat assistant that listens, knows who's speaking, and talks back with a natural voice, and takes real action in your Reminders, Calendar, Maps and Messages. Hearing, voice recognition and speech all run on your Mac, so your voice never leaves it.</p>
           <div class="x-btns">
             <a class="x-btn x-btn--primary" href="https://github.com/Goekdeniz-Guelmez/JOSIE-Voice/releases" target="_blank" rel="noopener">Download for Mac</a>
             <a class="x-btn x-glass" href="#install">How to install</a>
@@ -247,15 +261,31 @@
           <p class="x-note x-reveal">Clips and screenshots marked "mockup" are rendered from the app's source with demo content, not screen recordings. <a class="x-link" href="#gallery">See every screen ↓</a></p>
         </section>
 
+        <section class="x-sec" id="actions">
+          <p class="x-eye x-reveal">02 · Gets things done</p>
+          <h2 class="x-h x-reveal"><b>Not just</b><i>talk.</i></h2>
+          <p class="x-lede x-reveal">JOSIE works with the Apple apps you already use. Ask out loud and it really happens: the reminder is in Reminders, the event is in your calendar, the message is waiting in Messages.</p>
+          <div class="x-act">
+            <ul class="x-act-list">
+              <li class="x-act-row x-glass x-reveal"><span class="x-act-ic" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="6" cy="7" r="1.6"/><circle cx="6" cy="12" r="1.6"/><circle cx="6" cy="17" r="1.6"/><path d="M10 7h10M10 12h10M10 17h10"/></svg></span><div><h3>Reminders</h3><q>Remind me to bring a jacket at 7:30.</q><p>Added to Reminders, with the time set.</p></div></li>
+              <li class="x-act-row x-glass x-reveal"><span class="x-act-ic" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="15" rx="2"/><path d="M4 10h16M9 3v4M15 3v4"/></svg></span><div><h3>Calendar</h3><q>What's on tomorrow? Put lunch with Sam on Friday at noon.</q><p>Reads your day and adds the event.</p></div></li>
+              <li class="x-act-row x-glass x-reveal"><span class="x-act-ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 21s-6-5.6-6-11a6 6 0 0 1 12 0c0 5.4-6 11-6 11z"/><circle cx="12" cy="10" r="2.2"/></svg></span><div><h3>Maps</h3><q>Find a pharmacy near me that's still open.</q><p>Looks up places and directions in Maps.</p></div></li>
+              <li class="x-act-row x-glass x-reveal"><span class="x-act-ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 5h16v11H9l-5 4z"/></svg></span><div><h3>Messages</h3><q>Text Alex that I'm running ten minutes late.</q><p>Writes the draft in Messages. You tap Send.</p></div></li>
+            </ul>
+            <figure class="x-shot x-act-shot x-reveal"><a class="x-zoom" href="images/mac-call-1600.webp"><img src="images/mac-call-800.webp" srcset="images/mac-call-800.webp 800w, images/mac-call-1600.webp 1600w" sizes="(max-width: 900px) 92vw, 600px" width="800" height="500" loading="lazy" decoding="async" alt="A voice call where JOSIE answers a weather question, then runs an add reminder tool call and confirms the reminder in the transcript (mockup)" /></a><figcaption>Mid-call, JOSIE checks the weather, then adds the reminder for you. (mockup)</figcaption></figure>
+          </div>
+          <ul class="x-act-trust x-reveal"><li>Each app is off until you turn it on</li><li>macOS asks your permission first</li><li>Nothing is sent without your tap</li></ul>
+        </section>
+
         <section class="x-sec" id="features">
-          <p class="x-eye x-reveal">02 · Features</p>
+          <p class="x-eye x-reveal">03 · Features</p>
           <h2 class="x-h x-reveal"><b>What she</b><i>can do.</i></h2>
           <div class="x-grid">
             <article class="x-card x-glass x-reveal"><span class="x-num">01</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v10H9l-5 4z"/><path d="M8 10h.01M12 10h.01M16 10h.01"/></svg><h3>Real conversation</h3><p>Knows when you've finished talking. Interrupt her just by speaking.</p></article>
             <article class="x-card x-glass x-reveal"><span class="x-num">02</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12h2M7 8v8M11 5v14M15 9v6M19 7v10"/></svg><h3>Knows your voice</h3><p>Learns you from three short phrases and tells people apart.</p></article>
             <article class="x-card x-glass x-reveal"><span class="x-num">03</span><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg><h3>Voices you choose</h3><p>Pick a preset, clone a voice from a short recording, or describe a new one in words.</p></article>
             <article class="x-card x-glass x-reveal"><span class="x-num">04</span><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg><h3>Private by design</h3><p>Hearing, voice recognition and speech run on your Mac. Your data stays on your Mac. No account.</p></article>
-            <article class="x-card x-glass x-reveal"><span class="x-num">05</span><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="5" width="16" height="15" rx="2"/><path d="M4 10h16M9 3v4M15 3v4"/></svg><h3>Helps with your day</h3><p>Optional Reminders, Calendar, Maps and Messages drafts (you tap Send). Each is off until you turn it on.</p></article>
+            <article class="x-card x-glass x-reveal"><span class="x-num">05</span><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="5" width="16" height="15" rx="2"/><path d="M4 10h16M9 3v4M15 3v4"/></svg><h3>Takes real action</h3><p>Adds reminders and events, finds places in Maps and drafts Messages (you tap Send). Each is off until you turn it on.</p></article>
             <article class="x-card x-glass x-reveal"><span class="x-num">06</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg><h3>Sees what you show it</h3><p>Turn on the camera and ask about what it sees. Needs an image-capable model.</p></article>
             <article class="x-card x-glass x-reveal"><span class="x-num">07</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9z"/><path d="M16 9a4 4 0 0 1 0 6M19 6a8 8 0 0 1 0 12"/></svg><h3>Adapts to the room</h3><p>Volume follows background noise, with echo cancellation.</p></article>
             <article class="x-card x-glass x-reveal"><span class="x-num">08</span><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M5 5l1.5 1.5M17.5 17.5 19 19M5 19l1.5-1.5M17.5 6.5 19 5"/></svg><h3>Living sky</h3><p>The background follows the real time of day, under Apple's Liquid Glass design.</p></article>
@@ -267,7 +297,7 @@
         </section>
 
         <section class="x-sec" id="gallery">
-          <p class="x-eye x-reveal">03 · Screenshots</p>
+          <p class="x-eye x-reveal">04 · Screenshots</p>
           <h2 class="x-h x-reveal"><b>Every</b><i>screen.</i></h2>
           <p class="x-lede x-reveal">The Mac app, plus a preview of the iPhone app. Click any picture to see it larger.</p>
           <nav class="x-gnav x-reveal" aria-label="Screenshot groups"><a class="x-chip x-glass" href="#g-mac">Mac</a><a class="x-chip x-glass" href="#g-mac-calls">Calls &amp; chat</a><a class="x-chip x-glass" href="#g-mac-library">Library &amp; embeddings</a><a class="x-chip x-glass" href="#g-mac-voice">Voice studio &amp; Voice ID</a><a class="x-chip x-glass" href="#g-mac-dashboard">Dashboard</a><a class="x-chip x-glass" href="#g-mac-menus">Menu bar &amp; API server</a><a class="x-chip x-glass" href="#g-mac-settings">Settings</a><a class="x-chip x-glass" href="#g-mac-onboarding">Onboarding</a><a class="x-chip x-glass" href="#g-iphone">iPhone</a></nav>
@@ -351,7 +381,7 @@
         </section>
 
         <section class="x-sec" id="install">
-          <p class="x-eye x-reveal">04 · No tech skills needed</p>
+          <p class="x-eye x-reveal">05 · No tech skills needed</p>
           <h2 class="x-h x-reveal"><b>Five steps.</b><i>No terminal.</i></h2>
           <p class="x-lede x-reveal">You won't type a single command. Setup takes about 15 minutes, mostly waiting for downloads.</p>
           <div class="x-panel x-glass x-reveal">
@@ -386,7 +416,7 @@
         </section>
 
         <section class="x-sec" id="good">
-          <p class="x-eye x-reveal">05 · Good to know</p>
+          <p class="x-eye x-reveal">06 · Good to know</p>
           <h2 class="x-h x-reveal"><b>Small</b><i>details.</i></h2>
           <div class="x-grid">
             <div class="x-card x-glass x-reveal"><span class="x-num">01</span><h3>Works offline</h3><p>After setup, everything works offline except the language model, which runs in Ollama on your Mac.</p></div>
@@ -398,7 +428,7 @@
         </section>
 
         <section class="x-sec" id="faq">
-          <p class="x-eye x-reveal">06 · FAQ</p>
+          <p class="x-eye x-reveal">07 · FAQ</p>
           <h2 class="x-h x-reveal"><b>Questions,</b><i>answered.</i></h2>
           <div class="x-faq">
             <details class="x-glass x-reveal"><summary>Is it free?</summary><p>Yes.</p></details>
@@ -414,7 +444,7 @@
         </section>
 
         <section class="x-sec" id="family">
-          <p class="x-eye x-reveal">07 · The JOSIE family</p>
+          <p class="x-eye x-reveal">08 · The JOSIE family</p>
           <div class="x-family x-glass x-reveal">
             <div class="x-orb x-orb--sm" role="img" aria-label="The JOSIE orb"><canvas class="x-orb__gl" aria-hidden="true"></canvas><img src="logo.png" alt="" /></div>
             <div>
