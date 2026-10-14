@@ -1,0 +1,10 @@
+/* Hark hero: spacing and headline refinements for the opening section */
+.x-hero { min-height: min(88vh, 860px); align-content: center; }
+.x-hero .x-h { font-size: clamp(44px, 9vw, 96px); }
+.x-hero .x-eye { margin-bottom: 0; }
+.x-hero .x-meta { max-width: 100%; text-align: center; }
+@media (max-width: 520px) {
+  .x-hero { min-height: auto; }
+  .x-hero .x-btns { flex-direction: column; align-items: stretch; width: 100%; }
+  .x-hero .x-btn { justify-content: center; }
+}

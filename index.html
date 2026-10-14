@@ -1,0 +1,691 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>JOSIE-Voice · Talk to your Mac</title>
+    <link rel="icon" href="josie-orb.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400&display=swap"
+    />
+    <link rel="stylesheet" href="hark.css" />
+    <link rel="stylesheet" href="hark-hero.css" />
+    <style>
+      :root, :root[data-theme] {
+        color-scheme: dark;
+        --text-primary: #fff;
+        --text-secondary: rgb(255 255 255 / 0.8);
+        --stroke-secondary: rgb(255 255 255 / 0.14);
+        --x-sans: -apple-system, BlinkMacSystemFont, "SF Pro Display", var(--sans);
+        --x-serif: "New York", ui-serif, "Iowan Old Style", Georgia, serif;
+        --glass-dim: 0.3;
+        --orb-glow: 255 170 120;
+        --x-orange: #ff7a45;
+      }
+      html, body { background: transparent; }
+      body { font-family: var(--x-sans); }
+      /* sky: a fixed layer at z 0 with a CSS gradient under the canvas, content raised to z 1 */
+      #sky {
+        --sky-top: rgb(4 9 28); --sky-mid: rgb(10 22 54); --sky-hor: rgb(24 36 82);
+        position: fixed; top: 0; right: 0; bottom: 0; left: 0; inset: 0; z-index: 0; pointer-events: none; overflow: hidden;
+        background-color: #0b1a3a;
+        background-image: linear-gradient(180deg, var(--sky-top) 0%, var(--sky-mid) 55%, var(--sky-hor) 100%);
+      }
+      #sky canvas { position: absolute; top: 0; left: 0; display: block; max-width: none; }
+      .page { position: relative; z-index: 1; }
+      .x-hero > * { position: relative; }
+      /* liquid glass */
+      .x-glass {
+        position: relative;
+        isolation: isolate;
+        background: linear-gradient(135deg, rgb(255 255 255 / 0.16), rgb(255 255 255 / 0.04) 55%, rgb(255 255 255 / 0.08)), rgb(12 20 42 / var(--glass-dim));
+        -webkit-backdrop-filter: blur(24px) saturate(180%);
+        backdrop-filter: blur(24px) saturate(180%);
+        border: 1px solid;
+        border-color: rgb(255 255 255 / 0.42) rgb(255 255 255 / 0.12) rgb(255 255 255 / 0.08) rgb(255 255 255 / 0.32);
+        box-shadow: inset 1px 1px 0 rgb(255 255 255 / 0.22), 0 12px 40px rgb(0 0 20 / 0.22);
+        border-radius: var(--r-l);
+      }
+      .x-glass::before {
+        content: ""; position: absolute; inset: 0; z-index: -1; border-radius: inherit; pointer-events: none;
+        background: radial-gradient(120% 60% at 0% 0%, rgb(255 255 255 / 0.18), transparent 55%);
+      }
+      /* type */
+      .x-h { font-family: var(--x-sans); font-size: clamp(34px, 6vw, 64px); line-height: 1.02; letter-spacing: -0.01em; text-shadow: 0 2px 30px rgb(0 0 30 / 0.35); }
+      .x-h b { display: block; font-weight: 800; text-transform: uppercase; }
+      .x-h i { display: block; font-family: var(--x-serif); font-weight: 400; }
+      .x-eye { font: var(--type-tag); text-transform: uppercase; letter-spacing: 0.14em; color: var(--text-secondary); margin-bottom: 14px; }
+      .x-lede { font-size: var(--size-lede); line-height: 1.45; max-width: 60ch; color: rgb(255 255 255 / 0.92); text-shadow: 0 1px 16px rgb(0 0 30 / 0.3); }
+      .x-num { font: var(--type-tag); letter-spacing: 0.12em; color: var(--text-secondary); }
+      /* buttons */
+      .x-btns { display: flex; flex-wrap: wrap; gap: 10px; }
+      .x-btn { display: inline-flex; align-items: center; gap: 8px; min-height: var(--tap); padding: 10px 22px; border-radius: var(--r-pill); font: var(--type-body-strong); font-family: var(--x-sans); color: #fff; text-decoration: none; cursor: pointer; transition: transform var(--dur-quick) var(--ease-out); }
+      .x-btn:hover { transform: translateY(-1px); }
+      .x-btn--primary { background: linear-gradient(180deg, #ff9466, var(--x-orange)); color: #2a0e02; border: 1px solid rgb(255 220 200 / 0.7); box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.5), 0 8px 28px rgb(255 122 69 / 0.4); }
+      .x-btn--sm { min-height: 36px; padding: 6px 16px; font: var(--type-label); }
+      .x-link { color: #fff; text-underline-offset: 3px; text-decoration-color: rgb(255 255 255 / 0.5); }
+      /* nav */
+      .x-nav { position: sticky; top: 12px; z-index: 20; justify-self: center; display: flex; align-items: center; gap: 4px; padding: 6px; border-radius: var(--r-pill); max-width: 100%; }
+      .x-brand { display: flex; align-items: center; gap: 8px; min-height: 36px; padding: 0 12px 0 4px; font-weight: 600; color: #fff; text-decoration: none; white-space: nowrap; }
+      .x-brand img { width: 30px; height: 30px; }
+      .x-nav nav { display: flex; }
+      .x-nav nav a { padding: 8px 12px; border-radius: var(--r-pill); font: var(--type-label); color: var(--text-secondary); text-decoration: none; }
+      .x-nav nav a:hover { color: #fff; background: rgb(255 255 255 / 0.12); }
+      @media (max-width: 720px) { .x-nav nav { display: none; } .x-btn--sm { min-height: var(--tap); } }
+      /* layout */
+      .x-sec { padding-block: clamp(56px, 9vw, 110px) 0; scroll-margin-top: 80px; }
+      .x-sec > .x-lede { margin-top: 20px; }
+      .x-sec > * + .x-grid, .x-sec > * + .x-panel { margin-top: 32px; }
+      .x-grid { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr)); }
+      .x-grid--2 { grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr)); }
+      .x-card { padding: 24px; }
+      .x-card h3 { font: var(--type-heading); margin: 12px 0 6px; }
+      .x-card p { color: var(--text-secondary); font-size: var(--size-small); line-height: 1.45; }
+      .x-card svg { width: 28px; height: 28px; fill: none; stroke: #fff; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+      .x-card .x-num { float: right; }
+      /* hero */
+      .x-hero { text-align: center; display: grid; justify-items: center; gap: 22px; padding-top: clamp(32px, 6vw, 64px); }
+      .x-orb { position: relative; width: clamp(180px, 26vw, 280px); aspect-ratio: 1; }
+      .x-orb::before { content: ""; position: absolute; inset: -45%; border-radius: 50%; background: radial-gradient(circle, rgb(var(--orb-glow) / 0.75), rgb(var(--orb-glow) / 0.25) 40%, transparent 68%); animation: x-breathe 5s ease-in-out infinite; }
+      .x-orb img { position: relative; width: 100%; height: 100%; animation: x-float 5s ease-in-out infinite; }
+      .x-orb__gl { display: none; position: absolute; left: -35%; top: -35%; width: 170%; height: 170%; max-width: none; pointer-events: none; }
+      .x-orb.is-gl .x-orb__gl { display: block; }
+      .x-orb.is-gl img, .x-orb.is-gl::before { display: none; }
+      @keyframes x-breathe { 50% { transform: scale(1.14); opacity: 0.7; } }
+      @keyframes x-float { 50% { transform: scale(1.03); } }
+      .x-hero .x-lede { margin-inline: auto; }
+      .x-hero .x-btns { justify-content: center; }
+      .x-meta { font: var(--type-small); color: var(--text-secondary); padding: 8px 16px; border-radius: var(--r-pill); }
+      .x-phone { display: none; padding: 12px 18px; border-radius: var(--r-pill); font: var(--type-label); }
+      @media (max-width: 760px), (hover: none) and (pointer: coarse) { .x-phone { display: block; } }
+      /* gallery */
+      .x-shot { margin: 0; padding: 10px; border-radius: var(--r-xl); }
+      .x-shot img { width: 100%; aspect-ratio: 16 / 10; object-fit: cover; border-radius: calc(var(--r-xl) - 10px); }
+      .x-shot figcaption { padding: 12px 10px 4px; font: var(--type-label); }
+      /* install */
+      .x-panel { padding: clamp(20px, 3vw, 32px); }
+      .x-panel > h3 { font: var(--type-heading); margin-bottom: 4px; }
+      .x-steps { display: grid; gap: 16px; margin-top: 16px; }
+      .x-step { display: grid; grid-template-columns: 88px minmax(0, 1fr); gap: 12px 24px; padding: clamp(20px, 3vw, 32px); }
+      .x-step__n { font: 300 56px/1 var(--x-sans); }
+      .x-step h3 { font-family: var(--x-serif); font-style: italic; font-weight: 400; font-size: 26px; margin-bottom: 8px; }
+      .x-step p, .x-step li { color: rgb(255 255 255 / 0.9); line-height: 1.5; }
+      .x-step p + * { margin-top: 12px; }
+      .x-step ol { margin: 8px 0 0; padding-left: 22px; display: grid; gap: 8px; }
+      .x-step .callout { max-width: 560px; }
+      @media (max-width: 600px) { .x-step { grid-template-columns: 1fr; } .x-step__n { font-size: 40px; } }
+      .x-finish { margin-top: 16px; padding: 28px; text-align: center; font-family: var(--x-serif); font-style: italic; font-size: clamp(22px, 3vw, 30px); }
+      /* faq */
+      .x-faq { display: grid; gap: 10px; margin-top: 32px; }
+      .x-faq summary { list-style: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 16px; min-height: var(--tap); padding: 16px 22px; font: var(--type-body-strong); }
+      .x-faq summary::-webkit-details-marker { display: none; }
+      .x-faq summary::after { content: "+"; font-size: 22px; font-weight: 300; transition: transform var(--dur-quick) var(--ease-out); }
+      .x-faq details[open] summary::after { transform: rotate(45deg); }
+      .x-faq details p { padding: 0 22px 18px; color: var(--text-secondary); line-height: 1.5; max-width: 70ch; }
+      /* family */
+      .x-family { display: grid; grid-template-columns: 200px minmax(0, 1fr); gap: 28px; align-items: center; padding: clamp(24px, 4vw, 40px); border-radius: var(--r-xl); }
+      .x-family img { width: 100%; }
+      .x-family p { font-size: var(--size-lede); line-height: 1.45; margin-bottom: 18px; }
+      .x-chip { display: inline-flex; align-items: center; min-height: var(--tap); padding: 8px 16px; border-radius: var(--r-pill); color: #fff; text-decoration: none; font: var(--type-label); }
+      @media (max-width: 700px) { .x-family { grid-template-columns: 1fr; text-align: center; } .x-family img { width: 160px; margin-inline: auto; } .x-family .x-btns { justify-content: center; } }
+      .x-cta { text-align: center; display: grid; justify-items: center; gap: 24px; }
+      /* footer */
+      .x-foot { margin-top: clamp(56px, 8vw, 96px); padding: 16px 24px 20px; display: grid; gap: 6px; border-radius: var(--r-xl); }
+      .x-foot__row { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 4px 20px; }
+      .x-foot__row div { display: flex; gap: 16px; flex-wrap: wrap; }
+      .x-foot a { color: #fff; text-underline-offset: 3px; display: inline-flex; align-items: center; min-height: var(--tap); }
+      .x-foot .fineprint { font-size: var(--size-caption); }
+      /* sky clock */
+      .x-clock { position: fixed; right: 16px; bottom: 16px; z-index: 30; display: flex; align-items: center; gap: 4px; padding: 5px; border-radius: var(--r-pill); max-width: calc(100vw - 32px); overflow-x: auto; scrollbar-width: none; }
+      .x-clock__name { padding: 0 10px 0 12px; font: var(--type-label); white-space: nowrap; }
+      .x-clock button { flex: none; min-height: 32px; padding: 6px 12px; border: 0; border-radius: var(--r-pill); background: transparent; color: var(--text-secondary); font: var(--type-tag); font-family: var(--x-sans); cursor: pointer; transition: background var(--dur-quick) ease; }
+      .x-clock button:hover { color: #fff; }
+      .x-clock button[aria-pressed="true"] { background: rgb(255 255 255 / 0.22); color: #fff; }
+      @media (pointer: coarse), (max-width: 760px) { .x-clock button { min-height: var(--tap); } }
+      @media (max-width: 760px) { .x-clock { left: 16px; right: 16px; } .page { padding-bottom: 96px; } }
+      /* reveal */
+      .js .x-reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.9s var(--ease-out), transform 0.9s var(--ease-out); }
+      .js .x-reveal.is-in { opacity: 1; transform: none; }
+      @media (prefers-reduced-motion: reduce) {
+        .js .x-reveal { opacity: 1; transform: none; transition: none; }
+        .x-orb::before, .x-orb img { animation: none; }
+        .x-btn, .x-clock button { transition: none; }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="sky" aria-hidden="true"><canvas></canvas></div>
+    <div class="page" id="top">
+      <header class="x-nav x-glass">
+        <a class="x-brand" href="#top"><img src="josie-orb.png" alt="" />JOSIE-Voice</a>
+        <nav aria-label="Sections">
+          <a href="#features">Features</a><a href="#see">See it</a><a href="#install">Install</a><a href="#faq">FAQ</a>
+        </nav>
+        <a class="x-btn x-btn--primary x-btn--sm" href="https://github.com/Goekdeniz-Guelmez/JOSIE-Voice/releases" target="_blank" rel="noopener">Download</a>
+      </header>
+
+      <main class="main">
+        <section class="x-hero">
+          <div class="x-orb" role="img" aria-label="The JOSIE orb"><canvas class="x-orb__gl" aria-hidden="true"></canvas><img src="josie-orb.png" alt="" /></div>
+          <p class="x-eye">By Gökdeniz Gülmez · Free for Mac</p>
+          <h1 class="x-h"><b>Talk to</b><i>your Mac.</i></h1>
+          <p class="x-lede">JOSIE-Voice is a voice and chat assistant that listens, knows who's speaking, and talks back with a natural voice. Hearing, voice recognition and speech all run on your Mac, so your voice never leaves it.</p>
+          <div class="x-btns">
+            <a class="x-btn x-btn--primary" href="https://github.com/Goekdeniz-Guelmez/JOSIE-Voice/releases" target="_blank" rel="noopener">Download for Mac</a>
+            <a class="x-btn x-glass" href="#install">How to install</a>
+          </div>
+          <p class="x-phone x-glass">JOSIE-Voice is a Mac app. Open this page on your Mac to download.</p>
+          <p class="x-meta x-glass">Version 2.0 · macOS 14 Sonoma or newer · Apple Silicon (M1 or later) · about 6 GB of downloads on first launch</p>
+        </section>
+
+        <section class="x-sec" id="see">
+          <p class="x-eye x-reveal">01 · Two ways to use it</p>
+          <h2 class="x-h x-reveal"><b>Talk or</b><i>type.</i></h2>
+          <p class="x-lede x-reveal">Switch between Voice and Chat with one tap. It's the same conversation either way: start a call, hang up, keep typing, and JOSIE remembers it all.</p>
+          <div class="x-grid x-grid--2">
+            <figure class="x-shot x-glass x-reveal"><img src="mock_dreamy.jpg" alt="Daytime voice call with a glowing orange orb" /><figcaption>Voice: just talk, and JOSIE answers out loud.</figcaption></figure>
+            <figure class="x-shot x-glass x-reveal"><img src="mock_moonlight_voice.jpg" alt="Night voice call with a live transcript" /><figcaption>Live transcripts appear as you speak.</figcaption></figure>
+            <figure class="x-shot x-glass x-reveal"><img src="mock_night_chat.jpg" alt="Chat mode at night" /><figcaption>Chat: type when you can't talk.</figcaption></figure>
+            <figure class="x-shot x-glass x-reveal"><img src="mock_glass_chat_moon.jpg" alt="Chat with the sessions sidebar open" /><figcaption>Every conversation saved in the sidebar.</figcaption></figure>
+          </div>
+        </section>
+
+        <section class="x-sec" id="features">
+          <p class="x-eye x-reveal">02 · Features</p>
+          <h2 class="x-h x-reveal"><b>What she</b><i>can do.</i></h2>
+          <div class="x-grid">
+            <article class="x-card x-glass x-reveal"><span class="x-num">01</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v10H9l-5 4z"/><path d="M8 10h.01M12 10h.01M16 10h.01"/></svg><h3>Real conversation</h3><p>Knows when you've finished talking. Interrupt her just by speaking.</p></article>
+            <article class="x-card x-glass x-reveal"><span class="x-num">02</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12h2M7 8v8M11 5v14M15 9v6M19 7v10"/></svg><h3>Knows your voice</h3><p>Learns you from three short phrases and tells people apart.</p></article>
+            <article class="x-card x-glass x-reveal"><span class="x-num">03</span><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg><h3>Voices you choose</h3><p>Pick a preset, clone a voice from a short recording, or describe a new one in words.</p></article>
+            <article class="x-card x-glass x-reveal"><span class="x-num">04</span><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg><h3>Private by design</h3><p>Hearing, voice recognition and speech run on your Mac. Your data stays on your Mac. No account.</p></article>
+            <article class="x-card x-glass x-reveal"><span class="x-num">05</span><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="5" width="16" height="15" rx="2"/><path d="M4 10h16M9 3v4M15 3v4"/></svg><h3>Helps with your day</h3><p>Optional Reminders, Calendar, Maps and Messages drafts (you tap Send). Each is off until you turn it on.</p></article>
+            <article class="x-card x-glass x-reveal"><span class="x-num">06</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg><h3>Sees what you show it</h3><p>Turn on the camera and ask about what it sees. Needs an image-capable model.</p></article>
+            <article class="x-card x-glass x-reveal"><span class="x-num">07</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9z"/><path d="M16 9a4 4 0 0 1 0 6M19 6a8 8 0 0 1 0 12"/></svg><h3>Adapts to the room</h3><p>Volume follows background noise, with echo cancellation.</p></article>
+            <article class="x-card x-glass x-reveal"><span class="x-num">08</span><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M5 5l1.5 1.5M17.5 17.5 19 19M5 19l1.5-1.5M17.5 6.5 19 5"/></svg><h3>Living sky</h3><p>The background follows the real time of day, under Apple's Liquid Glass design.</p></article>
+          </div>
+        </section>
+
+        <section class="x-sec" id="install">
+          <p class="x-eye x-reveal">03 · No tech skills needed</p>
+          <h2 class="x-h x-reveal"><b>Five steps.</b><i>No terminal.</i></h2>
+          <p class="x-lede x-reveal">You won't type a single command. Setup takes about 15 minutes, mostly waiting for downloads.</p>
+          <div class="x-panel x-glass x-reveal">
+            <h3>Before you start</h3>
+            <ul class="checklist">
+              <li><span class="checklist__item">A Mac with Apple Silicon (M1 or newer) <small>To check, click the Apple menu → About This Mac. It should say "Chip: Apple M…".</small></span></li>
+              <li><span class="checklist__item">macOS 14 Sonoma or newer</span></li>
+              <li><span class="checklist__item">About 7 GB of free space</span></li>
+              <li><span class="checklist__item">16 GB of memory recommended <small>For the larger models. Smaller ones run on less.</small></span></li>
+              <li><span class="checklist__item">Internet for the first setup</span></li>
+            </ul>
+          </div>
+          <div class="x-steps">
+            <article class="x-step x-glass x-reveal"><p class="x-step__n">01</p><div><h3>Download JOSIE-Voice</h3><p>Click <a class="x-link" href="https://github.com/Goekdeniz-Guelmez/JOSIE-Voice/releases" target="_blank" rel="noopener">Download for Mac</a>. You get a file like <b>JOSIE-Voice-0.1.0-mac-test10-macOS-arm64.dmg</b> in your Downloads folder.</p></div></article>
+            <article class="x-step x-glass x-reveal"><p class="x-step__n">02</p><div><h3>Move it to Applications</h3><p>Double-click the .dmg file. Drag the JOSIE-Voice icon onto the Applications folder and close the window. Then eject the JOSIE-Voice disk in Finder's sidebar.</p></div></article>
+            <article class="x-step x-glass x-reveal"><p class="x-step__n">03</p><div><h3>Install Ollama, JOSIE's brain</h3><p>Ollama is a free app. Go to <a class="x-link" href="https://ollama.com/download" target="_blank" rel="noopener">ollama.com/download</a>, download it for macOS, drag it to Applications and open it once. A llama icon in the menu bar means it's running.</p><p>JOSIE downloads her brain into it in step 5.</p></div></article>
+            <article class="x-step x-glass x-reveal"><p class="x-step__n">04</p><div><h3>Open JOSIE-Voice</h3><p>Double-click it in Applications.</p>
+              <aside class="callout" aria-label="If macOS blocks it">
+                <p class="callout__head">If macOS says it "can't be opened"</p>
+                <p class="callout__lead"><strong>Click Done, then open System Settings → Privacy &amp; Security.</strong> Scroll down, click "Open Anyway" next to JOSIE-Voice and confirm.</p>
+                <p class="fineprint">The same applies if it can't verify the developer. You only need to do this once.</p>
+              </aside></div></article>
+            <article class="x-step x-glass x-reveal"><p class="x-step__n">05</p><div><h3>Follow the setup</h3>
+              <ol type="a">
+                <li><b>Choose model sizes.</b> 0.6B for 8 GB Macs or for speed; 1.7B for better quality on 16 GB or more. Then click Download all (about 5 GB; pause and resume anytime).</li>
+                <li><b>Leave the language model on Ollama.</b> JOSIE downloads qwen3.5:0.8b (about 1 GB) by herself.</li>
+                <li><b>Allow the microphone</b> and hear JOSIE say hello. Optionally say three phrases so she learns your voice.</li>
+                <li><b>Click Start talking.</b></li>
+              </ol></div></article>
+          </div>
+          <p class="x-finish x-glass x-reveal">That's it. Click the orb and say hi.</p>
+        </section>
+
+        <section class="x-sec" id="good">
+          <p class="x-eye x-reveal">04 · Good to know</p>
+          <h2 class="x-h x-reveal"><b>Small</b><i>details.</i></h2>
+          <div class="x-grid">
+            <div class="x-card x-glass x-reveal"><span class="x-num">01</span><h3>Works offline</h3><p>After setup, everything works offline except the language model, which runs in Ollama on your Mac.</p></div>
+            <div class="x-card x-glass x-reveal"><span class="x-num">02</span><h3>Other models</h3><p>In Settings, switch to any OpenAI-compatible service with your own key, or to Apple Intelligence on macOS 26.</p></div>
+            <div class="x-card x-glass x-reveal"><span class="x-num">03</span><h3>Run setup again</h3><p>Settings → Setup → Run setup again.</p></div>
+            <div class="x-card x-glass x-reveal"><span class="x-num">04</span><h3>Apple tools</h3><p>Turn them on one by one in Settings → Apple tools. macOS asks permission the first time each is used.</p></div>
+            <div class="x-card x-glass x-reveal"><span class="x-num">05</span><h3>Optional extras</h3><p>They download only if you want them: voice design (3.1 GB) and word timestamps (1.3 GB).</p></div>
+          </div>
+        </section>
+
+        <section class="x-sec" id="faq">
+          <p class="x-eye x-reveal">05 · FAQ</p>
+          <h2 class="x-h x-reveal"><b>Questions,</b><i>answered.</i></h2>
+          <div class="x-faq">
+            <details class="x-glass x-reveal"><summary>Is it free?</summary><p>Yes.</p></details>
+            <details class="x-glass x-reveal"><summary>Does my voice go to the cloud?</summary><p>No. Hearing, voice recognition and speech run on your Mac, and by default the language model (Ollama) does too. If you switch to an online model, your text goes to that service.</p></details>
+            <details class="x-glass x-reveal"><summary>Do I need an account?</summary><p>No.</p></details>
+            <details class="x-glass x-reveal"><summary>Does it work on Intel Macs?</summary><p>No, Apple Silicon (M1 or later) only.</p></details>
+            <details class="x-glass x-reveal"><summary>Is there an iPhone or iPad version?</summary><p>Not as a download yet.</p></details>
+            <details class="x-glass x-reveal"><summary>It says "Ollama isn't running"</summary><p>Open Ollama from Applications, then click Recheck in JOSIE's setup.</p></details>
+            <details class="x-glass x-reveal"><summary>JOSIE can't hear me</summary><p>Open System Settings → Privacy &amp; Security → Microphone and turn on JOSIE-Voice.</p></details>
+            <details class="x-glass x-reveal"><summary>How much space does it need?</summary><p>About 5 GB of voice models plus about 1 GB for the language model, at the default small sizes.</p></details>
+            <details class="x-glass x-reveal"><summary>How do I uninstall it?</summary><p>Drag JOSIE-Voice to the Trash. To remove its data and models too, delete the JOSIE-Voice folder in ~/Library/Application Support.</p></details>
+          </div>
+        </section>
+
+        <section class="x-sec" id="family">
+          <p class="x-eye x-reveal">06 · The JOSIE family</p>
+          <div class="x-family x-glass x-reveal">
+            <img src="josie-2-9b-tree-transparent.png" alt="The JOSIE tree logo" />
+            <div>
+              <p>JOSIE-Voice comes from the JOSIE family of personality-driven language models by Gökdeniz Gülmez, trained entirely on Apple Silicon.</p>
+              <div class="x-btns">
+                <a class="x-chip x-glass" href="https://josie-model-family.goekdenizguelmez.chatgpt.site" target="_blank" rel="noopener">Meet the JOSIE models ↗</a>
+                <a class="x-chip x-glass" href="https://huggingface.co/Goekdeniz-Guelmez" target="_blank" rel="noopener">Hugging Face ↗</a>
+                <a class="x-chip x-glass" href="https://github.com/sponsors/Goekdeniz-Guelmez" target="_blank" rel="noopener">Sponsor on GitHub ↗</a>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="x-sec x-cta">
+          <h2 class="x-h x-reveal"><b>Ready to</b><i>say hi?</i></h2>
+          <a class="x-btn x-btn--primary x-reveal" href="https://github.com/Goekdeniz-Guelmez/JOSIE-Voice/releases" target="_blank" rel="noopener">Download for Mac</a>
+        </section>
+      </main>
+
+      <footer class="x-foot x-glass">
+        <div class="x-foot__row">
+          <strong>JOSIE-Voice · By Gökdeniz Gülmez</strong>
+          <div><a href="mailto:goekdenizguelmez.ml@gmail.com?subject=JOSIE-Voice%20feedback">Send feedback ↗</a><a href="#top">Back to top ↑</a></div>
+        </div>
+        <p class="fineprint">Built with MLX Swift, Qwen3-ASR, Qwen3-TTS, Silero VAD, Smart Turn v3 and WeSpeaker. Ollama is a separate app by its own developers.</p>
+      </footer>
+    </div>
+
+    <div class="x-clock x-glass" role="group" aria-label="Sky clock">
+      <span class="x-clock__name" aria-live="polite">Live</span>
+      <button type="button" data-h="live" aria-pressed="true">Live</button>
+      <button type="button" data-h="6.6">Sunrise</button>
+      <button type="button" data-h="12.5">Midday</button>
+      <button type="button" data-h="17.2">Golden hour</button>
+      <button type="button" data-h="19.1">Sunset</button>
+      <button type="button" data-h="23">Night</button>
+    </div>
+
+    <script>
+      /* The sky: one self-contained function on #sky. Swap its body for a WebGL shader later. */
+      function Sky(el) {
+        var cv = el.querySelector("canvas"), ctx = null, root = document.documentElement;
+        try { ctx = cv.getContext("2d"); } catch (e) { ctx = null; }
+        if (!ctx && cv) cv.style.display = "none";
+        var reduce = false;
+        try { reduce = !!(window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches); } catch (e) {}
+        var N = [[4, 9, 28], [10, 22, 54], [24, 36, 82], [150, 170, 255], 0.22, [130, 150, 210], 0.1];
+        // hour, name, top, middle, horizon, sun glow, glass dim, cloud tint, cloud alpha
+        var K = [
+          [0, "Night"].concat(N),
+          [5.3, "Blue hour", [12, 26, 74], [38, 60, 128], [104, 112, 170], [150, 160, 255], 0.32, [150, 160, 215], 0.14],
+          [6.4, "Sunrise", [58, 76, 146], [228, 143, 160], [255, 195, 154], [255, 170, 120], 0.5, [255, 215, 210], 0.3],
+          [8.5, "Morning", [52, 120, 205], [130, 182, 236], [214, 233, 251], [255, 240, 200], 0.56, [255, 255, 255], 0.4],
+          [12, "Midday", [25, 105, 220], [84, 158, 240], [190, 224, 255], [255, 250, 225], 0.6, [255, 255, 255], 0.42],
+          [16.8, "Golden hour", [70, 108, 175], [238, 176, 104], [255, 210, 122], [255, 190, 90], 0.55, [255, 230, 190], 0.36],
+          [18.9, "Sunset", [40, 42, 108], [194, 69, 122], [255, 138, 61], [255, 120, 70], 0.45, [255, 170, 160], 0.28],
+          [20.6, "Night"].concat(N),
+          [24, "Night"].concat(N)
+        ];
+        var mix = function (a, b, t) { return a.map ? a.map(function (v, i) { return v + (b[i] - v) * t; }) : a + (b - a) * t; };
+        var rgb = function (c, a) { return "rgba(" + c.map(Math.round).join(",") + "," + a + ")"; };
+        function at(h) {
+          for (var i = 0; K[i + 1][0] <= h; i++);
+          var A = K[i], B = K[i + 1], t = (h - A[0]) / (B[0] - A[0]); t = t * t * (3 - 2 * t);
+          var o = { name: A[1] }; for (var j = 2; j < 9; j++) o[j] = mix(A[j], B[j], t); return o;
+        }
+        var clouds = [];
+        for (var l = 0; l < 3; l++) for (var n = 0; n < 7; n++) clouds.push({ l: l, x: Math.random() * 1.6 - 0.3, y: Math.random() * 0.75, r: (0.12 + Math.random() * 0.16) * (1 + l * 0.4), v: 0.004 + l * 0.005 });
+        var W, H, live = true, tgt = 0, cur = null, last = 0, dirty = true, shown = "";
+        var label = document.querySelector(".x-clock__name");
+        function css(c) { return "rgb(" + c.map(Math.round).join(",") + ")"; }
+        function size() {
+          var vv = window.visualViewport, de = document.documentElement;
+          var cw = Math.max(window.innerWidth || 0, de.clientWidth || 0, vv ? vv.width : 0, 1);
+          var ch = Math.max(window.innerHeight || 0, de.clientHeight || 0, vv ? vv.height : 0, 1);
+          var dpr = Number(window.devicePixelRatio);
+          if (!(dpr > 0) || !isFinite(dpr)) dpr = 1;
+          var s = Math.min(1, dpr) * 0.5;
+          W = Math.max(1, Math.ceil(cw * s)); H = Math.max(1, Math.ceil(ch * s));
+          if (cv) {
+            cv.style.width = Math.ceil(cw) + "px"; cv.style.height = Math.ceil(ch) + "px";
+            if (cv.width !== W) cv.width = W;
+            if (cv.height !== H) cv.height = H;
+          }
+          dirty = true;
+        }
+        function now() { var d = new Date(); return d.getHours() + d.getMinutes() / 60; }
+        function draw(dt) {
+          var P = at(cur);
+          el.style.setProperty("--sky-top", css(P[2]));
+          el.style.setProperty("--sky-mid", css(P[3]));
+          el.style.setProperty("--sky-hor", css(P[4]));
+          root.style.setProperty("--glass-dim", P[6].toFixed(3));
+          root.style.setProperty("--orb-glow", P[5].map(Math.round).join(" "));
+          var name = live ? "Live · " + P.name : P.name;
+          if (label && name !== shown) label.textContent = shown = name;
+          if (!ctx) return;
+          try { paint(P, dt); } catch (e) { ctx = null; cv.style.display = "none"; }
+        }
+        function paint(P, dt) {
+          var g = ctx.createLinearGradient(0, 0, 0, H), m = Math.max(W, H);
+          g.addColorStop(0, rgb(P[2], 1)); g.addColorStop(0.55, rgb(P[3], 1)); g.addColorStop(1, rgb(P[4], 1));
+          ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
+          var p = (cur - 6) / 14, sx, sy;
+          if (p > 0 && p < 1) { sx = W * (0.1 + 0.8 * p); sy = H * (0.9 - Math.sin(Math.PI * p) * 0.75); } else { sx = W * 0.8; sy = H * 0.16; }
+          var s = ctx.createRadialGradient(sx, sy, 0, sx, sy, m * 0.6);
+          s.addColorStop(0, rgb(P[5], 0.85)); s.addColorStop(0.06, rgb(P[5], 0.45)); s.addColorStop(1, rgb(P[5], 0));
+          ctx.fillStyle = s; ctx.fillRect(0, 0, W, H);
+          var sc = (window.pageYOffset || 0) / Math.max(1, document.body.scrollHeight);
+          clouds.forEach(function (c) {
+            if (!reduce) c.x = ((c.x + c.v * dt + 0.3) % 1.6 + 1.6) % 1.6 - 0.3;
+            var r = c.r * m, x = c.x * W, y = (c.y - sc * (0.15 + c.l * 0.25)) * H, gr = ctx.createRadialGradient(x, y, 0, x, y, r);
+            gr.addColorStop(0, rgb(P[7], P[8] * (0.6 + c.l * 0.2))); gr.addColorStop(1, rgb(P[7], 0));
+            ctx.fillStyle = gr; ctx.fillRect(x - r, y - r, r * 2, r * 2);
+          });
+          ctx.fillStyle = "rgba(8,14,32," + (P[6] * 0.4).toFixed(3) + ")"; ctx.fillRect(0, 0, W, H);
+        }
+        var raf = window.requestAnimationFrame ? function (f) { return window.requestAnimationFrame(f); } : function (f) { return setTimeout(function () { f(Date.now()); }, 33); };
+        function frame(ts) {
+          try {
+            ts = +ts || Date.now();
+            var dt = last ? Math.max(0, Math.min(0.1, (ts - last) / 1000)) : 0;
+            if (live) tgt = now();
+            if (cur === null || reduce) cur = tgt;
+            else { var d = ((tgt - cur) % 24 + 36) % 24 - 12; if (Math.abs(d) < 0.002) cur = tgt; else cur = (cur + d * Math.min(1, dt * 1.8) + 24) % 24; }
+            if (!reduce || dirty) { draw(dt); dirty = false; }
+            last = ts;
+          } catch (e) {}
+          raf(frame);
+        }
+        var resizeT = 0;
+        function later() { size(); clearTimeout(resizeT); resizeT = setTimeout(size, 300); }
+        window.addEventListener("resize", later);
+        window.addEventListener("orientationchange", later);
+        if (window.visualViewport) window.visualViewport.addEventListener("resize", later);
+        window.addEventListener("scroll", function () { dirty = true; }, { passive: true });
+        if (reduce) setInterval(function () { dirty = true; }, 60000);
+        size();
+        if (live) tgt = now();
+        cur = tgt; draw(0); dirty = false;
+        raf(frame);
+        return { preview: function (h) { live = h === "live"; if (!live) tgt = +h; dirty = true; } };
+      }
+      (function () {
+        var sky = Sky(document.getElementById("sky"));
+        var btns = document.querySelectorAll(".x-clock button");
+        btns.forEach(function (b) {
+          b.addEventListener("click", function () {
+            btns.forEach(function (o) { o.setAttribute("aria-pressed", o === b); });
+            sky.preview(b.dataset.h);
+          });
+        });
+        var els = document.querySelectorAll(".x-reveal");
+        if (!("IntersectionObserver" in window)) return els.forEach(function (e) { e.classList.add("is-in"); });
+        var io = new IntersectionObserver(function (en) {
+          en.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add("is-in"); io.unobserve(e.target); } });
+        }, { rootMargin: "0px 0px -8% 0px" });
+        els.forEach(function (e) { io.observe(e); });
+      })();
+    </script>
+    <script type="x-shader/x-vertex" id="orb-vert">#version 300 es
+void main() {
+  vec2 p = vec2(float((gl_VertexID << 1) & 2), float(gl_VertexID & 2));
+  gl_Position = vec4(p * 2.0 - 1.0, 0.0, 1.0);
+}
+</script>
+    <script type="x-shader/x-fragment" id="orb-frag">#version 300 es
+precision highp float;
+uniform vec2 uRes;
+uniform float uTime;
+uniform float uRadius;
+uniform float uLevel;
+uniform float uPulse;
+uniform vec3 uCore, uMid, uHigh, uGlow;
+uniform float uSwirl, uTurb, uIntensity;
+out vec4 outColor;
+
+float hash13(vec3 p) {
+  p = fract(p * 0.1031);
+  p += dot(p, p.zyx + 31.32);
+  return fract((p.x + p.y) * p.z);
+}
+float vnoise(vec3 x) {
+  vec3 i = floor(x);
+  vec3 f = fract(x);
+  f = f * f * (3.0 - 2.0 * f);
+  float n000 = hash13(i);
+  float n100 = hash13(i + vec3(1.0, 0.0, 0.0));
+  float n010 = hash13(i + vec3(0.0, 1.0, 0.0));
+  float n110 = hash13(i + vec3(1.0, 1.0, 0.0));
+  float n001 = hash13(i + vec3(0.0, 0.0, 1.0));
+  float n101 = hash13(i + vec3(1.0, 0.0, 1.0));
+  float n011 = hash13(i + vec3(0.0, 1.0, 1.0));
+  float n111 = hash13(i + vec3(1.0, 1.0, 1.0));
+  return mix(mix(mix(n000, n100, f.x), mix(n010, n110, f.x), f.y),
+             mix(mix(n001, n101, f.x), mix(n011, n111, f.x), f.y), f.z);
+}
+const mat3 OCT_ROT = mat3(0.00, 0.80, 0.60, -0.80, 0.36, -0.48, -0.60, -0.48, 0.64);
+float fbm4(vec3 p) {
+  float s = 0.0, a = 0.5;
+  for (int i = 0; i < 4; i++) { s += a * vnoise(p); p = OCT_ROT * p * 2.03; a *= 0.5; }
+  return s / 0.9375;
+}
+float fbm5(vec3 p) {
+  float s = 0.0, a = 0.5;
+  for (int i = 0; i < 5; i++) { s += a * vnoise(p); p = OCT_ROT * p * 2.03; a *= 0.5; }
+  return s / 0.96875;
+}
+
+vec2 rot2(vec2 v, float a) { float c = cos(a), s = sin(a); return vec2(c * v.x - s * v.y, s * v.x + c * v.y); }
+
+void main() {
+  vec2 p = (gl_FragCoord.xy / uRes) * 2.0 - 1.0;
+  float R = uRadius * (1.0 + uPulse);
+  vec2 q = p / R;
+  float r = length(q);
+  float t = uTime;
+
+  float e = max(r - 1.0, 0.0);
+  float ring = exp(-e * 8.0);
+  float wide = exp(-e * (2.5 - uLevel * 0.8)) * (0.72 + 0.28 * clamp(q.y / max(r, 1e-3), -1.0, 1.0));
+  vec3 haloCol = mix(uGlow, vec3(1.0, 0.93, 0.95), ring * 0.7);
+  float haloA = clamp(ring * 0.72 + wide * (0.62 + uLevel * 0.25), 0.0, 1.0) * clamp(uIntensity, 0.0, 1.6) * 0.82;
+  haloA *= 1.0 - smoothstep(0.6 / uRadius, 0.98 / uRadius, r);
+  vec4 halo = vec4(haloCol * haloA, haloA);
+
+  if (r > 1.0) { outColor = halo; return; }
+
+  float z = sqrt(max(0.0, 1.0 - r * r));
+  float twist = uSwirl * (1.0 - r * r) * (1.4 + 0.6 * sin(t * 0.35));
+  vec2 sq = rot2(q, t * 0.10 + twist + uSwirl * t * 0.45);
+  vec3 sp = vec3(sq * 1.15, z * 0.55);
+
+  float warpAmt = 1.25 + uTurb * 0.9 + uLevel * 1.3;
+  vec3 w1 = vec3(fbm4(sp * 1.3 + vec3(0.0, 0.0, t * 0.22)),
+                 fbm4(sp * 1.3 + vec3(3.1, 7.7, t * 0.22)),
+                 fbm4(sp * 1.3 + vec3(6.3, 2.2, -t * 0.18)));
+  vec3 w2 = vec3(fbm4(sp * 2.1 + w1 * 2.0 + vec3(1.2, 4.4, t * 0.31)),
+                 fbm4(sp * 2.1 + w1 * 2.0 + vec3(8.3, 2.8, t * 0.27)), 0.0);
+  float smoke = fbm5(sp * 1.7 + w2 * warpAmt + vec3(0.0, 0.0, t * 0.17));
+  float smokeFar = fbm4(sp * 3.1 + w1 * 1.4 - vec3(0.0, 0.0, t * 0.26) + 5.0);
+
+  float lit = clamp(dot(q, normalize(vec2(0.62, -0.78))) * 0.55 + 0.45, 0.0, 1.0);
+
+  float d = q.y + 0.22 - 0.62 * q.x + 0.18 * q.x * q.x + (w2.x - 0.5) * 0.55 + sin(t * 0.2) * 0.04;
+  float streak = exp(-d * d * 26.0) * smoothstep(-0.7, 0.35, q.x);
+  float df = d + 0.09 + (smokeFar - 0.5) * 0.3;
+  float streakFine = exp(-df * df * 120.0) * smoothstep(-0.2, 0.6, q.x);
+
+  vec3 col = mix(uCore, uMid, smoothstep(0.30, 0.95, smoke * 0.75 + lit * 0.55));
+  col = mix(col, uHigh, smoothstep(0.62, 1.05, lit * 0.8 + smokeFar * 0.45) * 0.9);
+  col = mix(col, uHigh, clamp(streak * (0.55 + 0.45 * smoke) + streakFine * 0.6, 0.0, 1.0));
+  col += (smokeFar - 0.5) * 0.10 + (smoke - 0.5) * 0.06;
+
+  float fres = pow(1.0 - z, 2.4);
+  col = mix(col, mix(uGlow, vec3(1.0), 0.55), fres * 0.42);
+  col *= 0.94 + 0.10 * z + 0.22 * uLevel;
+  col = mix(col, col * (0.85 + 0.3 * uIntensity), 0.5);
+  col = clamp(col, 0.0, 1.0);
+
+  float a = 1.0 - smoothstep(1.0 - 2.5 / (uRes.y * uRadius), 1.0, r);
+  outColor = vec4(col, 1.0) * a + halo * (1.0 - a);
+}
+</script>
+    <script>
+      /* JOSIE's liquid orb (WebGL2), ported from the app; falls back to josie-orb.png. */
+      (function () {
+        var wrap = document.querySelector(".x-orb");
+        var canvas = wrap && wrap.querySelector(".x-orb__gl");
+        if (!canvas) return;
+        var gl = null;
+        try {
+          gl = canvas.getContext("webgl2", { alpha: true, premultipliedAlpha: true, antialias: false, depth: false, stencil: false, powerPreference: "low-power", preserveDrawingBuffer: false });
+        } catch (e) { gl = null; }
+        if (!gl) return;
+
+        function src(id) { return document.getElementById(id).textContent.replace(/^\s+/, ""); }
+        function compile(type, s) {
+          var sh = gl.createShader(type);
+          if (!sh) throw new Error("createShader failed");
+          gl.shaderSource(sh, s); gl.compileShader(sh);
+          if (!gl.getShaderParameter(sh, gl.COMPILE_STATUS)) { var log = gl.getShaderInfoLog(sh); gl.deleteShader(sh); throw new Error("Shader compile failed: " + log); }
+          return sh;
+        }
+        var prog, vao, U = {};
+        var NAMES = ["uRes", "uTime", "uRadius", "uLevel", "uPulse", "uCore", "uMid", "uHigh", "uGlow", "uSwirl", "uTurb", "uIntensity"];
+        try {
+          var vs = compile(gl.VERTEX_SHADER, src("orb-vert"));
+          var fs = compile(gl.FRAGMENT_SHADER, src("orb-frag"));
+          prog = gl.createProgram();
+          gl.attachShader(prog, vs); gl.attachShader(prog, fs); gl.linkProgram(prog);
+          gl.deleteShader(vs); gl.deleteShader(fs);
+          if (!gl.getProgramParameter(prog, gl.LINK_STATUS)) throw new Error("Program link failed: " + gl.getProgramInfoLog(prog));
+          vao = gl.createVertexArray();
+          for (var i = 0; i < NAMES.length; i++) U[NAMES[i]] = gl.getUniformLocation(prog, NAMES[i]);
+        } catch (err) {
+          if (window.console) console.warn("WebGL orb unavailable, using image", err);
+          return;
+        }
+
+        var ORB_RADIUS = 1 / 1.7;
+        // Idle palette matched to the JOSIE orb: salmon core, peach mid, warm white highlight.
+        var PAL = { core: [0.91, 0.42, 0.36], mid: [0.98, 0.64, 0.56], high: [1.0, 0.95, 0.9], speed: 0.4, swirl: 0.12, turbulence: 0.3, intensity: 1.0 };
+        var reduce = false;
+        try { reduce = !!(window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches); } catch (e) {}
+        var rate = reduce ? 0.3 : 1;
+        var root = document.documentElement;
+        var glow = [1, 0.67, 0.47];
+        var time = Math.random() * 50, level = 0, energy = 0, alive = true;
+        var ph = { level: 0, prevLevel: 0, prevPrevLevel: 0, speaking: false, silence: 0, scale: 1, saturation: 1, brightness: 1, vScale: 0, vSat: 0, vBright: 0 };
+
+        function approach(c, t, k, dtMs) { return c + (t - c) * (1 - Math.exp((-k * dtMs) / 1000)); }
+        // orbPhysics.stepOrbPhysics for the idle state with no audio: the breathing branch.
+        function step(s, nowMs, dt) {
+          s.level = s.level * 0.85;
+          var t = nowMs / 1000, breath = 0.6;
+          var tScale = 1 + Math.sin(t * breath) * 0.015;
+          var tSat = 1 + Math.sin(t * breath * 0.7 + 1) * 0.05;
+          var tBright = 0.85 + Math.sin(t * breath * 0.5 + 2) * 0.05;
+          s.vScale = (s.vScale + (tScale - s.scale) * 0.08 * dt) * 0.85; s.scale += s.vScale * dt;
+          s.vSat = (s.vSat + (tSat - s.saturation) * 0.12 * dt) * 0.82; s.saturation += s.vSat * dt;
+          s.vBright = (s.vBright + (tBright - s.brightness) * 0.15 * dt) * 0.75; s.brightness += s.vBright * dt;
+          s.scale = Math.max(0.9, Math.min(1.5, s.scale));
+          s.saturation = Math.max(0.7, Math.min(1.6, s.saturation));
+          s.brightness = Math.max(0.6, Math.min(1.5, s.brightness));
+          return s;
+        }
+        function readGlow(dt) {
+          var v = root.style.getPropertyValue("--orb-glow") || "255 170 120";
+          var p = v.trim().split(/[\s,]+/);
+          if (p.length < 3) return;
+          for (var i = 0; i < 3; i++) { var n = parseFloat(p[i]) / 255; if (isFinite(n)) glow[i] = approach(glow[i], n, 4, dt); }
+        }
+        function resize() {
+          var r = canvas.getBoundingClientRect();
+          var dpr = Number(window.devicePixelRatio);
+          if (!(dpr > 0) || !isFinite(dpr)) dpr = 1;
+          dpr = Math.min(2, dpr);
+          var w = Math.max(1, Math.round(r.width * dpr)), h = Math.max(1, Math.round(r.height * dpr));
+          if (canvas.width !== w || canvas.height !== h) { canvas.width = w; canvas.height = h; }
+        }
+        function render() {
+          gl.viewport(0, 0, canvas.width, canvas.height);
+          gl.clearColor(0, 0, 0, 0); gl.clear(gl.COLOR_BUFFER_BIT);
+          gl.useProgram(prog);
+          gl.uniform2f(U.uRes, canvas.width, canvas.height);
+          gl.uniform1f(U.uTime, time);
+          gl.uniform1f(U.uRadius, ORB_RADIUS);
+          gl.uniform1f(U.uLevel, level);
+          gl.uniform1f(U.uPulse, reduce ? 0 : (ph.scale - 1) * 0.22);
+          gl.uniform3f(U.uCore, PAL.core[0], PAL.core[1], PAL.core[2]);
+          gl.uniform3f(U.uMid, PAL.mid[0], PAL.mid[1], PAL.mid[2]);
+          gl.uniform3f(U.uHigh, PAL.high[0], PAL.high[1], PAL.high[2]);
+          gl.uniform3f(U.uGlow, glow[0], glow[1], glow[2]);
+          gl.uniform1f(U.uSwirl, PAL.swirl);
+          gl.uniform1f(U.uTurb, PAL.turbulence);
+          gl.uniform1f(U.uIntensity, PAL.intensity);
+          gl.bindVertexArray(vao);
+          gl.drawArrays(gl.TRIANGLES, 0, 3);
+        }
+        function fail() { alive = false; wrap.classList.remove("is-gl"); }
+        canvas.addEventListener("webglcontextlost", function (e) { e.preventDefault(); fail(); });
+
+        // Gentle pointer reaction: movement near the orb stirs the liquid a little.
+        var px = null, py = null;
+        if (!reduce) window.addEventListener("pointermove", function (e) {
+          if (px !== null) {
+            var r = wrap.getBoundingClientRect(), cx = r.left + r.width / 2, cy = r.top + r.height / 2;
+            var dist = Math.sqrt((e.clientX - cx) * (e.clientX - cx) + (e.clientY - cy) * (e.clientY - cy));
+            var near = Math.max(0, 1 - dist / (r.width * 2.2));
+            var sp = Math.sqrt((e.clientX - px) * (e.clientX - px) + (e.clientY - py) * (e.clientY - py));
+            energy = Math.min(0.35, energy + Math.min(0.06, sp * 0.002) * near);
+          }
+          px = e.clientX; py = e.clientY;
+        }, { passive: true });
+
+        var raf = 0, last = 0, onScreen = true;
+        function tick(now) {
+          raf = 0;
+          if (!alive) return;
+          var dt = last ? Math.min(100, now - last) : 16.7;
+          last = now;
+          try {
+            readGlow(dt);
+            step(ph, Date.now(), dt / 16.67);
+            energy = approach(energy, 0, 1.2, dt);
+            level = approach(level, energy, 6, dt);
+            time += (dt / 1000) * (PAL.speed + level * 1.6) * rate;
+            render();
+          } catch (e) { fail(); return; }
+          schedule();
+        }
+        function schedule() {
+          if (alive && !raf && onScreen && document.visibilityState !== "hidden") raf = requestAnimationFrame(tick);
+        }
+        function stop() { if (raf) cancelAnimationFrame(raf); raf = 0; last = 0; }
+        document.addEventListener("visibilitychange", function () { if (document.visibilityState === "hidden") stop(); else schedule(); });
+        if ("IntersectionObserver" in window) {
+          new IntersectionObserver(function (en) {
+            onScreen = en[en.length - 1].isIntersecting;
+            if (onScreen) schedule(); else stop();
+          }).observe(wrap);
+        }
+        wrap.classList.add("is-gl");
+        resize();
+        if (typeof ResizeObserver !== "undefined") new ResizeObserver(resize).observe(canvas);
+        window.addEventListener("resize", resize);
+        window.addEventListener("orientationchange", function () { setTimeout(resize, 300); });
+        try { render(); } catch (e) { fail(); return; }
+        if (gl.getError() !== gl.NO_ERROR) { fail(); return; }
+        schedule();
+      })();
+    </script>
+    <script src="hark.js"></script>
+  </body>
+</html>
