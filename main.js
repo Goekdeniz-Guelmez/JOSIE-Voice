@@ -1,4 +1,4 @@
-/* Hark: progressive-enhancement helpers */
+/* progressive-enhancement helpers */
 (function () {
   var root = document.documentElement;
   root.classList.add("js");
