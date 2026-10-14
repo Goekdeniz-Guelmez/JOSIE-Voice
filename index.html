@@ -37,29 +37,38 @@
       #sky canvas { position: absolute; top: 0; left: 0; display: block; max-width: none; }
       .page { position: relative; z-index: 1; }
       .x-hero > * { position: relative; }
-      /* glass, after codepen.io/wprod/pen/raVpwJL: a lens-distorted light blur, a white tint and a bright specular rim */
+      /* Liquid Glass: clear, not frosted. The backdrop is bent at the rounded edges by a per-size SVG
+         displacement map (made in JS, Chromium), with a slight colour split, then a bright specular rim.
+         Other browsers get a very light blur instead. */
       .x-glass {
         position: relative;
         isolation: isolate;
         background: transparent;
         border: 0;
         border-radius: var(--r-l);
-        box-shadow: 0 6px 6px rgb(0 0 0 / 0.2), 0 0 20px rgb(0 0 0 / 0.1);
-        text-shadow: 0 1px 3px rgb(0 0 20 / 0.35);
+        box-shadow: 0 8px 24px rgb(0 0 20 / 0.18), 0 1px 2px rgb(0 0 20 / 0.12);
+        text-shadow: 0 1px 3px rgb(0 0 20 / 0.45);
       }
-      .x-glass p, .x-glass li, .x-glass small { color: rgb(255 255 255 / 0.92); }
+      .x-glass p, .x-glass li, .x-glass small { color: rgb(255 255 255 / 0.94); }
       .x-glass::before,
       .x-glass::after { content: ""; position: absolute; inset: 0; border-radius: inherit; pointer-events: none; }
       .x-glass::before {
         z-index: -2;
-        -webkit-backdrop-filter: blur(4px);
-        backdrop-filter: blur(4px);
-        filter: url(#x-lens) saturate(120%) brightness(1.15);
+        -webkit-backdrop-filter: blur(1.5px) saturate(150%) brightness(1.06);
+        backdrop-filter: blur(1.5px) saturate(150%) brightness(1.06);
       }
+      .x-glass.is-liquid::before { backdrop-filter: var(--lg-filter) saturate(150%) brightness(1.06); }
       .x-glass::after {
         z-index: -1;
-        background: linear-gradient(rgb(255 255 255 / 0.25), rgb(255 255 255 / 0.25)), rgb(12 20 42 / calc(var(--glass-dim) * 0.4));
-        box-shadow: inset 1px 1px 0 rgb(255 255 255 / 0.75), inset 0 0 5px rgb(255 255 255 / 0.75);
+        background:
+          radial-gradient(120% 70% at 20% 0%, rgb(255 255 255 / 0.16), transparent 55%),
+          linear-gradient(rgb(255 255 255 / 0.03), rgb(255 255 255 / 0.03)),
+          rgb(8 14 34 / calc(var(--glass-dim) * 0.22));
+        box-shadow:
+          inset 1.5px 1.5px 0 -0.5px rgb(255 255 255 / 0.9),
+          inset -1px -1px 0 -0.5px rgb(255 255 255 / 0.45),
+          inset 0 0 6px rgb(255 255 255 / 0.28),
+          inset 0 -10px 18px -12px rgb(255 255 255 / 0.25);
       }
       a.x-glass, button.x-glass, .x-chip.x-glass { transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 2.2); }
       a.x-glass:hover, button.x-glass:not(:disabled):hover { transform: scale(1.05); }
@@ -250,12 +259,7 @@
     </style>
   </head>
   <body>
-    <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
-      <filter id="x-lens" x="0%" y="0%" width="100%" height="100%" filterUnits="objectBoundingBox">
-        <feComponentTransfer in="SourceAlpha" result="alpha"><feFuncA type="identity" /></feComponentTransfer>
-        <feGaussianBlur in="alpha" stdDeviation="50" result="blur" />
-        <feDisplacementMap in="SourceGraphic" in2="blur" scale="50" xChannelSelector="A" yChannelSelector="A" />
-      </filter>
+    <svg id="x-lg-defs" width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
     </svg>
     <div id="sky" aria-hidden="true"><canvas></canvas></div>
     <div class="page" id="top">
@@ -283,7 +287,7 @@
 
         <section class="x-sec" id="see">
           <p class="x-eye x-reveal">01 · Two ways to use it</p>
-          <h2 class="x-h x-reveal"><b>Talk or</b><i data-scroll data-scroll-speed="0.06">type.</i></h2>
+          <h2 class="x-h x-reveal"><b>Talk or</b><i>type.</i></h2>
           <p class="x-lede x-reveal">Switch between Voice and Chat with one tap. It's the same conversation either way: start a call, hang up, keep typing, and JOSIE remembers it all.</p>
           <div class="x-grid x-grid--videos x-grid--showcase">
             <figure class="x-shot x-reveal"><video autoplay muted loop playsinline preload="metadata" poster="videos/josie-mac-call-poster.jpg" aria-label="Voice call on the Mac: the orb moves from listening to thinking, a tool call and speaking while the new turn and JOSIE's reply stream into the transcript"><source src="videos/josie-mac-call.webm" type="video/webm" /><source src="videos/josie-mac-call.mp4" type="video/mp4" /></video><figcaption>A voice call with the live transcript. (mockup)</figcaption></figure>
@@ -295,7 +299,7 @@
 
         <section class="x-sec" id="actions">
           <p class="x-eye x-reveal">02 · Gets things done</p>
-          <h2 class="x-h x-reveal"><b>Not just</b><i data-scroll data-scroll-speed="0.06">talk.</i></h2>
+          <h2 class="x-h x-reveal"><b>Not just</b><i>talk.</i></h2>
           <p class="x-lede x-reveal">JOSIE works with the Apple apps you already use. Ask out loud and it really happens: the reminder is in Reminders, the event is in your calendar, the message is waiting in Messages.</p>
           <div class="x-act">
             <ul class="x-act-list">
@@ -311,7 +315,7 @@
 
         <section class="x-sec" id="features">
           <p class="x-eye x-reveal">03 · Features</p>
-          <h2 class="x-h x-reveal"><b>What she</b><i data-scroll data-scroll-speed="0.06">can do.</i></h2>
+          <h2 class="x-h x-reveal"><b>What she</b><i>can do.</i></h2>
           <div class="x-grid">
             <article class="x-card x-glass x-reveal"><span class="x-num">01</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v10H9l-5 4z"/><path d="M8 10h.01M12 10h.01M16 10h.01"/></svg><h3>Real conversation</h3><p>Knows when you've finished talking. Interrupt her just by speaking.</p></article>
             <article class="x-card x-glass x-reveal"><span class="x-num">02</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12h2M7 8v8M11 5v14M15 9v6M19 7v10"/></svg><h3>Knows your voice</h3><p>Learns you from three short phrases and tells people apart.</p></article>
@@ -330,7 +334,7 @@
 
         <section class="x-sec" id="gallery">
           <p class="x-eye x-reveal">04 · Screenshots</p>
-          <h2 class="x-h x-reveal"><b>Every</b><i data-scroll data-scroll-speed="0.06">screen.</i></h2>
+          <h2 class="x-h x-reveal"><b>Every</b><i>screen.</i></h2>
           <p class="x-lede x-reveal">The Mac app, plus a preview of the iPhone app. Click any picture to see it larger.</p>
           <nav class="x-gnav x-reveal" aria-label="Screenshot groups"><a class="x-chip x-glass" href="#g-mac">Mac</a><a class="x-chip x-glass" href="#g-mac-calls">Calls &amp; chat</a><a class="x-chip x-glass" href="#g-mac-library">Library &amp; embeddings</a><a class="x-chip x-glass" href="#g-mac-voice">Voice studio &amp; Voice ID</a><a class="x-chip x-glass" href="#g-mac-dashboard">Dashboard</a><a class="x-chip x-glass" href="#g-mac-menus">Menu bar &amp; API server</a><a class="x-chip x-glass" href="#g-mac-settings">Settings</a><a class="x-chip x-glass" href="#g-mac-onboarding">Onboarding</a><a class="x-chip x-glass" href="#g-iphone">iPhone</a></nav>
           <h3 class="x-gh x-reveal" id="g-mac">Mac</h3>
@@ -414,7 +418,7 @@
 
         <section class="x-sec" id="install">
           <p class="x-eye x-reveal">05 · No tech skills needed</p>
-          <h2 class="x-h x-reveal"><b>Five steps.</b><i data-scroll data-scroll-speed="0.06">No terminal.</i></h2>
+          <h2 class="x-h x-reveal"><b>Five steps.</b><i>No terminal.</i></h2>
           <p class="x-lede x-reveal">You won't type a single command. Setup takes about 15 minutes, mostly waiting for downloads.</p>
           <div class="x-panel x-glass x-reveal">
             <h3>Before you start</h3>
@@ -449,7 +453,7 @@
 
         <section class="x-sec" id="good">
           <p class="x-eye x-reveal">06 · Good to know</p>
-          <h2 class="x-h x-reveal"><b>Small</b><i data-scroll data-scroll-speed="0.06">details.</i></h2>
+          <h2 class="x-h x-reveal"><b>Small</b><i>details.</i></h2>
           <div class="x-grid">
             <div class="x-card x-glass x-reveal"><span class="x-num">01</span><h3>Works offline</h3><p>After setup, everything works offline except the language model, which runs in Ollama on your Mac.</p></div>
             <div class="x-card x-glass x-reveal"><span class="x-num">02</span><h3>Other models</h3><p>In Settings, switch to any OpenAI-compatible service with your own key, or to Apple Intelligence on macOS 26.</p></div>
@@ -461,7 +465,7 @@
 
         <section class="x-sec" id="faq">
           <p class="x-eye x-reveal">07 · FAQ</p>
-          <h2 class="x-h x-reveal"><b>Questions,</b><i data-scroll data-scroll-speed="0.06">answered.</i></h2>
+          <h2 class="x-h x-reveal"><b>Questions,</b><i>answered.</i></h2>
           <div class="x-faq">
             <details class="x-glass x-reveal"><summary>Is it free?</summary><p>Yes.</p></details>
             <details class="x-glass x-reveal"><summary>Does my voice go to the cloud?</summary><p>No. Hearing, voice recognition and speech run on your Mac, and by default the language model (Ollama) does too. If you switch to an online model, your text goes to that service.</p></details>
@@ -491,7 +495,7 @@
         </section>
 
         <section class="x-sec x-cta">
-          <h2 class="x-h x-reveal"><b>Ready to</b><i data-scroll data-scroll-speed="0.06">say hi?</i></h2>
+          <h2 class="x-h x-reveal"><b>Ready to</b><i>say hi?</i></h2>
           <a class="x-btn x-btn--primary x-reveal" href="https://github.com/Goekdeniz-Guelmez/JOSIE-Voice/releases" target="_blank" rel="noopener">Download for Mac</a>
         </section>
       </main>
@@ -969,6 +973,64 @@ void main() {
       })();
     </script>
     <script src="main.js"></script>
+    <script>
+      /* Liquid Glass refraction: one displacement map per glass size. Pixels near the rounded edge are
+         pulled inward like light through a thick curved rim; the middle stays perfectly clear. */
+      (function () {
+        var defs = document.getElementById("x-lg-defs"), NS = "http://www.w3.org/2000/svg";
+        var ok = defs && window.CSS && CSS.supports && CSS.supports("backdrop-filter", "url(#x)") && /Chrome|Chromium|Edg\//.test(navigator.userAgent) && !/Firefox/.test(navigator.userAgent);
+        if (!ok) return;
+        var cache = {}, n = 0;
+        function map(w, h, r) {
+          var k = 2, cw = Math.max(2, Math.round(w / k)), ch = Math.max(2, Math.round(h / k));
+          var c = document.createElement("canvas"); c.width = cw; c.height = ch;
+          var g = c.getContext("2d"), img = g.createImageData(cw, ch), d = img.data;
+          var band = Math.max(6, Math.min(28, Math.min(w, h) * 0.32)) / k, rr = Math.min(r, w / 2, h / 2) / k;
+          var hx = cw / 2, hy = ch / 2;
+          for (var y = 0; y < ch; y++) for (var x = 0; x < cw; x++) {
+            var px = Math.abs(x + 0.5 - hx), py = Math.abs(y + 0.5 - hy);
+            var qx = px - (hx - rr), qy = py - (hy - rr), dist, nx, ny;
+            if (qx > 0 && qy > 0) { var l = Math.sqrt(qx * qx + qy * qy) || 1; dist = rr - l; nx = qx / l; ny = qy / l; }
+            else if (qx > qy) { dist = hx - px; nx = 1; ny = 0; } else { dist = hy - py; nx = 0; ny = 1; }
+            var t = Math.max(0, 1 - dist / band); t = t * t * (3 - 2 * t) * t;
+            var sx = (x + 0.5 < hx ? -1 : 1) * nx * t, sy = (y + 0.5 < hy ? -1 : 1) * ny * t;
+            var i = (y * cw + x) * 4;
+            d[i] = 128 + sx * 127; d[i + 1] = 128 + sy * 127; d[i + 2] = 128; d[i + 3] = 255;
+          }
+          g.putImageData(img, 0, 0);
+          return c.toDataURL();
+        }
+        function el(tag, at) { var e = document.createElementNS(NS, tag); for (var a in at) e.setAttribute(a, at[a]); return e; }
+        function filter(w, h, r) {
+          var key = w + "x" + h + "x" + r;
+          if (cache[key]) return cache[key];
+          var id = "x-lg-" + (n++), s = -Math.min(70, Math.max(24, Math.min(w, h) * 0.45));
+          var f = el("filter", { id: id, x: 0, y: 0, width: w, height: h, filterUnits: "userSpaceOnUse", primitiveUnits: "userSpaceOnUse", "color-interpolation-filters": "sRGB" });
+          f.appendChild(el("feImage", { href: map(w, h, r), x: 0, y: 0, width: w, height: h, preserveAspectRatio: "none", result: "m" }));
+          [["R", 1, "1 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 1 0"], ["G", 0.94, "0 0 0 0 0  0 1 0 0 0  0 0 0 0 0  0 0 0 1 0"], ["B", 0.88, "0 0 0 0 0  0 0 0 0 0  0 0 1 0 0  0 0 0 1 0"]].forEach(function (c) {
+            f.appendChild(el("feDisplacementMap", { in: "SourceGraphic", in2: "m", scale: (s * c[1]).toFixed(1), xChannelSelector: "R", yChannelSelector: "G", result: "d" + c[0] }));
+            f.appendChild(el("feColorMatrix", { in: "d" + c[0], type: "matrix", values: c[2], result: c[0] }));
+          });
+          f.appendChild(el("feBlend", { in: "R", in2: "G", mode: "screen", result: "RG" }));
+          f.appendChild(el("feBlend", { in: "RG", in2: "B", mode: "screen" }));
+          defs.appendChild(f);
+          return (cache[key] = "url(#" + id + ")");
+        }
+        function apply(g) {
+          var w = Math.round(g.offsetWidth), h = Math.round(g.offsetHeight);
+          if (w < 8 || h < 8) return;
+          var r = parseFloat(getComputedStyle(g).borderTopLeftRadius) || 0;
+          g.style.setProperty("--lg-filter", filter(w, h, Math.round(r)));
+          g.classList.add("is-liquid");
+        }
+        var all = document.querySelectorAll(".x-glass");
+        all.forEach(apply);
+        if ("ResizeObserver" in window) {
+          var ro = new ResizeObserver(function (es) { es.forEach(function (e) { apply(e.target); }); });
+          all.forEach(function (g) { ro.observe(g); });
+        }
+      })();
+    </script>
     <script src="vendor/lenis.min.js"></script>
     <script>window.lenis = window.Lenis; /* the Locomotive UMD build reads a global named "lenis" */</script>
     <script src="vendor/locomotive-scroll.umd.js"></script>
