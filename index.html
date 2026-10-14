@@ -130,10 +130,10 @@
       .x-faq details p { padding: 0 22px 18px; color: var(--text-secondary); line-height: 1.5; max-width: 70ch; }
       /* family */
       .x-family { display: grid; grid-template-columns: 200px minmax(0, 1fr); gap: 28px; align-items: center; padding: clamp(24px, 4vw, 40px); border-radius: var(--r-xl); }
-      .x-family img { width: 100%; }
+      .x-family .x-orb--sm { width: min(160px, 100%); justify-self: center; }
       .x-family p { font-size: var(--size-lede); line-height: 1.45; margin-bottom: 18px; }
       .x-chip { display: inline-flex; align-items: center; min-height: var(--tap); padding: 8px 16px; border-radius: var(--r-pill); color: #fff; text-decoration: none; font: var(--type-label); }
-      @media (max-width: 700px) { .x-family { grid-template-columns: 1fr; text-align: center; } .x-family img { width: 160px; margin-inline: auto; } .x-family .x-btns { justify-content: center; } }
+      @media (max-width: 700px) { .x-family { grid-template-columns: 1fr; text-align: center; } .x-family .x-orb--sm { width: 140px; margin-inline: auto; } .x-family .x-btns { justify-content: center; } }
       .x-cta { text-align: center; display: grid; justify-items: center; gap: 24px; }
       /* footer */
       .x-foot { margin-top: clamp(56px, 8vw, 96px); padding: 16px 24px 20px; display: grid; gap: 6px; border-radius: var(--r-xl); }
@@ -283,7 +283,7 @@
         <section class="x-sec" id="family">
           <p class="x-eye x-reveal">06 · The JOSIE family</p>
           <div class="x-family x-glass x-reveal">
-            <img src="josie-2-9b-tree-transparent.png" alt="The JOSIE tree logo" />
+            <div class="x-orb x-orb--sm" role="img" aria-label="The JOSIE orb"><canvas class="x-orb__gl" aria-hidden="true"></canvas><img src="josie-orb.png" alt="" /></div>
             <div>
               <p>JOSIE-Voice comes from the JOSIE family of personality-driven language models by Gökdeniz Gülmez, trained entirely on Apple Silicon.</p>
               <div class="x-btns">
@@ -547,9 +547,8 @@ void main() {
 }
 </script>
     <script>
-      /* JOSIE's liquid orb (WebGL2), ported from the app; falls back to josie-orb.png. */
-      (function () {
-        var wrap = document.querySelector(".x-orb");
+      /* JOSIE's liquid orb (WebGL2), ported from the app; falls back to josie-orb.png. Runs for every .x-orb. */
+      document.querySelectorAll(".x-orb").forEach(function (wrap) {
         var canvas = wrap && wrap.querySelector(".x-orb__gl");
         if (!canvas) return;
         var gl = null;
@@ -693,7 +692,7 @@ void main() {
         try { render(); } catch (e) { fail(); return; }
         if (gl.getError() !== gl.NO_ERROR) { fail(); return; }
         schedule();
-      })();
+      });
     </script>
     <script>
       (function () {
