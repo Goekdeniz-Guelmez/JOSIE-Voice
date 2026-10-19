@@ -289,7 +289,7 @@ JOSIE-Voice comes from the JOSIE family of personality-driven language models by
 
 ## About this repository
 
-This repository hosts the JOSIE-Voice website and visuals: the site lives in [`docs/`](docs/) and is served by GitHub Pages. The website resolves app downloads from GitHub Releases; the source code is private.
+This repository hosts the JOSIE-Voice website and visuals: the site lives in [`docs/`](docs/) and is served by GitHub Pages. The website links to app downloads published in [GitHub Releases](https://github.com/Goekdeniz-Guelmez/JOSIE-Voice/releases); the source code is private.
 
 Built with MLX Swift, Qwen3-ASR, Qwen3-TTS, Parakeet, Kokoro, Silero VAD, Smart Turn v3 and WeSpeaker. Ollama is a separate app by its own developers.
 
