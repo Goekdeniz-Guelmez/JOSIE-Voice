@@ -273,6 +273,7 @@
         <nav aria-label="Sections">
           <a href="#see">Experience</a><a href="#features">Capabilities</a><a href="#gallery">Inside JOSIE</a><a href="#faq">FAQ</a>
         </nav>
+        <a class="x-btn x-btn--primary x-btn--sm" data-download href="https://github.com/Goekdeniz-Guelmez/JOSIE-Voice/releases">Download <span aria-hidden="true">↓</span></a>
       </header>
 
       <main class="main" id="main-content">
@@ -282,8 +283,8 @@
             <h1 class="x-h hero-enter" id="hero-title">Your Mac.<br />With a <i>voice.</i></h1>
             <p class="x-lede hero-enter">Meet JOSIE. A voice assistant that feels like a conversation. Speak naturally, think out loud, and let the little things take care of themselves.</p>
             <div class="x-btns hero-enter">
-              <a class="x-btn x-btn--primary" href="#see"><span class="play-icon" aria-hidden="true">▶</span> Watch the demo <span aria-hidden="true">↓</span></a>
-              <a class="x-btn hero-demo" href="#features">Explore the possibilities <span aria-hidden="true">↗</span></a>
+              <a class="x-btn x-btn--primary" data-download href="https://github.com/Goekdeniz-Guelmez/JOSIE-Voice/releases">Download for Mac <span aria-hidden="true">↓</span></a>
+              <a class="x-btn hero-demo" href="#see"><span class="play-icon" aria-hidden="true">▶</span> Watch the demo</a>
             </div>
             <p class="hero-spec hero-enter">Free to use <span>·</span> Apple Silicon <span>·</span> macOS 14+</p>
           </div>
@@ -496,7 +497,13 @@
           </div>
         </section>
 
+        <section class="x-sec x-cta" aria-labelledby="download-title">
+          <h2 class="x-h x-reveal" id="download-title"><b>Ready to</b><i>say hello?</i></h2>
+          <a class="x-btn x-btn--primary x-reveal" data-download href="https://github.com/Goekdeniz-Guelmez/JOSIE-Voice/releases">Download for Mac <span aria-hidden="true">↓</span></a>
+          <p class="x-note">The latest DMG from GitHub Releases · Apple Silicon · macOS 14+</p>
+        </section>
       </main>
+      <p class="download-status" id="download-status" role="status" hidden></p>
 
       <footer class="x-foot x-glass">
         <div class="x-foot__row">
@@ -965,6 +972,7 @@ void main() {
     </script>
     <script src="main.js"></script>
     <script src="redesign.js"></script>
+    <script src="download.js"></script>
     <script async src="https://platform.x.com/widgets.js" charset="utf-8"></script>
     <script>
       /* Liquid Glass refraction: one displacement map per glass size. Pixels near the rounded edge are

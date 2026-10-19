@@ -259,7 +259,7 @@ After setup, everything works offline except the language model, which runs in O
 
 ## FAQ
 
-**Can I download it?** Not right now. This repository shows what JOSIE-Voice looks like and does; the app isn't offered as a download at the moment.
+**Can I download it?** Use Download for Mac on the website to download the newest published Mac DMG from [GitHub Releases](https://github.com/Goekdeniz-Guelmez/JOSIE-Voice/releases). If no DMG is published yet, the button links you to the releases page.
 
 **Is it free?** Yes.
 
@@ -289,7 +289,7 @@ JOSIE-Voice comes from the JOSIE family of personality-driven language models by
 
 ## About this repository
 
-This repository hosts the JOSIE-Voice website and visuals: the site lives in [`docs/`](docs/) and is served by GitHub Pages. There are no downloads here, and the source code is private.
+This repository hosts the JOSIE-Voice website and visuals: the site lives in [`docs/`](docs/) and is served by GitHub Pages. The website resolves app downloads from GitHub Releases; the source code is private.
 
 Built with MLX Swift, Qwen3-ASR, Qwen3-TTS, Parakeet, Kokoro, Silero VAD, Smart Turn v3 and WeSpeaker. Ollama is a separate app by its own developers.
 
