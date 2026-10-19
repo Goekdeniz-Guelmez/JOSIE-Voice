@@ -29,7 +29,7 @@
       body { font-family: var(--x-sans); }
       /* sky: a fixed layer at z 0 with a CSS gradient under the canvas, content raised to z 1 */
       #sky {
-        --sky-top: rgb(4 9 28); --sky-mid: rgb(10 22 54); --sky-hor: rgb(24 36 82);
+        --sky-top: rgb(52 120 205); --sky-mid: rgb(130 182 236); --sky-hor: rgb(214 233 251);
         position: fixed; top: 0; right: 0; bottom: 0; left: 0; inset: 0; z-index: 0; pointer-events: none; overflow: hidden;
         background-color: #0b1a3a;
         background-image: linear-gradient(180deg, var(--sky-top) 0%, var(--sky-mid) 55%, var(--sky-hor) 100%);
@@ -507,18 +507,14 @@
       </footer>
     </div>
 
-    <div class="x-clock x-glass" role="group" aria-label="Sky clock">
-      <span class="x-clock__name" aria-live="polite">Live</span>
-      <button type="button" data-h="live" aria-pressed="true">Live</button>
-      <button type="button" data-h="6.6">Sunrise</button>
-      <button type="button" data-h="12.5">Midday</button>
-      <button type="button" data-h="17.2">Golden hour</button>
-      <button type="button" data-h="19.1">Sunset</button>
-      <button type="button" data-h="23">Night</button>
+    <div class="x-clock x-glass sky-journey" aria-label="The sky follows your scroll from morning to night">
+      <span class="x-clock__name">Morning</span>
+      <span class="sky-journey__track" aria-hidden="true"><span></span></span>
+      <span class="sky-journey__end" aria-hidden="true">Night</span>
     </div>
 
     <script>
-      /* The sky: one self-contained function on #sky. Swap its body for a WebGL shader later. */
+      /* The page is one day: scrolling from top to bottom moves morning into night. */
       function Sky(el) {
         var cv = el.querySelector("canvas"), ctx = null, root = document.documentElement;
         try { ctx = cv.getContext("2d"); } catch (e) { ctx = null; }
@@ -547,8 +543,9 @@
         }
         var clouds = [];
         for (var l = 0; l < 3; l++) for (var n = 0; n < 7; n++) clouds.push({ l: l, x: Math.random() * 1.6 - 0.3, y: Math.random() * 0.75, r: (0.12 + Math.random() * 0.16) * (1 + l * 0.4), v: 0.004 + l * 0.005 });
-        var W, H, live = true, tgt = 0, cur = null, last = 0, dirty = true, shown = "";
+        var W, H, cur = 8.5, last = 0, dirty = true, shown = "";
         var label = document.querySelector(".x-clock__name");
+        var journey = document.querySelector(".sky-journey__track span");
         function css(c) { return "rgb(" + c.map(Math.round).join(",") + ")"; }
         function size() {
           var vv = window.visualViewport, de = document.documentElement;
@@ -565,7 +562,12 @@
           }
           dirty = true;
         }
-        function now() { var d = new Date(); return d.getHours() + d.getMinutes() / 60; }
+        function scrollHour() {
+          var distance = document.documentElement.scrollHeight - window.innerHeight;
+          var progress = distance > 0 ? Math.max(0, Math.min(1, window.scrollY / distance)) : 0;
+          if (journey) journey.style.transform = "scaleX(" + progress + ")";
+          return 8.5 + progress * (23 - 8.5);
+        }
         function draw(dt) {
           var P = at(cur);
           el.style.setProperty("--sky-top", css(P[2]));
@@ -573,7 +575,7 @@
           el.style.setProperty("--sky-hor", css(P[4]));
           root.style.setProperty("--glass-dim", P[6].toFixed(3));
           root.style.setProperty("--orb-glow", P[5].map(Math.round).join(" "));
-          var name = live ? "Live · " + P.name : P.name;
+          var name = P.name;
           if (label && name !== shown) label.textContent = shown = name;
           if (!ctx) return;
           try { paint(P, dt); } catch (e) { ctx = null; cv.style.display = "none"; }
@@ -601,9 +603,11 @@
           try {
             ts = +ts || Date.now();
             var dt = last ? Math.max(0, Math.min(0.1, (ts - last) / 1000)) : 0;
-            if (live) tgt = now();
-            if (cur === null || reduce) cur = tgt;
-            else { var d = ((tgt - cur) % 24 + 36) % 24 - 12; if (Math.abs(d) < 0.002) cur = tgt; else cur = (cur + d * Math.min(1, dt * 1.8) + 24) % 24; }
+            // Locomotive already smooths the scroll. Use its current position directly,
+            // including reverse scroll and page-height changes from the embed or gallery.
+            var hour = scrollHour();
+            if (hour !== cur) dirty = true;
+            cur = hour;
             if (!reduce || dirty) { draw(dt); dirty = false; }
             last = ts;
           } catch (e) {}
@@ -615,23 +619,11 @@
         window.addEventListener("orientationchange", later);
         if (window.visualViewport) window.visualViewport.addEventListener("resize", later);
         window.addEventListener("scroll", function () { dirty = true; }, { passive: true });
-        if (reduce) setInterval(function () { dirty = true; }, 60000);
         size();
-        if (live) tgt = now();
-        cur = tgt; draw(0); dirty = false;
+        cur = scrollHour(); draw(0); dirty = false;
         raf(frame);
-        return { preview: function (h) { live = h === "live"; if (!live) tgt = +h; dirty = true; } };
       }
-      (function () {
-        var sky = Sky(document.getElementById("sky"));
-        var btns = document.querySelectorAll(".x-clock button");
-        btns.forEach(function (b) {
-          b.addEventListener("click", function () {
-            btns.forEach(function (o) { o.setAttribute("aria-pressed", o === b); });
-            sky.preview(b.dataset.h);
-          });
-        });
-      })();
+      Sky(document.getElementById("sky"));
     </script>
     <script type="x-shader/x-vertex" id="orb-vert">#version 300 es
 void main() {

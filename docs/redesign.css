@@ -160,3 +160,11 @@ body::before { content: ""; position: fixed; inset: 0; z-index: 1; pointer-event
 .demo-embed > blockquote { padding: 26px; border: 1px solid #ffffff20; border-radius: 14px; background: #11141e; color: #bdbec8; font-size: 13px; line-height: 1.8; overflow-wrap: anywhere; }
 .demo-embed > blockquote p { margin-bottom: 18px; }
 @media (max-width: 760px) { .demo-feature { grid-template-columns: 1fr; padding: 24px 18px; gap: 30px; }.demo-copy h3 { font-size: 34px; }.demo-copy > p:not(.x-eye) { max-width: none; } }
+
+/* A quiet position indicator replaces the real-time sky controls. */
+.x-clock.sky-journey { left: auto; right: 16px; bottom: 16px; gap: 14px; padding: 12px 16px; overflow: hidden; }
+.sky-journey .x-clock__name { min-width: 68px; padding: 0; font: 10px/1.5 var(--mono); }
+.sky-journey__track { width: 85px; height: 2px; background: #ffffff26; overflow: hidden; }
+.sky-journey__track span { display: block; width: 100%; height: 100%; background: #f4b99b; transform: scaleX(0); transform-origin: left; }
+.sky-journey__end { color: #a7a0ae; font: 9px/1.5 var(--mono); }
+@media (max-width: 760px) { .x-clock.sky-journey { right: 10px; bottom: 10px; padding: 10px 13px; } }
