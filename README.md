@@ -11,9 +11,7 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/Goekdeniz-Guelmez/JOSIE-Voice/releases"><b>Download for Mac</b></a> ·
-  <a href="https://goekdeniz-guelmez.github.io/JOSIE-Voice/">Website</a> ·
-  <a href="#install">How to install</a> ·
+  <a href="https://goekdeniz-guelmez.github.io/JOSIE-Voice/"><b>Website</b></a> ·
   <a href="#faq">FAQ</a>
 </p>
 
@@ -247,21 +245,7 @@ JOSIE-Voice is a native Mac app built with SwiftUI and MLX Swift. Everything exc
 
 After setup, everything works offline except the language model, which runs in Ollama on your Mac.
 
-## Install
-
-No terminal needed. Setup takes about 15 minutes, mostly waiting for downloads.
-
-**Before you start:** a Mac with Apple Silicon (Apple menu → About This Mac should say "Chip: Apple M…"), macOS 14 or newer, about 7 GB of free space, 16 GB of memory recommended for the larger models, and internet for the first setup.
-
-1. **Download JOSIE-Voice.** Get the latest `.dmg` from [Releases](https://github.com/Goekdeniz-Guelmez/JOSIE-Voice/releases).
-2. **Move it to Applications.** Open the `.dmg`, drag JOSIE-Voice onto the Applications folder, then eject the disk.
-3. **Install Ollama, JOSIE's brain.** Download it free from [ollama.com/download](https://ollama.com/download), move it to Applications and open it once. A llama icon in the menu bar means it's running.
-4. **Open JOSIE-Voice.** Current builds are test builds and are ad-hoc signed. If macOS says it "can't be opened", go to **System Settings → Privacy & Security**, scroll down and click **Open Anyway**. You only need to do this once.
-5. **Follow the setup.** Choose model sizes (0.6B for 8 GB Macs or for speed, 1.7B for better quality on 16 GB or more) and click **Download all**. Leave the language model on Ollama; JOSIE downloads `qwen3.5:0.8b` by itself. Allow the microphone, optionally say three phrases so it learns your voice, and click **Start talking**.
-
-That's it. Click the orb and say hi.
-
-### Good to know
+## Good to know
 
 - **Run setup again:** Settings → Setup → Run setup again.
 - **Apple tools:** turn them on one by one in Settings. macOS asks permission the first time each is used.
@@ -297,7 +281,7 @@ JOSIE-Voice comes from the JOSIE family of personality-driven language models by
 
 ## About this repository
 
-This repository hosts the JOSIE-Voice website and the app downloads. The source code is private.
+This repository hosts the JOSIE-Voice website and visuals. The source code is private.
 
 Built with MLX Swift, Qwen3-ASR, Qwen3-TTS, Parakeet, Kokoro, Silero VAD, Smart Turn v3 and WeSpeaker. Ollama is a separate app by its own developers.
 
