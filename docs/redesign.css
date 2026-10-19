@@ -9,6 +9,10 @@ body::before { content: ""; position: fixed; inset: 0; z-index: 1; pointer-event
 .x-nav { border: 1px solid rgb(255 255 255 / .1); box-shadow: none; }
 .x-brand { font-size: 16px; letter-spacing: -.6px; }
 .x-brand img { width: 28px; height: 28px; }
+.release-alert { display: flex; align-items: center; gap: 13px; width: fit-content; max-width: 100%; margin: 18px auto 0; padding: 10px 14px; color: #f4e8e1; border: 1px solid rgb(244 185 155 / .28); border-radius: 12px; background: linear-gradient(105deg, rgb(244 185 155 / .14), rgb(244 185 155 / .055)); box-shadow: inset 0 1px 0 rgb(255 255 255 / .045); font-size: 13px; line-height: 1.5; }
+.release-alert__badge { flex: none; padding: 5px 8px; border-radius: 7px; background: rgb(244 185 155 / .16); color: #f4b99b; font: 9px/1.3 var(--mono); letter-spacing: .1em; }
+.release-alert strong { color: #ffd0b9; font-weight: 600; }
+.release-alert__spark { color: #f4b99b; font-size: 16px; }
 .x-nav nav { gap: 16px; }
 .x-nav nav a { font-size: 12px; }
 .x-nav nav a[aria-current] { background: rgb(255 255 255 / .06); }
@@ -203,6 +207,8 @@ body::before { content: ""; position: fixed; inset: 0; z-index: 1; pointer-event
 .pipeline-section > .x-note { margin-top: 20px; }
 @media (max-width: 760px) { .pipeline-stages { grid-template-columns: 1fr; gap: 22px; margin-top: 32px; }.pipeline-stages h3 { margin-top: 10px; }.pipeline-diagram-bar { padding: 13px; }.pipeline-diagram-bar > span { font-size: 8px; letter-spacing: .04em; }.pipeline-diagram-bar a { font-size: 9px; }.pipeline-diagram > .x-zoom { padding: 6px; }.pipeline-detail > summary { font-size: 13px; }.pipeline-detail > p { font-size: 12px; } }
 @media (prefers-reduced-motion: reduce) { .pipeline-expand { transition: none; } }
+
+@media (max-width: 760px) { .release-alert { gap: 9px; margin-top: 14px; padding: 9px 10px; font-size: 11px; }.release-alert__badge { padding: 5px 6px; font-size: 8px; }.release-alert__spark { display: none; } }
 
 .agent-story h3 { font-size: clamp(27px, 3vw, 38px); font-weight: 400; line-height: 1.16; letter-spacing: -1.2px; }
 .agent-story h3 i { font-family: Georgia, serif; color: #f2c3ad; }
