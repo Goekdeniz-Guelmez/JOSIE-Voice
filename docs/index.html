@@ -11,8 +11,8 @@
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400&display=swap"
     />
-    <link rel="stylesheet" href="styles.css" />
-    <link rel="stylesheet" href="hero.css" />
+    <link rel="stylesheet" href="styles.css?v=9010a03f9f" />
+    <link rel="stylesheet" href="hero.css?v=f803c00533" />
     <style>
       :root, :root[data-theme] {
         color-scheme: dark;
@@ -259,7 +259,8 @@
         .x-btn, .x-clock button { transition: none; }
       }
     </style>
-    <link rel="stylesheet" href="redesign.css" />
+    <link rel="stylesheet" href="redesign.css?v=15735a5ff8" />
+    <link rel="stylesheet" href="customization.css?v=6e22603acb" />
     <meta name="description" content="Meet JOSIE. A personal voice and chat assistant for your Mac. Natural conversation, real actions, and on-device voice. Free for Apple Silicon." />
   </head>
   <body>
@@ -394,109 +395,115 @@
 
         <section class="x-sec customization" id="customize" aria-labelledby="customize-title">
           <p class="x-eye x-reveal">05 · Make it yours</p>
-          <h2 class="x-h x-reveal" id="customize-title"><b>A little personality.</b><i>A lot of possibility.</i></h2>
-          <p class="x-lede x-reveal">Choose the models behind the conversation, the tools within reach, and the things worth remembering. Start simple. Make room for more when you want it.</p>
+          <h2 class="x-h x-reveal" id="customize-title"><b>Make JOSIE</b><i>your own.</i></h2>
+          <p class="x-lede x-reveal">Choose what powers JOSIE, what it can access, and how it works with you.</p>
           <div class="custom-explorer x-reveal">
             <div class="custom-tabs" role="tablist" aria-label="Explore JOSIE customization">
-              <button type="button" role="tab" id="custom-tab-models" aria-controls="custom-panel-models" aria-selected="true" tabindex="0"><span>01</span>Models &amp; endpoints</button>
-              <button type="button" role="tab" id="custom-tab-tools" aria-controls="custom-panel-tools" aria-selected="false" tabindex="-1"><span>02</span>Tools &amp; MCP</button>
-              <button type="button" role="tab" id="custom-tab-memory" aria-controls="custom-panel-memory" aria-selected="false" tabindex="-1"><span>03</span>Memory &amp; knowledge</button>
-              <button type="button" role="tab" id="custom-tab-agents" aria-controls="custom-panel-agents" aria-selected="false" tabindex="-1"><span>04</span>Agents &amp; model pools</button>
-              <button type="button" role="tab" id="custom-tab-skills" aria-controls="custom-panel-skills" aria-selected="false" tabindex="-1"><span>05</span>Skills &amp; personality</button>
-              <button type="button" role="tab" id="custom-tab-api" aria-controls="custom-panel-api" aria-selected="false" tabindex="-1"><span>06</span>Your Mac as an endpoint</button>
+              <button type="button" role="tab" id="custom-tab-models" aria-controls="custom-panel-models" aria-selected="true" tabindex="0"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="5" width="14" height="14" rx="3"/><path d="M9 9h6v6H9zM9 2v3m6-3v3M9 19v3m6-3v3M2 9h3m-3 6h3m14-6h3m-3 6h3"/></svg><span>Models</span></button>
+              <button type="button" role="tab" id="custom-tab-tools" aria-controls="custom-panel-tools" aria-selected="false" tabindex="-1"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m14 6 4 4M5 19l8-8M15 3a5 5 0 0 0-5 6L3 16a3 3 0 0 0 4 4l7-7a5 5 0 0 0 7-6l-4 3-3-3 3-4z"/></svg><span>Tools & MCP</span></button>
+              <button type="button" role="tab" id="custom-tab-memory" aria-controls="custom-panel-memory" aria-selected="false" tabindex="-1"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 4h8a3 3 0 0 1 3 3v13l-7-4-7 4V7a3 3 0 0 1 3-3zM9 8h6m-6 4h4"/></svg><span>Memory</span></button>
+              <button type="button" role="tab" id="custom-tab-agents" aria-controls="custom-panel-agents" aria-selected="false" tabindex="-1"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="8" cy="8" r="3"/><path d="M2 20v-2a6 6 0 0 1 12 0v2M16 5a3 3 0 0 1 0 6m2 3a5 5 0 0 1 4 5"/></svg><span>Agents</span></button>
+              <button type="button" role="tab" id="custom-tab-skills" aria-controls="custom-panel-skills" aria-selected="false" tabindex="-1"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 2.5 6.5L21 12l-6.5 2.5L12 21l-2.5-6.5L3 12l6.5-2.5z"/></svg><span>Skills</span></button>
+              <button type="button" role="tab" id="custom-tab-api" aria-controls="custom-panel-api" aria-selected="false" tabindex="-1"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m8 6-6 6 6 6m8-12 6 6-6 6M14 3l-4 18"/></svg><span>API</span></button>
             </div>
             <div class="custom-panel" id="custom-panel-models" role="tabpanel" aria-labelledby="custom-tab-models" tabindex="0">
               <div class="custom-panel-copy">
-                <p class="x-eye">01 / THE BRAIN</p><h3>Your assistant.<br /><i>Your choice of model.</i></h3>
+                <p class="x-eye">01 / THE BRAIN</p><h3>A mind of<br /><i>your choosing.</i></h3>
                 <p>Keep the language model on your Mac with Ollama, connect an OpenAI-compatible service, or choose Apple Intelligence. Set the endpoint and model that fit the way you work.</p>
-                <ul class="custom-points">
+                <div class="custom-capabilities"><span>Local or cloud</span><span>Custom endpoints</span><span>Speech engines</span></div>
+                <details class="custom-more"><summary>Explore the controls <span aria-hidden="true">＋</span></summary><ul class="custom-points">
                   <li><h4>Pick your backend</h4><p>Choose an address and model, including a custom model ID. Image understanding depends on the model you select.</p></li>
                   <li><h4>Tune how it thinks</h4><p>Set Full or Light prompts separately for Voice and Chat, with reasoning controls where the backend supports them.</p></li>
                   <li><h4>Choose how it hears and speaks</h4><p>Choose voices from Qwen3-TTS, Kokoro, Pocket TTS and more; recognition from Qwen3-ASR, Parakeet, Voxtral Realtime or Apple. Set supported sizes and 4-, 6- or 8-bit precisions on your Mac.</p></li>
-                </ul>
+                </ul></details>
               </div>
               <figure class="custom-screen x-shot">
-                <a class="x-zoom" href="images/custom-mac-settings-models-1600.webp"><img src="images/custom-mac-settings-models-800.webp" srcset="images/custom-mac-settings-models-800.webp 800w, images/custom-mac-settings-models-1600.webp 1600w" sizes="(max-width: 900px) 90vw, 720px" width="1600" height="1000" loading="lazy" decoding="async" alt="Models &amp; endpoints showing backend, prompt size and Agent mode controls (mockup)" /></a>
+                <a class="x-zoom" href="images/custom-mac-settings-models-1600.webp"><img src="images/custom-mac-settings-models-800.webp" srcset="images/custom-mac-settings-models-800.webp 800w, images/custom-mac-settings-models-1600.webp 1600w" sizes="(max-width: 700px) 90vw, 65vw" width="1600" height="1000" loading="lazy" decoding="async" alt="Models &amp; endpoints showing backend, prompt size and Agent mode controls (mockup)" /></a>
                 <figcaption>Models &amp; endpoints · Interface mockup. Click to explore.</figcaption>
                 <p class="custom-scope">Tools require a tool-calling model. Apple Intelligence does not support dynamic tools.</p>
               </figure>
             </div>
             <div class="custom-panel" id="custom-panel-tools" role="tabpanel" aria-labelledby="custom-tab-tools" tabindex="0">
               <div class="custom-panel-copy">
-                <p class="x-eye">02 / THE CONNECTIONS</p><h3>Open the right doors.<br /><i>You keep the keys.</i></h3>
+                <p class="x-eye">02 / THE CONNECTIONS</p><h3>Connected.<br /><i>On your terms.</i></h3>
                 <p>Connect the Apple apps you use, turn on web search, and add MCP servers for tools beyond the built-in collection.</p>
-                <ul class="custom-points">
+                <div class="custom-capabilities"><span>Apple apps</span><span>Access controls</span><span>MCP servers</span></div>
+                <details class="custom-more"><summary>Explore the controls <span aria-hidden="true">＋</span></summary><ul class="custom-points">
                   <li><h4>Choose what is available</h4><p>Enable tool groups individually. Apple app integrations start off until you choose to enable them.</p></li>
                   <li><h4>Set the depth of access</h4><p>Use Read, Add or Full where supported: from looking things up to creating, editing or deleting.</p></li>
                   <li><h4>Extend with MCP</h4><p>Bring additional tools into JOSIE through your configured MCP servers. Specialist agents can use a narrower selection.</p></li>
-                </ul>
+                </ul></details>
               </div>
               <figure class="custom-screen x-shot">
-                <a class="x-zoom" href="images/custom-mac-settings-tools-1600.webp"><img src="images/custom-mac-settings-tools-800.webp" srcset="images/custom-mac-settings-tools-800.webp 800w, images/custom-mac-settings-tools-1600.webp 1600w" sizes="(max-width: 900px) 90vw, 720px" width="1600" height="1000" loading="lazy" decoding="async" alt="Tools &amp; MCP with built-in switches and Apple app access depth controls (mockup)" /></a>
+                <a class="x-zoom" href="images/custom-mac-settings-tools-1600.webp"><img src="images/custom-mac-settings-tools-800.webp" srcset="images/custom-mac-settings-tools-800.webp 800w, images/custom-mac-settings-tools-1600.webp 1600w" sizes="(max-width: 700px) 90vw, 65vw" width="1600" height="1000" loading="lazy" decoding="async" alt="Tools &amp; MCP with built-in switches and Apple app access depth controls (mockup)" /></a>
                 <figcaption>Tools &amp; MCP · Interface mockup. Click to explore.</figcaption>
                 <p class="custom-scope">Actions such as sending mail or editing calendar entries pause for an on-screen confirmation.</p>
               </figure>
             </div>
             <div class="custom-panel" id="custom-panel-memory" role="tabpanel" aria-labelledby="custom-tab-memory" tabindex="0">
               <div class="custom-panel-copy">
-                <p class="x-eye">03 / THE CONTEXT</p><h3>Less repeating yourself.<br /><i>More picking up the thread.</i></h3>
+                <p class="x-eye">03 / THE CONTEXT</p><h3>Pick up<br /><i>the thread.</i></h3>
                 <p>Let JOSIE remember useful facts, find something in an earlier conversation, or pull the right passage from your documents.</p>
-                <ul class="custom-points">
+                <div class="custom-capabilities"><span>Personal memory</span><span>Document search</span><span>Past conversations</span></div>
+                <details class="custom-more"><summary>Explore the controls <span aria-hidden="true">＋</span></summary><ul class="custom-points">
                   <li><h4>Remember, retrieve, forget</h4><p>Control the Memory tool and its access depth. Ask JOSIE to remember a fact, recall it later, or forget it.</p></li>
                   <li><h4>Search your own context</h4><p>Enable document search and past-conversation search independently, with optional automatic context retrieval.</p></li>
                   <li><h4>Tune what comes back</h4><p>Adjust chunk size, overlap, passage counts, recent turns and similarity thresholds in Documents &amp; search.</p></li>
-                </ul>
+                </ul></details>
               </div>
               <figure class="custom-screen x-shot">
-                <a class="x-zoom" href="images/custom-mac-settings-retrieval-1600.webp"><img src="images/custom-mac-settings-retrieval-800.webp" srcset="images/custom-mac-settings-retrieval-800.webp 800w, images/custom-mac-settings-retrieval-1600.webp 1600w" sizes="(max-width: 900px) 90vw, 720px" width="1600" height="1000" loading="lazy" decoding="async" alt="Documents &amp; search retrieval controls for chunks, overlap, passages and similarity (mockup)" /></a>
+                <a class="x-zoom" href="images/custom-mac-settings-retrieval-1600.webp"><img src="images/custom-mac-settings-retrieval-800.webp" srcset="images/custom-mac-settings-retrieval-800.webp 800w, images/custom-mac-settings-retrieval-1600.webp 1600w" sizes="(max-width: 700px) 90vw, 65vw" width="1600" height="1000" loading="lazy" decoding="async" alt="Documents &amp; search retrieval controls for chunks, overlap, passages and similarity (mockup)" /></a>
                 <figcaption>Memory &amp; knowledge · Interface mockup. Click to explore.</figcaption>
                 <p class="custom-scope">Local storage does not mean every model is local: retrieved context can be sent to your chosen model provider.</p>
               </figure>
             </div>
             <div class="custom-panel" id="custom-panel-agents" role="tabpanel" aria-labelledby="custom-tab-agents" tabindex="0">
               <div class="custom-panel-copy">
-                <p class="x-eye">04 / THE TEAM</p><h3>One conversation.<br /><i>A few extra minds.</i></h3>
+                <p class="x-eye">04 / THE TEAM</p><h3>A little help.<br /><i>A lot more done.</i></h3>
                 <p>Turn on Agent mode for work that takes several steps. JOSIE can search, read, check and hand a focused task to a specialist before answering.</p>
-                <ul class="custom-points">
+                <div class="custom-capabilities"><span>Specialist agents</span><span>Model pools</span><span>Background work</span></div>
+                <details class="custom-more"><summary>Explore the controls <span aria-hidden="true">＋</span></summary><ul class="custom-points">
                   <li><h4>Make specialists your own</h4><p>Give each agent instructions, allowed tools, MCP servers, skills and a step limit. Call one in with @A.name.</p></li>
                   <li><h4>Match the model to the task</h4><p>Build a pool of up to four backend models with capability notes and supported reasoning depths. JOSIE picks per task.</p></li>
                   <li><h4>Keep the conversation moving</h4><p>On the Mac, optional background helpers can continue working while you chat and deliver their reports when done.</p></li>
-                </ul>
+                </ul></details>
               </div>
               <figure class="custom-screen x-shot">
-                <a class="x-zoom" href="images/custom-mac-settings-subagent-models-1600.webp"><img src="images/custom-mac-settings-subagent-models-800.webp" srcset="images/custom-mac-settings-subagent-models-800.webp 800w, images/custom-mac-settings-subagent-models-1600.webp 1600w" sizes="(max-width: 900px) 90vw, 720px" width="1600" height="1000" loading="lazy" decoding="async" alt="Agents settings with a model pool, capability notes and reasoning depth choices (mockup)" /></a>
+                <a class="x-zoom" href="images/custom-mac-settings-subagent-models-1600.webp"><img src="images/custom-mac-settings-subagent-models-800.webp" srcset="images/custom-mac-settings-subagent-models-800.webp 800w, images/custom-mac-settings-subagent-models-1600.webp 1600w" sizes="(max-width: 700px) 90vw, 65vw" width="1600" height="1000" loading="lazy" decoding="async" alt="Agents settings with a model pool, capability notes and reasoning depth choices (mockup)" /></a>
                 <figcaption>Agents &amp; model pools · Interface mockup. Click to explore.</figcaption>
                 <p class="custom-scope">Agent mode and sub-agents are opt-in. Each helper’s tools stay within the access you gave JOSIE.</p>
               </figure>
             </div>
             <div class="custom-panel" id="custom-panel-skills" role="tabpanel" aria-labelledby="custom-tab-skills" tabindex="0">
               <div class="custom-panel-copy">
-                <p class="x-eye">05 / THE WAY IT WORKS</p><h3>Your way of doing things.<br /><i>Worth remembering.</i></h3>
+                <p class="x-eye">05 / THE WAY IT WORKS</p><h3>Your habits.<br /><i>Its instructions.</i></h3>
                 <p>Turn a useful set of instructions into a reusable skill. Keep your preferred writing style, meeting format or explanation approach close at hand.</p>
-                <ul class="custom-points">
+                <div class="custom-capabilities"><span>Markdown skills</span><span>@ mentions</span><span>Custom personas</span></div>
+                <details class="custom-more"><summary>Explore the controls <span aria-hidden="true">＋</span></summary><ul class="custom-points">
                   <li><h4>Edit plain Markdown</h4><p>Add and manage skills in Settings, or edit their Markdown files. Enable only the skills you want JOSIE to use.</p></li>
                   <li><h4>Call one in when it matters</h4><p>Type @S.name to attach a skill to a message. The @. picker helps you find both skills and specialist agents.</p></li>
                   <li><h4>Give JOSIE a personality</h4><p>Choose a persona or write custom instructions, with a voice and orb colour to match. Voice and Chat can have different prompts.</p></li>
-                </ul>
+                </ul></details>
               </div>
               <figure class="custom-screen x-shot">
-                <a class="x-zoom" href="images/custom-mac-settings-skills-1600.webp"><img src="images/custom-mac-settings-skills-800.webp" srcset="images/custom-mac-settings-skills-800.webp 800w, images/custom-mac-settings-skills-1600.webp 1600w" sizes="(max-width: 900px) 90vw, 720px" width="1600" height="1000" loading="lazy" decoding="async" alt="Skills settings with reusable instruction files and individual enable switches (mockup)" /></a>
+                <a class="x-zoom" href="images/custom-mac-settings-skills-1600.webp"><img src="images/custom-mac-settings-skills-800.webp" srcset="images/custom-mac-settings-skills-800.webp 800w, images/custom-mac-settings-skills-1600.webp 1600w" sizes="(max-width: 700px) 90vw, 65vw" width="1600" height="1000" loading="lazy" decoding="async" alt="Skills settings with reusable instruction files and individual enable switches (mockup)" /></a>
                 <figcaption>Skills &amp; personality · Interface mockup. Click to explore.</figcaption>
                 <p class="custom-scope">Skills load on demand. Proposed skill or agent edits are saved only after you confirm them.</p>
               </figure>
             </div>
             <div class="custom-panel" id="custom-panel-api" role="tabpanel" aria-labelledby="custom-tab-api" tabindex="0">
               <div class="custom-panel-copy">
-                <p class="x-eye">06 / BEYOND THE WINDOW</p><h3>A familiar API.<br /><i>Your Mac underneath.</i></h3>
+                <p class="x-eye">06 / BEYOND THE WINDOW</p><h3>Your Mac.<br /><i>Beyond the app.</i></h3>
                 <p>Turn on JOSIE’s optional OpenAI-compatible server to use the Mac’s configured pipeline from other apps, scripts, or the iPhone and iPad preview.</p>
-                <ul class="custom-points">
+                <div class="custom-capabilities"><span>Chat & audio</span><span>Embeddings</span><span>Phone ↔ Mac</span></div>
+                <details class="custom-more"><summary>Explore the controls <span aria-hidden="true">＋</span></summary><ul class="custom-points">
                   <li><h4>More than text</h4><p>Endpoints cover chat completions, speech recognition, speech synthesis, embeddings and realtime sessions.</p></li>
                   <li><h4>Choose where it is reachable</h4><p>The server starts off and binds to localhost when enabled. LAN access and API keys are controlled in Settings.</p></li>
                   <li><h4>Bring the Mac to your phone</h4><p>Add your Mac as a provider on iPhone or iPad over your network or Tailscale. The Mac hosts the models and agent features.</p></li>
-                </ul>
+                </ul></details>
               </div>
               <figure class="custom-screen x-shot">
-                <a class="x-zoom" href="images/custom-mac-settings-api-1600.webp"><img src="images/custom-mac-settings-api-800.webp" srcset="images/custom-mac-settings-api-800.webp 800w, images/custom-mac-settings-api-1600.webp 1600w" sizes="(max-width: 900px) 90vw, 720px" width="1600" height="1000" loading="lazy" decoding="async" alt="API server settings with LAN access, port and a hidden API key (mockup)" /></a>
+                <a class="x-zoom" href="images/custom-mac-settings-api-1600.webp"><img src="images/custom-mac-settings-api-800.webp" srcset="images/custom-mac-settings-api-800.webp 800w, images/custom-mac-settings-api-1600.webp 1600w" sizes="(max-width: 700px) 90vw, 65vw" width="1600" height="1000" loading="lazy" decoding="async" alt="API server settings with LAN access, port and a hidden API key (mockup)" /></a>
                 <figcaption>Your Mac as an endpoint · Interface mockup. Click to explore.</figcaption>
                 <p class="custom-scope">Audio and local embedding requests use supported models already loaded on the Mac; the API does not load them for you.</p>
               </figure>
@@ -1173,10 +1180,10 @@ void main() {
         });
       })();
     </script>
-    <script src="main.js"></script>
-    <script src="redesign.js"></script>
-    <script src="download.js"></script>
-    <script src="customization.js"></script>
+    <script src="main.js?v=18f0a30fb3"></script>
+    <script src="redesign.js?v=70f6228c18"></script>
+    <script src="download.js?v=c798d3a9b6"></script>
+    <script src="customization.js?v=2ad6612072"></script>
     <script async src="https://platform.x.com/widgets.js" charset="utf-8"></script>
     <script>
       /* Liquid Glass refraction: one displacement map per glass size. Pixels near the rounded edge are

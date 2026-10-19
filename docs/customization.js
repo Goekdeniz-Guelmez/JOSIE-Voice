@@ -2,6 +2,11 @@
 (function () {
   var explorer = document.querySelector('.custom-explorer');
   if (!explorer) return;
+  // Keep every panel readable if the component stylesheet did not arrive.
+  if (window.getComputedStyle(explorer).getPropertyValue('--customization-ready').trim() !== '1') return;
+  explorer.querySelectorAll('.custom-more').forEach(function (detail) {
+    detail.addEventListener('toggle', function () { window.dispatchEvent(new Event('resize')); });
+  });
   var tabs = Array.from(explorer.querySelectorAll('[role="tab"]'));
   var panels = tabs.map(function (tab) { return document.getElementById(tab.getAttribute('aria-controls')); });
   if (!tabs.length || panels.some(function (panel) { return !panel; })) return;
