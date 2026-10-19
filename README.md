@@ -232,13 +232,17 @@ Each app is off until you turn it on in Settings → Apple tools, macOS asks you
 | **Sees what you show it** | Turn on the camera and ask about what it sees. Needs an image-capable model. |
 | **Adapts to the room** | Volume follows background noise, with echo cancellation. |
 | **Living sky** | The background follows the real time of day, under Apple's Liquid Glass design. |
+| **Personas** | Talk to JOSIE, JARVIS, HAL 9000 or a character you write, each with its own prompt, voice and orb colour. |
+| **Your iPhone, your Mac** | In the iPhone preview, pick your Mac as the provider, at home or over Tailscale. The call runs on your Mac, and you can show Josie a photo. |
+| **Choose how it hears** | Speech recognition with Qwen3-ASR, NVIDIA Parakeet v3 or Apple's own on-device recognizer. All on your Mac. |
+| **Its own chat prompt** | Write separate instructions for Chat and Voice. Muted in a call? Typed messages still get a text reply. |
 
 ## How it works
 
 JOSIE-Voice is a native Mac app built with SwiftUI and MLX Swift. Everything except the language model runs on your Mac's Apple Silicon:
 
 - **Listening:** Silero VAD notices when you speak, and Smart Turn v3 knows when you've finished.
-- **Speech recognition:** Qwen3-ASR by default, or NVIDIA Parakeet TDT 0.6B v3 (chosen in Settings).
+- **Speech recognition:** Qwen3-ASR by default, or NVIDIA Parakeet TDT 0.6B v3 or Apple's on-device recognizer (chosen in Settings).
 - **Who's speaking:** WeSpeaker, ported to MLX, recognises your voice and any voices you add.
 - **Speech:** Qwen3-TTS by default, with voice cloning and voice design, or Kokoro 82M (chosen in Settings).
 - **The brain:** a language model in [Ollama](https://ollama.com) on your Mac (`qwen3.5:0.8b` by default). In Settings you can switch to any OpenAI-compatible service with your own key, or to Apple Intelligence on macOS 26.
@@ -247,11 +251,15 @@ After setup, everything works offline except the language model, which runs in O
 
 ## Good to know
 
+- **Other models:** in Settings, switch to any OpenAI-compatible service with your own key, or to Apple Intelligence on macOS 26.
 - **Run setup again:** Settings → Setup → Run setup again.
 - **Apple tools:** turn them on one by one in Settings. macOS asks permission the first time each is used.
 - **Optional extras** download only if you want them: voice design (3.1 GB) and word timestamps (1.3 GB).
+- **For tinkerers:** Dashboard → Chat counts tokens per reply. Settings → Developer → Debug overlay shows live latency on the call screen.
 
 ## FAQ
+
+**Can I download it?** Use Download for Mac on the website to download the newest published Mac DMG from [GitHub Releases](https://github.com/Goekdeniz-Guelmez/JOSIE-Voice/releases). If no DMG is published yet, the button links you to the releases page.
 
 **Is it free?** Yes.
 
@@ -281,7 +289,7 @@ JOSIE-Voice comes from the JOSIE family of personality-driven language models by
 
 ## About this repository
 
-This repository hosts the JOSIE-Voice website and visuals; the site lives in [`docs/`](docs/) and is served by GitHub Pages. There are no downloads here, and the source code is private.
+This repository hosts the JOSIE-Voice website and visuals: the site lives in [`docs/`](docs/) and is served by GitHub Pages. The website links to app downloads published in [GitHub Releases](https://github.com/Goekdeniz-Guelmez/JOSIE-Voice/releases); the source code is private.
 
 Built with MLX Swift, Qwen3-ASR, Qwen3-TTS, Parakeet, Kokoro, Silero VAD, Smart Turn v3 and WeSpeaker. Ollama is a separate app by its own developers.
 

@@ -11,8 +11,8 @@
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400&display=swap"
     />
-    <link rel="stylesheet" href="styles.css" />
-    <link rel="stylesheet" href="hero.css" />
+    <link rel="stylesheet" href="styles.css?v=9010a03f9f" />
+    <link rel="stylesheet" href="hero.css?v=f803c00533" />
     <style>
       :root, :root[data-theme] {
         color-scheme: dark;
@@ -29,7 +29,7 @@
       body { font-family: var(--x-sans); }
       /* sky: a fixed layer at z 0 with a CSS gradient under the canvas, content raised to z 1 */
       #sky {
-        --sky-top: rgb(4 9 28); --sky-mid: rgb(10 22 54); --sky-hor: rgb(24 36 82);
+        --sky-top: rgb(52 120 205); --sky-mid: rgb(130 182 236); --sky-hor: rgb(214 233 251);
         position: fixed; top: 0; right: 0; bottom: 0; left: 0; inset: 0; z-index: 0; pointer-events: none; overflow: hidden;
         background-color: #0b1a3a;
         background-image: linear-gradient(180deg, var(--sky-top) 0%, var(--sky-mid) 55%, var(--sky-hor) 100%);
@@ -259,8 +259,12 @@
         .x-btn, .x-clock button { transition: none; }
       }
     </style>
+    <link rel="stylesheet" href="redesign.css?v=15735a5ff8" />
+    <link rel="stylesheet" href="customization.css?v=6e22603acb" />
+    <meta name="description" content="Meet JOSIE. A personal voice and chat assistant for your Mac. Natural conversation, real actions, and on-device voice. Free for Apple Silicon." />
   </head>
   <body>
+    <a class="skip-link" href="#main-content">Skip to content</a>
     <svg id="x-lg-defs" width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
     </svg>
     <div id="sky" aria-hidden="true"><canvas></canvas></div>
@@ -268,28 +272,52 @@
       <header class="x-nav x-glass">
         <a class="x-brand" href="#top"><img src="logo.png" alt="" />JOSIE-Voice</a>
         <nav aria-label="Sections">
-          <a href="#features">Features</a><a href="#see">See it</a><a href="#actions">Actions</a><a href="#gallery">Screenshots</a><a href="#faq">FAQ</a>
+          <a href="#see">Experience</a><a href="#pipeline">How it works</a><a href="#customize">Make it yours</a><a href="#gallery">Inside JOSIE</a><a href="#faq">FAQ</a>
         </nav>
+        <a class="x-btn x-btn--primary x-btn--sm" data-download href="https://github.com/Goekdeniz-Guelmez/JOSIE-Voice/releases">Download <span aria-hidden="true">↓</span></a>
       </header>
 
-      <main class="main">
-        <section class="x-hero">
-          <div class="x-orb-slot"><div class="x-orb x-orb--hero" role="img" aria-label="The JOSIE orb"><canvas class="x-orb__gl" aria-hidden="true"></canvas><img src="logo.png" alt="" /></div></div>
-          <p class="x-eye">By Gökdeniz Gülmez · Free for Mac</p>
-          <h1 class="x-h" data-scroll data-scroll-speed="0.12"><b>Talk to</b><i>your Mac.</i></h1>
-          <p class="x-lede">JOSIE-Voice is a voice and chat assistant that listens, knows who's speaking, talks back with a natural voice, and takes real action in your Reminders, Calendar, Maps and Messages. Hearing, voice recognition and speech all run on your Mac, so your voice never leaves it.</p>
-          <div class="x-btns">
-            <a class="x-btn x-glass" href="#see">See it in action</a>
+      <main class="main" id="main-content">
+        <section class="x-hero" aria-labelledby="hero-title">
+          <div class="hero-copy">
+            <p class="x-eye hero-enter"><span class="status-dot"></span> A little more human. A lot more personal.</p>
+            <h1 class="x-h hero-enter" id="hero-title">Your Mac.<br />With a <i>voice.</i></h1>
+            <p class="x-lede hero-enter">Meet JOSIE. A voice assistant that feels like a conversation. Speak naturally, think out loud, and let the little things take care of themselves.</p>
+            <div class="x-btns hero-enter">
+              <a class="x-btn x-btn--primary" data-download href="https://github.com/Goekdeniz-Guelmez/JOSIE-Voice/releases">Download for Mac <span aria-hidden="true">↓</span></a>
+              <a class="x-btn hero-demo" href="#see"><span class="play-icon" aria-hidden="true">▶</span> Watch the demo</a>
+            </div>
+            <p class="hero-spec hero-enter">Free to use <span>·</span> Apple Silicon <span>·</span> macOS 14+</p>
           </div>
-          <p class="x-meta x-glass">Version 2.0 · macOS 14 Sonoma or newer · Apple Silicon (M1 or later) · about 6 GB of downloads on first launch</p>
+          <div class="hero-stage" aria-label="JOSIE's living orb">
+            <div class="orb-orbit orbit-one" aria-hidden="true"></div><div class="orb-orbit orbit-two" aria-hidden="true"></div>
+            <span class="stage-label stage-label--top"><span class="status-dot"></span> A presence, not just an app</span>
+            <div class="x-orb-slot"><div class="x-orb x-orb--hero" role="img" aria-label="The JOSIE orb"><canvas class="x-orb__gl" aria-hidden="true"></canvas><img src="logo.png" alt="" /></div></div>
+            <div class="conversation-card"><span class="conversation-who">YOU, NATURALLY</span><p id="conversation-prompt">“Remind me to slow down at seven.”</p><span class="conversation-reply"><span aria-hidden="true">✦</span> Consider it done.</span></div>
+            <span class="stage-label stage-label--bottom"><span class="orb-pointer-hint">MOVE YOUR POINTER. STIR THE SMOKE.</span><span class="orb-touch-hint">ON-DEVICE VOICE. IN YOUR WORLD.</span></span>
+          </div>
+          <div class="hero-bottom"><span>Built for your Mac. Designed around you.</span><a href="#see">A closer look <span aria-hidden="true">↓</span></a><span class="hero-version">JOSIE-VOICE / V2.0</span></div>
         </section>
+        <div class="principles-strip" aria-label="At a glance"><span><i>01</i> Your voice stays on your Mac</span><span><i>02</i> No account. Just you.</span><span><i>03</i> Real conversation. Real actions.</span></div>
 
         <section class="x-sec" id="see">
           <p class="x-eye x-reveal">01 · Two ways to use it</p>
-          <h2 class="x-h x-reveal"><b>Talk or</b><i>type.</i></h2>
+          <h2 class="x-h x-reveal"><b>A conversation.</b><i>Not a command line.</i></h2>
           <p class="x-lede x-reveal">Switch between Voice and Chat with one tap. It's the same conversation either way: start a call, hang up, keep typing, and JOSIE remembers it all.</p>
+          <div class="demo-feature x-reveal" aria-labelledby="demo-title">
+            <div class="demo-copy">
+              <p class="x-eye"><span class="status-dot"></span> THE REAL THING</p>
+              <h3 id="demo-title">Six minutes.<br /><i>One uninterrupted call.</i></h3>
+              <p>A real JOSIE-Voice session on a MacBook Pro M4 Pro. Watch a conversation turn into action, with more than 100 tool calls along the way.</p>
+              <div class="demo-facts"><span>No cuts</span><span>No speedups</span><span>Real tool calls</span></div>
+              <p class="demo-models">Qwen-3 0.6B TTS / ASR · 4-bit<br />DeepSeek 4.1 Flash via Ollama Cloud</p>
+              <a class="x-link demo-direct" href="https://x.com/ActuallyIsaak/status/2111818137947852897" target="_blank" rel="noopener">Watch the full demo on X ↗</a>
+            </div>
+            <div class="demo-embed">
+              <blockquote class="twitter-tweet" data-theme="dark" data-dnt="true" data-conversation="none"><p lang="en" dir="ltr">Here is a 6 minute call within JOSIE-Voice on a MacBook Pro M4 Pro using: Qwen-3 0.6B TTS/ASR 4bit and Deepseek 4.1 Flash on ollama cloud. it does 100+ Tool calls with agentic work in the real world. No cuts or speedup's. https://t.co/xlkTtYk3oQ</p>&mdash; Gökdeniz Gülmez (@ActuallyIsaak) <a href="https://x.com/ActuallyIsaak/status/2111818137947852897?ref_src=twsrc%5Etfw">October 18, 2026</a></blockquote>
+            </div>
+          </div>
           <div class="x-grid x-grid--videos x-grid--showcase">
-            <figure class="x-shot x-reveal"><video autoplay muted loop playsinline preload="metadata" poster="videos/josie-mac-call-poster.jpg" aria-label="Voice call on the Mac: the orb moves from listening to thinking, a tool call and speaking while the new turn and JOSIE's reply stream into the transcript"><source src="videos/josie-mac-call.webm" type="video/webm" /><source src="videos/josie-mac-call.mp4" type="video/mp4" /></video><figcaption>A voice call with the live transcript. (mockup)</figcaption></figure>
             <figure class="x-shot x-reveal"><video autoplay muted loop playsinline preload="metadata" poster="videos/josie-transcript-morph-poster.jpg" aria-label="Turning the transcript on and off during a call: the orb glides up and shrinks, the controls grow into a glass capsule and the bubbles rise in, then it folds back"><source src="videos/josie-transcript-morph.webm" type="video/webm" /><source src="videos/josie-transcript-morph.mp4" type="video/mp4" /></video><figcaption>Show or hide the transcript mid-call. (mockup)</figcaption></figure>
             <figure class="x-shot x-reveal"><video autoplay muted loop playsinline preload="metadata" poster="videos/josie-sky-day-night-poster.jpg" aria-label="The sky behind the orb running through one day: afternoon, golden hour, a starry night and dawn"><source src="videos/josie-sky-day-night.webm" type="video/webm" /><source src="videos/josie-sky-day-night.mp4" type="video/mp4" /></video><figcaption>The sky follows the time of day, stars at night. (mockup)</figcaption></figure>
           </div>
@@ -298,7 +326,7 @@
 
         <section class="x-sec" id="actions">
           <p class="x-eye x-reveal">02 · Gets things done</p>
-          <h2 class="x-h x-reveal"><b>Not just</b><i>talk.</i></h2>
+          <h2 class="x-h x-reveal"><b>Less to do.</b><i>More to your day.</i></h2>
           <p class="x-lede x-reveal">JOSIE works with the Apple apps you already use. Ask out loud and it really happens: the reminder is in Reminders, the event is in your calendar, the message is waiting in Messages.</p>
           <div class="x-act">
             <ul class="x-act-list">
@@ -314,19 +342,19 @@
 
         <section class="x-sec" id="features">
           <p class="x-eye x-reveal">03 · Features</p>
-          <h2 class="x-h x-reveal"><b>What it</b><i>can do.</i></h2>
+          <h2 class="x-h x-reveal"><b>Small presence.</b><i>So many possibilities.</i></h2>
           <div class="x-grid">
             <article class="x-card x-glass x-reveal"><span class="x-num">01</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v10H9l-5 4z"/><path d="M8 10h.01M12 10h.01M16 10h.01"/></svg><h3>Real conversation</h3><p>Knows when you've finished talking. Interrupt Josie just by speaking.</p></article>
             <article class="x-card x-glass x-reveal"><span class="x-num">02</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12h2M7 8v8M11 5v14M15 9v6M19 7v10"/></svg><h3>Knows your voice</h3><p>Learns you from three short phrases and tells people apart.</p></article>
             <article class="x-card x-glass x-reveal"><span class="x-num">03</span><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg><h3>Voices you choose</h3><p>Pick a preset, clone a voice from a short recording, or describe a new one in words.</p></article>
-            <article class="x-card x-glass x-reveal"><span class="x-num">04</span><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg><h3>Private by design</h3><p>Hearing, voice recognition and speech run on your Mac. Your data stays on your Mac. No account.</p></article>
+            <article class="x-card x-glass x-reveal"><span class="x-num">04</span><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg><h3>Private by design</h3><p>Hearing, voice recognition and speech run on your Mac. Choose a local language model or connect your preferred provider.</p></article>
             <article class="x-card x-glass x-reveal"><span class="x-num">05</span><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="5" width="16" height="15" rx="2"/><path d="M4 10h16M9 3v4M15 3v4"/></svg><h3>Takes real action</h3><p>Adds reminders and events, finds places in Maps and drafts Messages (you tap Send). Each is off until you turn it on.</p></article>
             <article class="x-card x-glass x-reveal"><span class="x-num">06</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg><h3>Sees what you show it</h3><p>Turn on the camera and ask about what it sees. Needs an image-capable model.</p></article>
             <article class="x-card x-glass x-reveal"><span class="x-num">07</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9z"/><path d="M16 9a4 4 0 0 1 0 6M19 6a8 8 0 0 1 0 12"/></svg><h3>Adapts to the room</h3><p>Volume follows background noise, with echo cancellation.</p></article>
             <article class="x-card x-glass x-reveal"><span class="x-num">08</span><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M5 5l1.5 1.5M17.5 17.5 19 19M5 19l1.5-1.5M17.5 6.5 19 5"/></svg><h3>Living sky</h3><p>The background follows the real time of day, under Apple's Liquid Glass design.</p></article>
             <article class="x-card x-glass x-reveal"><span class="x-num">09</span><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg><h3>Personas</h3><p>Talk to JOSIE, JARVIS, HAL 9000 or a character you write, each with its own prompt, voice and orb colour.</p></article>
             <article class="x-card x-glass x-reveal"><span class="x-num">10</span><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="7" y="2.5" width="10" height="19" rx="2.5"/><path d="M11 18.5h2"/></svg><h3>Your iPhone, your Mac</h3><p>In the iPhone preview, pick your Mac as the provider, at home or over Tailscale. The call runs on your Mac, and you can show Josie a photo.</p></article>
-            <article class="x-card x-glass x-reveal"><span class="x-num">11</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12h2M7 9v6M11 6v12M15 9v6M19 11v2"/></svg><h3>Choose how it hears</h3><p>Speech recognition with Qwen3-ASR, NVIDIA Parakeet v3 or Apple's own on-device recognizer. All on your Mac.</p></article>
+            <article class="x-card x-glass x-reveal"><span class="x-num">11</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12h2M7 9v6M11 6v12M15 9v6M19 11v2"/></svg><h3>Choose how it hears</h3><p>Speech recognition with Qwen3-ASR, NVIDIA Parakeet, Voxtral Realtime or Apple’s on-device recognizer. All on your Mac.</p></article>
             <article class="x-card x-glass x-reveal"><span class="x-num">12</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v10H9l-5 4z"/><path d="M8 9h8M8 12h5"/></svg><h3>Its own chat prompt</h3><p>Write separate instructions for Chat and Voice. Muted in a call? Typed messages still get a text reply.</p></article>
           </div>
           <div class="x-grid x-grid--pair x-grid--feat">
@@ -336,10 +364,167 @@
           </div>
         </section>
 
+        <section class="x-sec pipeline-section" id="pipeline" aria-labelledby="pipeline-title">
+          <p class="x-eye x-reveal">04 · Under the hood</p>
+          <h2 class="x-h x-reveal" id="pipeline-title"><b>From your voice.</b><i>Back to you.</i></h2>
+          <p class="x-lede x-reveal">A few carefully connected stages make a conversation feel natural. Here’s how the Mac listens, works out what comes next, and speaks back.</p>
+          <ol class="pipeline-stages x-reveal">
+            <li><span>01 / LISTEN</span><h3>Find the words.</h3><p>Echo handling separates playback from your voice. Voice activity and turn detection decide when to listen, then speech recognition turns audio into text.</p></li>
+            <li><span>02 / THINK &amp; ACT</span><h3>Work through the request.</h3><p>Your chosen language model answers, retrieves context, or uses enabled tools. Agent mode can take several steps before returning a reply.</p></li>
+            <li><span>03 / SPEAK</span><h3>Keep it flowing.</h3><p>Text is split into speakable chunks and synthesized into audio. When you interrupt, JOSIE can stop playback and keep the conversation in step.</p></li>
+          </ol>
+          <figure class="pipeline-diagram pipeline-diagram--main x-shot x-reveal">
+            <div class="pipeline-diagram-bar"><span>THE MAC VOICE PIPELINE</span><a href="diagrams/02-mac-voice-pipeline.png" target="_blank" rel="noopener">Open full size ↗</a></div>
+            <a class="x-zoom" href="diagrams/02-mac-voice-pipeline.png"><img src="diagrams/02-mac-voice-pipeline-preview.webp" width="1400" height="807" loading="lazy" decoding="async" alt="Excalidraw Mac voice pipeline: microphone and echo gate, voice and turn detection, speech recognition, language model and tools, speech synthesis and playback, with a return path for interruptions" /></a>
+            <figcaption>The Mac call path, with echo handling, speaker recognition and interruption control. Your language model can run locally or through your chosen external endpoint.</figcaption>
+          </figure>
+          <div class="pipeline-details">
+            <details class="pipeline-detail x-reveal">
+              <summary><span><small>TOOLS &amp; CONTEXT</small>How a request reaches the right tool</span><span class="pipeline-expand" aria-hidden="true">＋</span></summary>
+              <p>The tool registry connects the model to built-in tools, documents, Apple apps and MCP servers. Your enabled tools and access depths determine what is available; actions that require confirmation wait for your tap.</p>
+              <figure class="pipeline-diagram x-shot"><a class="x-zoom" href="diagrams/04-tools-architecture.png"><img src="diagrams/04-tools-architecture-preview.webp" width="1400" height="1299" loading="lazy" decoding="async" alt="Excalidraw tool architecture: callers feed a registry filtered by access policy, which routes to built-in tools, knowledge search, Apple apps and MCP servers, with confirmation handling" /></a><figcaption>Tool routing, retrieval and access policy. <a href="diagrams/04-tools-architecture.png" target="_blank" rel="noopener">Open full size ↗</a></figcaption></figure>
+            </details>
+            <details class="pipeline-detail x-reveal">
+              <summary><span><small>IPHONE ↔ MAC</small>A call that reaches back to your Mac</span><span class="pipeline-expand" aria-hidden="true">＋</span></summary>
+              <p>In the iPhone and iPad preview, your Mac can act as the voice provider. Audio travels to its pipeline and the reply streams back, with tool calls and interruption events kept in the same session.</p>
+              <figure class="pipeline-diagram x-shot"><a class="x-zoom" href="diagrams/06-iphone-mac-live-sequence.png"><img src="diagrams/06-iphone-mac-live-sequence-preview.webp" width="1400" height="1687" loading="lazy" decoding="async" alt="Excalidraw sequence diagram showing phone-to-Mac model discovery, connection setup, streamed audio, tool results, interruption, image input and hang-up" /></a><figcaption>The phone-to-Mac call sequence over your network or Tailscale. <a href="diagrams/06-iphone-mac-live-sequence.png" target="_blank" rel="noopener">Open full size ↗</a></figcaption></figure>
+            </details>
+          </div>
+          <p class="x-note x-reveal">Original Excalidraw architecture sketches. Model examples and limits reflect the diagram revision; available engines and Agent mode settings are covered below.</p>
+        </section>
+
+        <section class="x-sec customization" id="customize" aria-labelledby="customize-title">
+          <p class="x-eye x-reveal">05 · Make it yours</p>
+          <h2 class="x-h x-reveal" id="customize-title"><b>Make JOSIE</b><i>your own.</i></h2>
+          <p class="x-lede x-reveal">Choose what powers JOSIE, what it can access, and how it works with you.</p>
+          <div class="custom-explorer x-reveal">
+            <div class="custom-tabs" role="tablist" aria-label="Explore JOSIE customization">
+              <button type="button" role="tab" id="custom-tab-models" aria-controls="custom-panel-models" aria-selected="true" tabindex="0"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="5" width="14" height="14" rx="3"/><path d="M9 9h6v6H9zM9 2v3m6-3v3M9 19v3m6-3v3M2 9h3m-3 6h3m14-6h3m-3 6h3"/></svg><span>Models</span></button>
+              <button type="button" role="tab" id="custom-tab-tools" aria-controls="custom-panel-tools" aria-selected="false" tabindex="-1"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m14 6 4 4M5 19l8-8M15 3a5 5 0 0 0-5 6L3 16a3 3 0 0 0 4 4l7-7a5 5 0 0 0 7-6l-4 3-3-3 3-4z"/></svg><span>Tools & MCP</span></button>
+              <button type="button" role="tab" id="custom-tab-memory" aria-controls="custom-panel-memory" aria-selected="false" tabindex="-1"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 4h8a3 3 0 0 1 3 3v13l-7-4-7 4V7a3 3 0 0 1 3-3zM9 8h6m-6 4h4"/></svg><span>Memory</span></button>
+              <button type="button" role="tab" id="custom-tab-agents" aria-controls="custom-panel-agents" aria-selected="false" tabindex="-1"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="8" cy="8" r="3"/><path d="M2 20v-2a6 6 0 0 1 12 0v2M16 5a3 3 0 0 1 0 6m2 3a5 5 0 0 1 4 5"/></svg><span>Agents</span></button>
+              <button type="button" role="tab" id="custom-tab-skills" aria-controls="custom-panel-skills" aria-selected="false" tabindex="-1"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 2.5 6.5L21 12l-6.5 2.5L12 21l-2.5-6.5L3 12l6.5-2.5z"/></svg><span>Skills</span></button>
+              <button type="button" role="tab" id="custom-tab-api" aria-controls="custom-panel-api" aria-selected="false" tabindex="-1"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m8 6-6 6 6 6m8-12 6 6-6 6M14 3l-4 18"/></svg><span>API</span></button>
+            </div>
+            <div class="custom-panel" id="custom-panel-models" role="tabpanel" aria-labelledby="custom-tab-models" tabindex="0">
+              <div class="custom-panel-copy">
+                <p class="x-eye">01 / THE BRAIN</p><h3>A mind of<br /><i>your choosing.</i></h3>
+                <p>Keep the language model on your Mac with Ollama, connect an OpenAI-compatible service, or choose Apple Intelligence. Set the endpoint and model that fit the way you work.</p>
+                <div class="custom-capabilities"><span>Local or cloud</span><span>Custom endpoints</span><span>Speech engines</span></div>
+                <details class="custom-more"><summary>Explore the controls <span aria-hidden="true">＋</span></summary><ul class="custom-points">
+                  <li><h4>Pick your backend</h4><p>Choose an address and model, including a custom model ID. Image understanding depends on the model you select.</p></li>
+                  <li><h4>Tune how it thinks</h4><p>Set Full or Light prompts separately for Voice and Chat, with reasoning controls where the backend supports them.</p></li>
+                  <li><h4>Choose how it hears and speaks</h4><p>Choose voices from Qwen3-TTS, Kokoro, Pocket TTS and more; recognition from Qwen3-ASR, Parakeet, Voxtral Realtime or Apple. Set supported sizes and 4-, 6- or 8-bit precisions on your Mac.</p></li>
+                </ul></details>
+              </div>
+              <figure class="custom-screen x-shot">
+                <a class="x-zoom" href="images/custom-mac-settings-models-1600.webp"><img src="images/custom-mac-settings-models-800.webp" srcset="images/custom-mac-settings-models-800.webp 800w, images/custom-mac-settings-models-1600.webp 1600w" sizes="(max-width: 700px) 90vw, 65vw" width="1600" height="1000" loading="lazy" decoding="async" alt="Models &amp; endpoints showing backend, prompt size and Agent mode controls (mockup)" /></a>
+                <figcaption>Models &amp; endpoints · Interface mockup. Click to explore.</figcaption>
+                <p class="custom-scope">Tools require a tool-calling model. Apple Intelligence does not support dynamic tools.</p>
+              </figure>
+            </div>
+            <div class="custom-panel" id="custom-panel-tools" role="tabpanel" aria-labelledby="custom-tab-tools" tabindex="0">
+              <div class="custom-panel-copy">
+                <p class="x-eye">02 / THE CONNECTIONS</p><h3>Connected.<br /><i>On your terms.</i></h3>
+                <p>Connect the Apple apps you use, turn on web search, and add MCP servers for tools beyond the built-in collection.</p>
+                <div class="custom-capabilities"><span>Apple apps</span><span>Access controls</span><span>MCP servers</span></div>
+                <details class="custom-more"><summary>Explore the controls <span aria-hidden="true">＋</span></summary><ul class="custom-points">
+                  <li><h4>Choose what is available</h4><p>Enable tool groups individually. Apple app integrations start off until you choose to enable them.</p></li>
+                  <li><h4>Set the depth of access</h4><p>Use Read, Add or Full where supported: from looking things up to creating, editing or deleting.</p></li>
+                  <li><h4>Extend with MCP</h4><p>Bring additional tools into JOSIE through your configured MCP servers. Specialist agents can use a narrower selection.</p></li>
+                </ul></details>
+              </div>
+              <figure class="custom-screen x-shot">
+                <a class="x-zoom" href="images/custom-mac-settings-tools-1600.webp"><img src="images/custom-mac-settings-tools-800.webp" srcset="images/custom-mac-settings-tools-800.webp 800w, images/custom-mac-settings-tools-1600.webp 1600w" sizes="(max-width: 700px) 90vw, 65vw" width="1600" height="1000" loading="lazy" decoding="async" alt="Tools &amp; MCP with built-in switches and Apple app access depth controls (mockup)" /></a>
+                <figcaption>Tools &amp; MCP · Interface mockup. Click to explore.</figcaption>
+                <p class="custom-scope">Actions such as sending mail or editing calendar entries pause for an on-screen confirmation.</p>
+              </figure>
+            </div>
+            <div class="custom-panel" id="custom-panel-memory" role="tabpanel" aria-labelledby="custom-tab-memory" tabindex="0">
+              <div class="custom-panel-copy">
+                <p class="x-eye">03 / THE CONTEXT</p><h3>Pick up<br /><i>the thread.</i></h3>
+                <p>Let JOSIE remember useful facts, find something in an earlier conversation, or pull the right passage from your documents.</p>
+                <div class="custom-capabilities"><span>Personal memory</span><span>Document search</span><span>Past conversations</span></div>
+                <details class="custom-more"><summary>Explore the controls <span aria-hidden="true">＋</span></summary><ul class="custom-points">
+                  <li><h4>Remember, retrieve, forget</h4><p>Control the Memory tool and its access depth. Ask JOSIE to remember a fact, recall it later, or forget it.</p></li>
+                  <li><h4>Search your own context</h4><p>Enable document search and past-conversation search independently, with optional automatic context retrieval.</p></li>
+                  <li><h4>Tune what comes back</h4><p>Adjust chunk size, overlap, passage counts, recent turns and similarity thresholds in Documents &amp; search.</p></li>
+                </ul></details>
+              </div>
+              <figure class="custom-screen x-shot">
+                <a class="x-zoom" href="images/custom-mac-settings-retrieval-1600.webp"><img src="images/custom-mac-settings-retrieval-800.webp" srcset="images/custom-mac-settings-retrieval-800.webp 800w, images/custom-mac-settings-retrieval-1600.webp 1600w" sizes="(max-width: 700px) 90vw, 65vw" width="1600" height="1000" loading="lazy" decoding="async" alt="Documents &amp; search retrieval controls for chunks, overlap, passages and similarity (mockup)" /></a>
+                <figcaption>Memory &amp; knowledge · Interface mockup. Click to explore.</figcaption>
+                <p class="custom-scope">Local storage does not mean every model is local: retrieved context can be sent to your chosen model provider.</p>
+              </figure>
+            </div>
+            <div class="custom-panel" id="custom-panel-agents" role="tabpanel" aria-labelledby="custom-tab-agents" tabindex="0">
+              <div class="custom-panel-copy">
+                <p class="x-eye">04 / THE TEAM</p><h3>A little help.<br /><i>A lot more done.</i></h3>
+                <p>Turn on Agent mode for work that takes several steps. JOSIE can search, read, check and hand a focused task to a specialist before answering.</p>
+                <div class="custom-capabilities"><span>Specialist agents</span><span>Model pools</span><span>Background work</span></div>
+                <details class="custom-more"><summary>Explore the controls <span aria-hidden="true">＋</span></summary><ul class="custom-points">
+                  <li><h4>Make specialists your own</h4><p>Give each agent instructions, allowed tools, MCP servers, skills and a step limit. Call one in with @A.name.</p></li>
+                  <li><h4>Match the model to the task</h4><p>Build a pool of up to four backend models with capability notes and supported reasoning depths. JOSIE picks per task.</p></li>
+                  <li><h4>Keep the conversation moving</h4><p>On the Mac, optional background helpers can continue working while you chat and deliver their reports when done.</p></li>
+                </ul></details>
+              </div>
+              <figure class="custom-screen x-shot">
+                <a class="x-zoom" href="images/custom-mac-settings-subagent-models-1600.webp"><img src="images/custom-mac-settings-subagent-models-800.webp" srcset="images/custom-mac-settings-subagent-models-800.webp 800w, images/custom-mac-settings-subagent-models-1600.webp 1600w" sizes="(max-width: 700px) 90vw, 65vw" width="1600" height="1000" loading="lazy" decoding="async" alt="Agents settings with a model pool, capability notes and reasoning depth choices (mockup)" /></a>
+                <figcaption>Agents &amp; model pools · Interface mockup. Click to explore.</figcaption>
+                <p class="custom-scope">Agent mode and sub-agents are opt-in. Each helper’s tools stay within the access you gave JOSIE.</p>
+              </figure>
+            </div>
+            <div class="custom-panel" id="custom-panel-skills" role="tabpanel" aria-labelledby="custom-tab-skills" tabindex="0">
+              <div class="custom-panel-copy">
+                <p class="x-eye">05 / THE WAY IT WORKS</p><h3>Your habits.<br /><i>Its instructions.</i></h3>
+                <p>Turn a useful set of instructions into a reusable skill. Keep your preferred writing style, meeting format or explanation approach close at hand.</p>
+                <div class="custom-capabilities"><span>Markdown skills</span><span>@ mentions</span><span>Custom personas</span></div>
+                <details class="custom-more"><summary>Explore the controls <span aria-hidden="true">＋</span></summary><ul class="custom-points">
+                  <li><h4>Edit plain Markdown</h4><p>Add and manage skills in Settings, or edit their Markdown files. Enable only the skills you want JOSIE to use.</p></li>
+                  <li><h4>Call one in when it matters</h4><p>Type @S.name to attach a skill to a message. The @. picker helps you find both skills and specialist agents.</p></li>
+                  <li><h4>Give JOSIE a personality</h4><p>Choose a persona or write custom instructions, with a voice and orb colour to match. Voice and Chat can have different prompts.</p></li>
+                </ul></details>
+              </div>
+              <figure class="custom-screen x-shot">
+                <a class="x-zoom" href="images/custom-mac-settings-skills-1600.webp"><img src="images/custom-mac-settings-skills-800.webp" srcset="images/custom-mac-settings-skills-800.webp 800w, images/custom-mac-settings-skills-1600.webp 1600w" sizes="(max-width: 700px) 90vw, 65vw" width="1600" height="1000" loading="lazy" decoding="async" alt="Skills settings with reusable instruction files and individual enable switches (mockup)" /></a>
+                <figcaption>Skills &amp; personality · Interface mockup. Click to explore.</figcaption>
+                <p class="custom-scope">Skills load on demand. Proposed skill or agent edits are saved only after you confirm them.</p>
+              </figure>
+            </div>
+            <div class="custom-panel" id="custom-panel-api" role="tabpanel" aria-labelledby="custom-tab-api" tabindex="0">
+              <div class="custom-panel-copy">
+                <p class="x-eye">06 / BEYOND THE WINDOW</p><h3>Your Mac.<br /><i>Beyond the app.</i></h3>
+                <p>Turn on JOSIE’s optional OpenAI-compatible server to use the Mac’s configured pipeline from other apps, scripts, or the iPhone and iPad preview.</p>
+                <div class="custom-capabilities"><span>Chat & audio</span><span>Embeddings</span><span>Phone ↔ Mac</span></div>
+                <details class="custom-more"><summary>Explore the controls <span aria-hidden="true">＋</span></summary><ul class="custom-points">
+                  <li><h4>More than text</h4><p>Endpoints cover chat completions, speech recognition, speech synthesis, embeddings and realtime sessions.</p></li>
+                  <li><h4>Choose where it is reachable</h4><p>The server starts off and binds to localhost when enabled. LAN access and API keys are controlled in Settings.</p></li>
+                  <li><h4>Bring the Mac to your phone</h4><p>Add your Mac as a provider on iPhone or iPad over your network or Tailscale. The Mac hosts the models and agent features.</p></li>
+                </ul></details>
+              </div>
+              <figure class="custom-screen x-shot">
+                <a class="x-zoom" href="images/custom-mac-settings-api-1600.webp"><img src="images/custom-mac-settings-api-800.webp" srcset="images/custom-mac-settings-api-800.webp 800w, images/custom-mac-settings-api-1600.webp 1600w" sizes="(max-width: 700px) 90vw, 65vw" width="1600" height="1000" loading="lazy" decoding="async" alt="API server settings with LAN access, port and a hidden API key (mockup)" /></a>
+                <figcaption>Your Mac as an endpoint · Interface mockup. Click to explore.</figcaption>
+                <p class="custom-scope">Audio and local embedding requests use supported models already loaded on the Mac; the API does not load them for you.</p>
+              </figure>
+            </div>
+          </div>
+          <div class="agent-story">
+            <div class="agent-story-heading x-reveal"><div><p class="x-eye">THE WORK, IN VIEW</p><h3>Follow the steps.<br /><i>Stay in the conversation.</i></h3></div><p>A tool activity pill shows what JOSIE is doing. Expand it to inspect tool results, specialist runs and reasoning when enabled. Set a step limit, answer confirmation cards, or stop a run.</p></div>
+            <div class="agent-flow x-reveal" aria-label="Example agent workflow"><span><small>YOU</small>Ask a question</span><b aria-hidden="true">→</b><span><small>JOSIE + SPECIALISTS</small>Search · read · check</span><b aria-hidden="true">→</b><span><small>BACK TO YOU</small>An answer with the work behind it</span></div>
+            <div class="x-grid x-grid--pair agent-story-shots">
+              <figure class="x-shot x-reveal"><a class="x-zoom" href="images/custom-mac-chat-agent-steps-1600.webp"><img src="images/custom-mac-chat-agent-steps-800.webp" srcset="images/custom-mac-chat-agent-steps-800.webp 800w, images/custom-mac-chat-agent-steps-1600.webp 1600w" sizes="(max-width: 760px) 90vw, 600px" width="1600" height="1000" loading="lazy" decoding="async" alt="A completed agent reply with expanded tool steps and a nested researcher run (mockup)" /></a><figcaption>Open the activity pill to see the work behind the reply. (mockup)</figcaption></figure>
+              <figure class="x-shot x-reveal"><a class="x-zoom" href="images/custom-mac-mention-popover-1600.webp"><img src="images/custom-mac-mention-popover-800.webp" srcset="images/custom-mac-mention-popover-800.webp 800w, images/custom-mac-mention-popover-1600.webp 1600w" sizes="(max-width: 760px) 90vw, 600px" width="1600" height="1000" loading="lazy" decoding="async" alt="The chat mention picker showing reusable skills and specialist agents (mockup)" /></a><figcaption>Type @. to bring a skill or specialist into the conversation. (mockup)</figcaption></figure>
+            </div>
+          </div>
+        </section>
+
         <section class="x-sec" id="gallery">
-          <p class="x-eye x-reveal">04 · Screenshots</p>
-          <h2 class="x-h x-reveal"><b>Every</b><i>screen.</i></h2>
+          <p class="x-eye x-reveal">06 · Screenshots</p>
+          <h2 class="x-h x-reveal"><b>Thoughtful,</b><i>inside and out.</i></h2>
           <p class="x-lede x-reveal">The Mac app, plus a preview of the iPhone app. Click any picture to see it larger.</p>
+          <div class="gallery-preview x-reveal"><a class="x-zoom" href="images/mac-chat-1600.webp"><img src="images/mac-chat-1600.webp" alt="JOSIE chat interface with a conversation and document attachment (mockup)" width="1600" height="1000" loading="lazy" /></a><div><span class="x-eye">YOUR SPACE TO THINK</span><h3>A familiar feeling.<br /><i>A new kind of company.</i></h3><p>Voice, chat, your library, and a voice studio. Everything has its place.</p><span class="x-note">Interface preview · Mockup</span></div></div>
+          <details class="gallery-archive"><summary>Explore every screen <span aria-hidden="true">＋</span></summary><div class="gallery-archive-content">
           <nav class="x-gnav x-reveal" aria-label="Screenshot groups"><a class="x-chip x-glass" href="#g-mac">Mac</a><a class="x-chip x-glass" href="#g-mac-calls">Calls &amp; chat</a><a class="x-chip x-glass" href="#g-mac-library">Library &amp; embeddings</a><a class="x-chip x-glass" href="#g-mac-voice">Voice studio &amp; Voice ID</a><a class="x-chip x-glass" href="#g-mac-dashboard">Dashboard</a><a class="x-chip x-glass" href="#g-mac-menus">Menu bar &amp; API server</a><a class="x-chip x-glass" href="#g-mac-settings">Settings</a><a class="x-chip x-glass" href="#g-mac-onboarding">Onboarding</a><a class="x-chip x-glass" href="#g-iphone">iPhone</a></nav>
           <h3 class="x-gh x-reveal" id="g-mac">Mac</h3>
           <h4 class="x-gsub x-reveal" id="g-mac-calls">Calls &amp; chat</h4>
@@ -419,11 +604,12 @@
             <figure class="x-phone-shot x-reveal"><a class="x-zoom x-phone-frame" href="images/ios-settings-providers.webp"><img src="images/ios-settings-providers.webp" width="501" height="1000" loading="lazy" decoding="async" alt="iPhone Settings, Providers: the built-in OpenAI entry and JOSIE-Voice on my Mac selected for calls, with buttons to add the Mac or another provider (mockup)" /></a><figcaption>Providers: OpenAI, your own server or your Mac. (mockup)</figcaption></figure>
             <figure class="x-phone-shot x-reveal"><a class="x-zoom x-phone-frame" href="images/ios-dashboard-calls.webp"><img src="images/ios-dashboard-calls.webp" width="501" height="1000" loading="lazy" decoding="async" alt="iPhone Dashboard, Calls after a couple of GPT-Live calls (mockup)" /></a><figcaption>Your calls on the iPhone dashboard. (mockup)</figcaption></figure>
           </div>
+          </div></details>
           <p class="x-note x-reveal">Every screenshot and clip on this page is a mockup rendered from the app's source with demo content, not a capture of a running build.</p>
         </section>
 
         <section class="x-sec" id="good">
-          <p class="x-eye x-reveal">05 · Good to know</p>
+          <p class="x-eye x-reveal">07 · Good to know</p>
           <h2 class="x-h x-reveal"><b>Small</b><i>details.</i></h2>
           <div class="x-grid">
             <div class="x-card x-glass x-reveal"><span class="x-num">01</span><h3>Works offline</h3><p>After setup, everything works offline except the language model, which runs in Ollama on your Mac.</p></div>
@@ -436,7 +622,7 @@
         </section>
 
         <section class="x-sec" id="faq">
-          <p class="x-eye x-reveal">06 · FAQ</p>
+          <p class="x-eye x-reveal">08 · FAQ</p>
           <h2 class="x-h x-reveal"><b>Questions,</b><i>answered.</i></h2>
           <div class="x-faq">
             <details class="x-glass x-reveal"><summary>Is it free?</summary><p>Yes.</p></details>
@@ -452,7 +638,7 @@
         </section>
 
         <section class="x-sec" id="family">
-          <p class="x-eye x-reveal">07 · The JOSIE family</p>
+          <p class="x-eye x-reveal">09 · The JOSIE family</p>
           <div class="x-family x-glass x-reveal">
             <div class="x-orb x-orb--sm" role="img" aria-label="The JOSIE orb"><canvas class="x-orb__gl" aria-hidden="true"></canvas><img src="logo.png" alt="" /></div>
             <div>
@@ -466,7 +652,13 @@
           </div>
         </section>
 
+        <section class="x-sec x-cta" aria-labelledby="download-title">
+          <h2 class="x-h x-reveal" id="download-title"><b>Ready to</b><i>say hello?</i></h2>
+          <a class="x-btn x-btn--primary x-reveal" data-download href="https://github.com/Goekdeniz-Guelmez/JOSIE-Voice/releases">Download for Mac <span aria-hidden="true">↓</span></a>
+          <p class="x-note">The latest DMG from GitHub Releases · Apple Silicon · macOS 14+</p>
+        </section>
       </main>
+      <p class="download-status" id="download-status" role="status" hidden></p>
 
       <footer class="x-foot x-glass">
         <div class="x-foot__row">
@@ -477,18 +669,14 @@
       </footer>
     </div>
 
-    <div class="x-clock x-glass" role="group" aria-label="Sky clock">
-      <span class="x-clock__name" aria-live="polite">Live</span>
-      <button type="button" data-h="live" aria-pressed="true">Live</button>
-      <button type="button" data-h="6.6">Sunrise</button>
-      <button type="button" data-h="12.5">Midday</button>
-      <button type="button" data-h="17.2">Golden hour</button>
-      <button type="button" data-h="19.1">Sunset</button>
-      <button type="button" data-h="23">Night</button>
+    <div class="x-clock x-glass sky-journey" aria-label="The sky follows your scroll from morning to night">
+      <span class="x-clock__name">Morning</span>
+      <span class="sky-journey__track" aria-hidden="true"><span></span></span>
+      <span class="sky-journey__end" aria-hidden="true">Night</span>
     </div>
 
     <script>
-      /* The sky: one self-contained function on #sky. Swap its body for a WebGL shader later. */
+      /* The page is one day: scrolling from top to bottom moves morning into night. */
       function Sky(el) {
         var cv = el.querySelector("canvas"), ctx = null, root = document.documentElement;
         try { ctx = cv.getContext("2d"); } catch (e) { ctx = null; }
@@ -517,8 +705,9 @@
         }
         var clouds = [];
         for (var l = 0; l < 3; l++) for (var n = 0; n < 7; n++) clouds.push({ l: l, x: Math.random() * 1.6 - 0.3, y: Math.random() * 0.75, r: (0.12 + Math.random() * 0.16) * (1 + l * 0.4), v: 0.004 + l * 0.005 });
-        var W, H, live = true, tgt = 0, cur = null, last = 0, dirty = true, shown = "";
+        var W, H, cur = 8.5, last = 0, dirty = true, shown = "";
         var label = document.querySelector(".x-clock__name");
+        var journey = document.querySelector(".sky-journey__track span");
         function css(c) { return "rgb(" + c.map(Math.round).join(",") + ")"; }
         function size() {
           var vv = window.visualViewport, de = document.documentElement;
@@ -535,7 +724,12 @@
           }
           dirty = true;
         }
-        function now() { var d = new Date(); return d.getHours() + d.getMinutes() / 60; }
+        function scrollHour() {
+          var distance = document.documentElement.scrollHeight - window.innerHeight;
+          var progress = distance > 0 ? Math.max(0, Math.min(1, window.scrollY / distance)) : 0;
+          if (journey) journey.style.transform = "scaleX(" + progress + ")";
+          return 8.5 + progress * (23 - 8.5);
+        }
         function draw(dt) {
           var P = at(cur);
           el.style.setProperty("--sky-top", css(P[2]));
@@ -543,7 +737,7 @@
           el.style.setProperty("--sky-hor", css(P[4]));
           root.style.setProperty("--glass-dim", P[6].toFixed(3));
           root.style.setProperty("--orb-glow", P[5].map(Math.round).join(" "));
-          var name = live ? "Live · " + P.name : P.name;
+          var name = P.name;
           if (label && name !== shown) label.textContent = shown = name;
           if (!ctx) return;
           try { paint(P, dt); } catch (e) { ctx = null; cv.style.display = "none"; }
@@ -571,9 +765,11 @@
           try {
             ts = +ts || Date.now();
             var dt = last ? Math.max(0, Math.min(0.1, (ts - last) / 1000)) : 0;
-            if (live) tgt = now();
-            if (cur === null || reduce) cur = tgt;
-            else { var d = ((tgt - cur) % 24 + 36) % 24 - 12; if (Math.abs(d) < 0.002) cur = tgt; else cur = (cur + d * Math.min(1, dt * 1.8) + 24) % 24; }
+            // Locomotive already smooths the scroll. Use its current position directly,
+            // including reverse scroll and page-height changes from the embed or gallery.
+            var hour = scrollHour();
+            if (hour !== cur) dirty = true;
+            cur = hour;
             if (!reduce || dirty) { draw(dt); dirty = false; }
             last = ts;
           } catch (e) {}
@@ -585,23 +781,11 @@
         window.addEventListener("orientationchange", later);
         if (window.visualViewport) window.visualViewport.addEventListener("resize", later);
         window.addEventListener("scroll", function () { dirty = true; }, { passive: true });
-        if (reduce) setInterval(function () { dirty = true; }, 60000);
         size();
-        if (live) tgt = now();
-        cur = tgt; draw(0); dirty = false;
+        cur = scrollHour(); draw(0); dirty = false;
         raf(frame);
-        return { preview: function (h) { live = h === "live"; if (!live) tgt = +h; dirty = true; } };
       }
-      (function () {
-        var sky = Sky(document.getElementById("sky"));
-        var btns = document.querySelectorAll(".x-clock button");
-        btns.forEach(function (b) {
-          b.addEventListener("click", function () {
-            btns.forEach(function (o) { o.setAttribute("aria-pressed", o === b); });
-            sky.preview(b.dataset.h);
-          });
-        });
-      })();
+      Sky(document.getElementById("sky"));
     </script>
     <script type="x-shader/x-vertex" id="orb-vert">#version 300 es
 void main() {
@@ -616,6 +800,8 @@ uniform float uTime;
 uniform float uRadius;
 uniform float uLevel;
 uniform float uPulse;
+uniform vec2 uPointer, uDrag, uWake;
+uniform float uTouch;
 uniform vec3 uCore, uMid, uHigh, uGlow;
 uniform float uSwirl, uTurb, uIntensity;
 out vec4 outColor;
@@ -673,7 +859,17 @@ void main() {
 
   float z = sqrt(max(0.0, 1.0 - r * r));
   float twist = uSwirl * (1.0 - r * r) * (1.4 + 0.6 * sin(t * 0.35));
-  vec2 sq = rot2(q, t * 0.10 + twist + uSwirl * t * 0.45);
+  // Stir the volume inside the sphere, keeping its outline and halo steady.
+  // The delayed wake leaves a soft curl behind the hand's direction of travel.
+  vec2 handDelta = q - uPointer;
+  vec2 wakeDelta = q - uWake;
+  float hand = exp(-dot(handDelta, handDelta) * 3.6);
+  float wake = exp(-dot(wakeDelta, wakeDelta) * 2.5);
+  vec2 drag = -uDrag * (hand * 0.34 + wake * 0.18);
+  float spin = uDrag.x * 0.75 - uDrag.y * 0.6;
+  vec2 curl = vec2(-handDelta.y, handDelta.x) * spin * hand * 0.8;
+  vec2 smokeQ = q + (drag + curl - handDelta * hand * 0.12) * uTouch;
+  vec2 sq = rot2(smokeQ, t * 0.10 + twist + uSwirl * t * 0.45);
   vec3 sp = vec3(sq * 1.15, z * 0.55);
 
   float warpAmt = 1.25 + uTurb * 0.9 + uLevel * 1.3;
@@ -687,7 +883,7 @@ void main() {
 
   float lit = clamp(dot(q, normalize(vec2(0.62, -0.78))) * 0.55 + 0.45, 0.0, 1.0);
 
-  float d = q.y + 0.22 - 0.62 * q.x + 0.18 * q.x * q.x + (w2.x - 0.5) * 0.55 + sin(t * 0.2) * 0.04;
+  float d = smokeQ.y + 0.22 - 0.62 * smokeQ.x + 0.18 * smokeQ.x * smokeQ.x + (w2.x - 0.5) * 0.55 + sin(t * 0.2) * 0.04;
   float streak = exp(-d * d * 26.0) * smoothstep(-0.7, 0.35, q.x);
   float df = d + 0.09 + (smokeFar - 0.5) * 0.3;
   float streakFine = exp(-df * df * 120.0) * smoothstep(-0.2, 0.6, q.x);
@@ -717,10 +913,9 @@ void main() {
         try { reduce = !!(window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches); } catch (e) {}
         var docked = false, settleTimer = 0;
         function corner(w) {
-          var small = window.innerWidth <= 720, size = small ? 40 : 52;
-          var cx = (small ? 12 : 20) + size / 2, cy = 12 + 24;
-          var s = size / w;
-          return { x: cx - (w * s) / 2, y: cy - (w * s) / 2, s: s };
+          var brand = document.querySelector(".x-brand img");
+          var r = brand.getBoundingClientRect();
+          return { x: r.left, y: r.top, s: r.width / w };
         }
         function place(x, y, s) { orb.style.transform = "translate(" + x + "px," + y + "px) scale(" + s + ")"; }
         function animate(fn) {
@@ -734,6 +929,7 @@ void main() {
         function dock() {
           if (docked) return;
           docked = true;
+          document.documentElement.classList.add("orb-docked");
           var r = slot.getBoundingClientRect(), w = r.width;
           orb.classList.remove("is-moving");
           orb.style.width = w + "px"; orb.style.height = w + "px";
@@ -748,6 +944,7 @@ void main() {
         function undock() {
           if (!docked) return;
           docked = false;
+          document.documentElement.classList.remove("orb-docked");
           var r = slot.getBoundingClientRect();
           orb.setAttribute("role", "img");
           orb.removeAttribute("tabindex");
@@ -799,7 +996,7 @@ void main() {
           return sh;
         }
         var prog, vao, U = {};
-        var NAMES = ["uRes", "uTime", "uRadius", "uLevel", "uPulse", "uCore", "uMid", "uHigh", "uGlow", "uSwirl", "uTurb", "uIntensity"];
+        var NAMES = ["uRes", "uTime", "uRadius", "uLevel", "uPulse", "uPointer", "uDrag", "uWake", "uTouch", "uCore", "uMid", "uHigh", "uGlow", "uSwirl", "uTurb", "uIntensity"];
         try {
           var vs = compile(gl.VERTEX_SHADER, src("orb-vert"));
           var fs = compile(gl.FRAGMENT_SHADER, src("orb-frag"));
@@ -823,6 +1020,8 @@ void main() {
         var root = document.documentElement;
         var glow = [1, 0.67, 0.47];
         var time = Math.random() * 50, level = 0, energy = 0, alive = true;
+        var isHero = wrap.classList.contains("x-orb--hero");
+        var hand = { x: 0, y: 0, tx: 0, ty: 0, wx: 0, wy: 0, vx: 0, vy: 0, strength: 0, inside: false };
         var ph = { level: 0, prevLevel: 0, prevPrevLevel: 0, speaking: false, silence: 0, scale: 1, saturation: 1, brightness: 1, vScale: 0, vSat: 0, vBright: 0 };
 
         function approach(c, t, k, dtMs) { return c + (t - c) * (1 - Math.exp((-k * dtMs) / 1000)); }
@@ -864,6 +1063,10 @@ void main() {
           gl.uniform1f(U.uRadius, ORB_RADIUS);
           gl.uniform1f(U.uLevel, level);
           gl.uniform1f(U.uPulse, reduce ? 0 : (ph.scale - 1) * 0.22);
+          gl.uniform2f(U.uPointer, hand.x, hand.y);
+          gl.uniform2f(U.uDrag, hand.vx, hand.vy);
+          gl.uniform2f(U.uWake, hand.wx, hand.wy);
+          gl.uniform1f(U.uTouch, hand.strength);
           gl.uniform3f(U.uCore, PAL.core[0], PAL.core[1], PAL.core[2]);
           gl.uniform3f(U.uMid, PAL.mid[0], PAL.mid[1], PAL.mid[2]);
           gl.uniform3f(U.uHigh, PAL.high[0], PAL.high[1], PAL.high[2]);
@@ -877,18 +1080,54 @@ void main() {
         function fail() { alive = false; wrap.classList.remove("is-gl"); }
         canvas.addEventListener("webglcontextlost", function (e) { e.preventDefault(); fail(); });
 
-        // Gentle pointer reaction: movement near the orb stirs the liquid a little.
-        var px = null, py = null;
-        if (!reduce) window.addEventListener("pointermove", function (e) {
-          if (px !== null) {
-            var r = wrap.getBoundingClientRect(), cx = r.left + r.width / 2, cy = r.top + r.height / 2;
-            var dist = Math.sqrt((e.clientX - cx) * (e.clientX - cx) + (e.clientY - cy) * (e.clientY - cy));
-            var near = Math.max(0, 1 - dist / (r.width * 2.2));
-            var sp = Math.sqrt((e.clientX - px) * (e.clientX - px) + (e.clientY - py) * (e.clientY - py));
-            energy = Math.min(0.35, energy + Math.min(0.06, sp * 0.002) * near);
+        // Pointer coordinates match the visible sphere, not the oversized halo canvas.
+        // Only the large hero orb accepts stirring; touch gestures keep scrolling normally.
+        function releaseHand() { hand.inside = false; }
+        if (window.matchMedia) {
+          var motionPreference = window.matchMedia("(prefers-reduced-motion: reduce)");
+          if (motionPreference.addEventListener) motionPreference.addEventListener("change", function (e) {
+            reduce = e.matches; rate = reduce ? 0.3 : 1; releaseHand();
+          });
+        }
+        if (isHero) {
+          window.addEventListener("pointermove", function (e) {
+            if (reduce || e.pointerType === "touch" || wrap.classList.contains("is-docked")) { releaseHand(); return; }
+            var r = wrap.getBoundingClientRect();
+            if (!r.width || !r.height) return;
+            var x = (e.clientX - r.left - r.width / 2) / (r.width / 2);
+            var y = -(e.clientY - r.top - r.height / 2) / (r.height / 2);
+            if (x * x + y * y > 1.15 * 1.15) { releaseHand(); return; }
+            if (!hand.inside && hand.strength < 0.05) {
+              // Enter without a jump from the centre; motion builds from here.
+              hand.x = hand.wx = x; hand.y = hand.wy = y;
+              hand.vx = hand.vy = 0;
+            }
+            hand.tx = x; hand.ty = y; hand.inside = true;
+          }, { passive: true });
+          window.addEventListener("pointerout", function (e) { if (!e.relatedTarget) releaseHand(); });
+          window.addEventListener("pointercancel", releaseHand);
+          window.addEventListener("blur", releaseHand);
+          window.addEventListener("scroll", releaseHand, { passive: true });
+        }
+        function stir(dt) {
+          if (!isHero || reduce || wrap.classList.contains("is-docked")) {
+            hand.inside = false; hand.strength = 0; hand.vx = hand.vy = 0;
+            return;
           }
-          px = e.clientX; py = e.clientY;
-        }, { passive: true });
+          var beforeX = hand.x, beforeY = hand.y;
+          hand.x = approach(hand.x, hand.tx, 14, dt);
+          hand.y = approach(hand.y, hand.ty, 14, dt);
+          var seconds = Math.max(0.001, dt / 1000);
+          var vx = Math.max(-2.5, Math.min(2.5, (hand.x - beforeX) / seconds));
+          var vy = Math.max(-2.5, Math.min(2.5, (hand.y - beforeY) / seconds));
+          hand.vx = approach(hand.vx, hand.inside ? vx : 0, hand.inside ? 10 : 3, dt);
+          hand.vy = approach(hand.vy, hand.inside ? vy : 0, hand.inside ? 10 : 3, dt);
+          hand.wx = approach(hand.wx, hand.x, 3.5, dt);
+          hand.wy = approach(hand.wy, hand.y, 3.5, dt);
+          hand.strength = approach(hand.strength, hand.inside ? 1 : 0, hand.inside ? 8 : 1.8, dt);
+          var movement = Math.sqrt(hand.vx * hand.vx + hand.vy * hand.vy);
+          energy = Math.max(energy, Math.min(0.5, movement * hand.strength * 0.2));
+        }
 
         var raf = 0, last = 0, onScreen = true;
         function tick(now) {
@@ -898,6 +1137,7 @@ void main() {
           last = now;
           try {
             readGlow(dt);
+            stir(dt);
             step(ph, Date.now(), dt / 16.67);
             energy = approach(energy, 0, 1.2, dt);
             level = approach(level, energy, 6, dt);
@@ -909,7 +1149,7 @@ void main() {
         function schedule() {
           if (alive && !raf && onScreen && document.visibilityState !== "hidden") raf = requestAnimationFrame(tick);
         }
-        function stop() { if (raf) cancelAnimationFrame(raf); raf = 0; last = 0; }
+        function stop() { if (raf) cancelAnimationFrame(raf); raf = 0; last = 0; releaseHand(); }
         document.addEventListener("visibilitychange", function () { if (document.visibilityState === "hidden") stop(); else schedule(); });
         if ("IntersectionObserver" in window) {
           new IntersectionObserver(function (en) {
@@ -940,7 +1180,11 @@ void main() {
         });
       })();
     </script>
-    <script src="main.js"></script>
+    <script src="main.js?v=18f0a30fb3"></script>
+    <script src="redesign.js?v=70f6228c18"></script>
+    <script src="download.js?v=c798d3a9b6"></script>
+    <script src="customization.js?v=2ad6612072"></script>
+    <script async src="https://platform.x.com/widgets.js" charset="utf-8"></script>
     <script>
       /* Liquid Glass refraction: one displacement map per glass size. Pixels near the rounded edge are
          pulled inward like light through a thick curved rim; the middle stays perfectly clear. */
