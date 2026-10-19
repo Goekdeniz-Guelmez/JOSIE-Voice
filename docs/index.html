@@ -294,7 +294,7 @@
             <div class="x-orb-slot"><div class="x-orb x-orb--hero" role="img" aria-label="The JOSIE orb"><canvas class="x-orb__gl" aria-hidden="true"></canvas><img src="logo.png" alt="" /></div></div>
             <div class="orb-caption"><div class="voice-wave" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div><span>Go ahead. Say hello.</span></div>
             <div class="conversation-card"><span class="conversation-who">YOU, NATURALLY</span><p id="conversation-prompt">“Remind me to slow down at seven.”</p><span class="conversation-reply"><span aria-hidden="true">✦</span> Consider it done.</span></div>
-            <span class="stage-label stage-label--bottom">ON-DEVICE VOICE. IN YOUR WORLD.</span>
+            <span class="stage-label stage-label--bottom"><span class="orb-pointer-hint">MOVE YOUR POINTER. STIR THE SMOKE.</span><span class="orb-touch-hint">ON-DEVICE VOICE. IN YOUR WORLD.</span></span>
           </div>
           <div class="hero-bottom"><span>Built for your Mac. Designed around you.</span><a href="#see">A closer look <span aria-hidden="true">↓</span></a><span class="hero-version">JOSIE-VOICE / V2.0</span></div>
         </section>
@@ -765,6 +765,8 @@ uniform float uTime;
 uniform float uRadius;
 uniform float uLevel;
 uniform float uPulse;
+uniform vec2 uPointer, uDrag, uWake;
+uniform float uTouch;
 uniform vec3 uCore, uMid, uHigh, uGlow;
 uniform float uSwirl, uTurb, uIntensity;
 out vec4 outColor;
@@ -822,7 +824,17 @@ void main() {
 
   float z = sqrt(max(0.0, 1.0 - r * r));
   float twist = uSwirl * (1.0 - r * r) * (1.4 + 0.6 * sin(t * 0.35));
-  vec2 sq = rot2(q, t * 0.10 + twist + uSwirl * t * 0.45);
+  // Stir the volume inside the sphere, keeping its outline and halo steady.
+  // The delayed wake leaves a soft curl behind the hand's direction of travel.
+  vec2 handDelta = q - uPointer;
+  vec2 wakeDelta = q - uWake;
+  float hand = exp(-dot(handDelta, handDelta) * 3.6);
+  float wake = exp(-dot(wakeDelta, wakeDelta) * 2.5);
+  vec2 drag = -uDrag * (hand * 0.34 + wake * 0.18);
+  float spin = uDrag.x * 0.75 - uDrag.y * 0.6;
+  vec2 curl = vec2(-handDelta.y, handDelta.x) * spin * hand * 0.8;
+  vec2 smokeQ = q + (drag + curl - handDelta * hand * 0.12) * uTouch;
+  vec2 sq = rot2(smokeQ, t * 0.10 + twist + uSwirl * t * 0.45);
   vec3 sp = vec3(sq * 1.15, z * 0.55);
 
   float warpAmt = 1.25 + uTurb * 0.9 + uLevel * 1.3;
@@ -836,7 +848,7 @@ void main() {
 
   float lit = clamp(dot(q, normalize(vec2(0.62, -0.78))) * 0.55 + 0.45, 0.0, 1.0);
 
-  float d = q.y + 0.22 - 0.62 * q.x + 0.18 * q.x * q.x + (w2.x - 0.5) * 0.55 + sin(t * 0.2) * 0.04;
+  float d = smokeQ.y + 0.22 - 0.62 * smokeQ.x + 0.18 * smokeQ.x * smokeQ.x + (w2.x - 0.5) * 0.55 + sin(t * 0.2) * 0.04;
   float streak = exp(-d * d * 26.0) * smoothstep(-0.7, 0.35, q.x);
   float df = d + 0.09 + (smokeFar - 0.5) * 0.3;
   float streakFine = exp(-df * df * 120.0) * smoothstep(-0.2, 0.6, q.x);
@@ -949,7 +961,7 @@ void main() {
           return sh;
         }
         var prog, vao, U = {};
-        var NAMES = ["uRes", "uTime", "uRadius", "uLevel", "uPulse", "uCore", "uMid", "uHigh", "uGlow", "uSwirl", "uTurb", "uIntensity"];
+        var NAMES = ["uRes", "uTime", "uRadius", "uLevel", "uPulse", "uPointer", "uDrag", "uWake", "uTouch", "uCore", "uMid", "uHigh", "uGlow", "uSwirl", "uTurb", "uIntensity"];
         try {
           var vs = compile(gl.VERTEX_SHADER, src("orb-vert"));
           var fs = compile(gl.FRAGMENT_SHADER, src("orb-frag"));
@@ -973,6 +985,8 @@ void main() {
         var root = document.documentElement;
         var glow = [1, 0.67, 0.47];
         var time = Math.random() * 50, level = 0, energy = 0, alive = true;
+        var isHero = wrap.classList.contains("x-orb--hero");
+        var hand = { x: 0, y: 0, tx: 0, ty: 0, wx: 0, wy: 0, vx: 0, vy: 0, strength: 0, inside: false };
         var ph = { level: 0, prevLevel: 0, prevPrevLevel: 0, speaking: false, silence: 0, scale: 1, saturation: 1, brightness: 1, vScale: 0, vSat: 0, vBright: 0 };
 
         function approach(c, t, k, dtMs) { return c + (t - c) * (1 - Math.exp((-k * dtMs) / 1000)); }
@@ -1014,6 +1028,10 @@ void main() {
           gl.uniform1f(U.uRadius, ORB_RADIUS);
           gl.uniform1f(U.uLevel, level);
           gl.uniform1f(U.uPulse, reduce ? 0 : (ph.scale - 1) * 0.22);
+          gl.uniform2f(U.uPointer, hand.x, hand.y);
+          gl.uniform2f(U.uDrag, hand.vx, hand.vy);
+          gl.uniform2f(U.uWake, hand.wx, hand.wy);
+          gl.uniform1f(U.uTouch, hand.strength);
           gl.uniform3f(U.uCore, PAL.core[0], PAL.core[1], PAL.core[2]);
           gl.uniform3f(U.uMid, PAL.mid[0], PAL.mid[1], PAL.mid[2]);
           gl.uniform3f(U.uHigh, PAL.high[0], PAL.high[1], PAL.high[2]);
@@ -1027,18 +1045,54 @@ void main() {
         function fail() { alive = false; wrap.classList.remove("is-gl"); }
         canvas.addEventListener("webglcontextlost", function (e) { e.preventDefault(); fail(); });
 
-        // Gentle pointer reaction: movement near the orb stirs the liquid a little.
-        var px = null, py = null;
-        if (!reduce) window.addEventListener("pointermove", function (e) {
-          if (px !== null) {
-            var r = wrap.getBoundingClientRect(), cx = r.left + r.width / 2, cy = r.top + r.height / 2;
-            var dist = Math.sqrt((e.clientX - cx) * (e.clientX - cx) + (e.clientY - cy) * (e.clientY - cy));
-            var near = Math.max(0, 1 - dist / (r.width * 2.2));
-            var sp = Math.sqrt((e.clientX - px) * (e.clientX - px) + (e.clientY - py) * (e.clientY - py));
-            energy = Math.min(0.35, energy + Math.min(0.06, sp * 0.002) * near);
+        // Pointer coordinates match the visible sphere, not the oversized halo canvas.
+        // Only the large hero orb accepts stirring; touch gestures keep scrolling normally.
+        function releaseHand() { hand.inside = false; }
+        if (window.matchMedia) {
+          var motionPreference = window.matchMedia("(prefers-reduced-motion: reduce)");
+          if (motionPreference.addEventListener) motionPreference.addEventListener("change", function (e) {
+            reduce = e.matches; rate = reduce ? 0.3 : 1; releaseHand();
+          });
+        }
+        if (isHero) {
+          window.addEventListener("pointermove", function (e) {
+            if (reduce || e.pointerType === "touch" || wrap.classList.contains("is-docked")) { releaseHand(); return; }
+            var r = wrap.getBoundingClientRect();
+            if (!r.width || !r.height) return;
+            var x = (e.clientX - r.left - r.width / 2) / (r.width / 2);
+            var y = -(e.clientY - r.top - r.height / 2) / (r.height / 2);
+            if (x * x + y * y > 1.15 * 1.15) { releaseHand(); return; }
+            if (!hand.inside && hand.strength < 0.05) {
+              // Enter without a jump from the centre; motion builds from here.
+              hand.x = hand.wx = x; hand.y = hand.wy = y;
+              hand.vx = hand.vy = 0;
+            }
+            hand.tx = x; hand.ty = y; hand.inside = true;
+          }, { passive: true });
+          window.addEventListener("pointerout", function (e) { if (!e.relatedTarget) releaseHand(); });
+          window.addEventListener("pointercancel", releaseHand);
+          window.addEventListener("blur", releaseHand);
+          window.addEventListener("scroll", releaseHand, { passive: true });
+        }
+        function stir(dt) {
+          if (!isHero || reduce || wrap.classList.contains("is-docked")) {
+            hand.inside = false; hand.strength = 0; hand.vx = hand.vy = 0;
+            return;
           }
-          px = e.clientX; py = e.clientY;
-        }, { passive: true });
+          var beforeX = hand.x, beforeY = hand.y;
+          hand.x = approach(hand.x, hand.tx, 14, dt);
+          hand.y = approach(hand.y, hand.ty, 14, dt);
+          var seconds = Math.max(0.001, dt / 1000);
+          var vx = Math.max(-2.5, Math.min(2.5, (hand.x - beforeX) / seconds));
+          var vy = Math.max(-2.5, Math.min(2.5, (hand.y - beforeY) / seconds));
+          hand.vx = approach(hand.vx, hand.inside ? vx : 0, hand.inside ? 10 : 3, dt);
+          hand.vy = approach(hand.vy, hand.inside ? vy : 0, hand.inside ? 10 : 3, dt);
+          hand.wx = approach(hand.wx, hand.x, 3.5, dt);
+          hand.wy = approach(hand.wy, hand.y, 3.5, dt);
+          hand.strength = approach(hand.strength, hand.inside ? 1 : 0, hand.inside ? 8 : 1.8, dt);
+          var movement = Math.sqrt(hand.vx * hand.vx + hand.vy * hand.vy);
+          energy = Math.max(energy, Math.min(0.5, movement * hand.strength * 0.2));
+        }
 
         var raf = 0, last = 0, onScreen = true;
         function tick(now) {
@@ -1048,6 +1102,7 @@ void main() {
           last = now;
           try {
             readGlow(dt);
+            stir(dt);
             step(ph, Date.now(), dt / 16.67);
             energy = approach(energy, 0, 1.2, dt);
             level = approach(level, energy, 6, dt);
@@ -1059,7 +1114,7 @@ void main() {
         function schedule() {
           if (alive && !raf && onScreen && document.visibilityState !== "hidden") raf = requestAnimationFrame(tick);
         }
-        function stop() { if (raf) cancelAnimationFrame(raf); raf = 0; last = 0; }
+        function stop() { if (raf) cancelAnimationFrame(raf); raf = 0; last = 0; releaseHand(); }
         document.addEventListener("visibilitychange", function () { if (document.visibilityState === "hidden") stop(); else schedule(); });
         if ("IntersectionObserver" in window) {
           new IntersectionObserver(function (en) {
