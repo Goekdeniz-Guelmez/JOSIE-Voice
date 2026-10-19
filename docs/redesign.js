@@ -1,6 +1,9 @@
 /* Small, optional motion accents. Core page remains usable without them. */
 (function () {
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
+  document.querySelectorAll('.pipeline-detail').forEach(function (detail) {
+    detail.addEventListener('toggle', function () { window.dispatchEvent(new Event('resize')); });
+  });
   var archive = document.querySelector('.gallery-archive');
   if (archive) {
     archive.addEventListener('toggle', function () {

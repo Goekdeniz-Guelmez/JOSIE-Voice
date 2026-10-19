@@ -271,7 +271,7 @@
       <header class="x-nav x-glass">
         <a class="x-brand" href="#top"><img src="logo.png" alt="" />JOSIE-Voice</a>
         <nav aria-label="Sections">
-          <a href="#see">Experience</a><a href="#customize">Make it yours</a><a href="#gallery">Inside JOSIE</a><a href="#faq">FAQ</a>
+          <a href="#see">Experience</a><a href="#pipeline">How it works</a><a href="#customize">Make it yours</a><a href="#gallery">Inside JOSIE</a><a href="#faq">FAQ</a>
         </nav>
         <a class="x-btn x-btn--primary x-btn--sm" data-download href="https://github.com/Goekdeniz-Guelmez/JOSIE-Voice/releases">Download <span aria-hidden="true">↓</span></a>
       </header>
@@ -364,8 +364,37 @@
           </div>
         </section>
 
+        <section class="x-sec pipeline-section" id="pipeline" aria-labelledby="pipeline-title">
+          <p class="x-eye x-reveal">04 · Under the hood</p>
+          <h2 class="x-h x-reveal" id="pipeline-title"><b>From your voice.</b><i>Back to you.</i></h2>
+          <p class="x-lede x-reveal">A few carefully connected stages make a conversation feel natural. Here’s how the Mac listens, works out what comes next, and speaks back.</p>
+          <ol class="pipeline-stages x-reveal">
+            <li><span>01 / LISTEN</span><h3>Find the words.</h3><p>Echo handling separates playback from your voice. Voice activity and turn detection decide when to listen, then speech recognition turns audio into text.</p></li>
+            <li><span>02 / THINK &amp; ACT</span><h3>Work through the request.</h3><p>Your chosen language model answers, retrieves context, or uses enabled tools. Agent mode can take several steps before returning a reply.</p></li>
+            <li><span>03 / SPEAK</span><h3>Keep it flowing.</h3><p>Text is split into speakable chunks and synthesized into audio. When you interrupt, JOSIE can stop playback and keep the conversation in step.</p></li>
+          </ol>
+          <figure class="pipeline-diagram pipeline-diagram--main x-shot x-reveal">
+            <div class="pipeline-diagram-bar"><span>THE MAC VOICE PIPELINE</span><a href="diagrams/02-mac-voice-pipeline.png" target="_blank" rel="noopener">Open full size ↗</a></div>
+            <a class="x-zoom" href="diagrams/02-mac-voice-pipeline.png"><img src="diagrams/02-mac-voice-pipeline-preview.webp" width="1400" height="807" loading="lazy" decoding="async" alt="Excalidraw Mac voice pipeline: microphone and echo gate, voice and turn detection, speech recognition, language model and tools, speech synthesis and playback, with a return path for interruptions" /></a>
+            <figcaption>The Mac call path, with echo handling, speaker recognition and interruption control. Your language model can run locally or through your chosen external endpoint.</figcaption>
+          </figure>
+          <div class="pipeline-details">
+            <details class="pipeline-detail x-reveal">
+              <summary><span><small>TOOLS &amp; CONTEXT</small>How a request reaches the right tool</span><span class="pipeline-expand" aria-hidden="true">＋</span></summary>
+              <p>The tool registry connects the model to built-in tools, documents, Apple apps and MCP servers. Your enabled tools and access depths determine what is available; actions that require confirmation wait for your tap.</p>
+              <figure class="pipeline-diagram x-shot"><a class="x-zoom" href="diagrams/04-tools-architecture.png"><img src="diagrams/04-tools-architecture-preview.webp" width="1400" height="1299" loading="lazy" decoding="async" alt="Excalidraw tool architecture: callers feed a registry filtered by access policy, which routes to built-in tools, knowledge search, Apple apps and MCP servers, with confirmation handling" /></a><figcaption>Tool routing, retrieval and access policy. <a href="diagrams/04-tools-architecture.png" target="_blank" rel="noopener">Open full size ↗</a></figcaption></figure>
+            </details>
+            <details class="pipeline-detail x-reveal">
+              <summary><span><small>IPHONE ↔ MAC</small>A call that reaches back to your Mac</span><span class="pipeline-expand" aria-hidden="true">＋</span></summary>
+              <p>In the iPhone and iPad preview, your Mac can act as the voice provider. Audio travels to its pipeline and the reply streams back, with tool calls and interruption events kept in the same session.</p>
+              <figure class="pipeline-diagram x-shot"><a class="x-zoom" href="diagrams/06-iphone-mac-live-sequence.png"><img src="diagrams/06-iphone-mac-live-sequence-preview.webp" width="1400" height="1687" loading="lazy" decoding="async" alt="Excalidraw sequence diagram showing phone-to-Mac model discovery, connection setup, streamed audio, tool results, interruption, image input and hang-up" /></a><figcaption>The phone-to-Mac call sequence over your network or Tailscale. <a href="diagrams/06-iphone-mac-live-sequence.png" target="_blank" rel="noopener">Open full size ↗</a></figcaption></figure>
+            </details>
+          </div>
+          <p class="x-note x-reveal">Original Excalidraw architecture sketches. Model examples and limits reflect the diagram revision; available engines and Agent mode settings are covered below.</p>
+        </section>
+
         <section class="x-sec customization" id="customize" aria-labelledby="customize-title">
-          <p class="x-eye x-reveal">04 · Make it yours</p>
+          <p class="x-eye x-reveal">05 · Make it yours</p>
           <h2 class="x-h x-reveal" id="customize-title"><b>A little personality.</b><i>A lot of possibility.</i></h2>
           <p class="x-lede x-reveal">Choose the models behind the conversation, the tools within reach, and the things worth remembering. Start simple. Make room for more when you want it.</p>
           <div class="custom-explorer x-reveal">
@@ -485,7 +514,7 @@
         </section>
 
         <section class="x-sec" id="gallery">
-          <p class="x-eye x-reveal">05 · Screenshots</p>
+          <p class="x-eye x-reveal">06 · Screenshots</p>
           <h2 class="x-h x-reveal"><b>Thoughtful,</b><i>inside and out.</i></h2>
           <p class="x-lede x-reveal">The Mac app, plus a preview of the iPhone app. Click any picture to see it larger.</p>
           <div class="gallery-preview x-reveal"><a class="x-zoom" href="images/mac-chat-1600.webp"><img src="images/mac-chat-1600.webp" alt="JOSIE chat interface with a conversation and document attachment (mockup)" width="1600" height="1000" loading="lazy" /></a><div><span class="x-eye">YOUR SPACE TO THINK</span><h3>A familiar feeling.<br /><i>A new kind of company.</i></h3><p>Voice, chat, your library, and a voice studio. Everything has its place.</p><span class="x-note">Interface preview · Mockup</span></div></div>
@@ -574,7 +603,7 @@
         </section>
 
         <section class="x-sec" id="good">
-          <p class="x-eye x-reveal">06 · Good to know</p>
+          <p class="x-eye x-reveal">07 · Good to know</p>
           <h2 class="x-h x-reveal"><b>Small</b><i>details.</i></h2>
           <div class="x-grid">
             <div class="x-card x-glass x-reveal"><span class="x-num">01</span><h3>Works offline</h3><p>After setup, everything works offline except the language model, which runs in Ollama on your Mac.</p></div>
@@ -587,7 +616,7 @@
         </section>
 
         <section class="x-sec" id="faq">
-          <p class="x-eye x-reveal">07 · FAQ</p>
+          <p class="x-eye x-reveal">08 · FAQ</p>
           <h2 class="x-h x-reveal"><b>Questions,</b><i>answered.</i></h2>
           <div class="x-faq">
             <details class="x-glass x-reveal"><summary>Is it free?</summary><p>Yes.</p></details>
@@ -603,7 +632,7 @@
         </section>
 
         <section class="x-sec" id="family">
-          <p class="x-eye x-reveal">08 · The JOSIE family</p>
+          <p class="x-eye x-reveal">09 · The JOSIE family</p>
           <div class="x-family x-glass x-reveal">
             <div class="x-orb x-orb--sm" role="img" aria-label="The JOSIE orb"><canvas class="x-orb__gl" aria-hidden="true"></canvas><img src="logo.png" alt="" /></div>
             <div>
