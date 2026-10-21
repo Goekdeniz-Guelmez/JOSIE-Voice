@@ -19,6 +19,9 @@
   Free · Apple Silicon (M1 or newer) · macOS 14 Sonoma or newer · No account
 </p>
 
+> [!WARNING]
+> **No download yet.** The first public JOSIE-Voice DMG for the Mac will be released in **December 2026**. Until then there is no installer here or in [Releases](https://github.com/Goekdeniz-Guelmez/JOSIE-Voice/releases); the 1.0.0 release notes describe what's coming.
+
 ---
 
 ## Talk or type
@@ -259,7 +262,7 @@ After setup, everything works offline except the language model, which runs in O
 
 ## FAQ
 
-**Can I download it?** Use Download for Mac on the website to download the newest published Mac DMG from [GitHub Releases](https://github.com/Goekdeniz-Guelmez/JOSIE-Voice/releases). If no DMG is published yet, the button links you to the releases page.
+**Can I download it?** Not yet. The first public Mac DMG will be released in **December 2026** on [GitHub Releases](https://github.com/Goekdeniz-Guelmez/JOSIE-Voice/releases).
 
 **Is it free?** Yes.
 
@@ -289,7 +292,7 @@ JOSIE-Voice comes from the JOSIE family of personality-driven language models by
 
 ## About this repository
 
-This repository hosts the JOSIE-Voice website and visuals: the site lives in [`docs/`](docs/) and is served by GitHub Pages. The website links to app downloads published in [GitHub Releases](https://github.com/Goekdeniz-Guelmez/JOSIE-Voice/releases); the source code is private.
+This repository hosts the JOSIE-Voice website and visuals: the site lives in [`docs/`](docs/) and is served by GitHub Pages. App downloads will be published in [GitHub Releases](https://github.com/Goekdeniz-Guelmez/JOSIE-Voice/releases), starting with the first DMG in December 2026; the source code is private.
 
 Built with MLX Swift, Qwen3-ASR, Qwen3-TTS, Parakeet, Kokoro, Silero VAD, Smart Turn v3 and WeSpeaker. Ollama is a separate app by its own developers.
 
